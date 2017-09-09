@@ -64,7 +64,7 @@
                             </div>
 
 
-                            <div id="fuerza-field" class="form-group">
+                            <div id="fuerza-field" class="form-group ">
                                 <label class="col-lg-3 control-label">Ejercicios de Fuerza?</label>
                                 <div class="col-lg-9">
                                     <label class="radio-inline radio-right">

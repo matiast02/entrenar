@@ -46,7 +46,7 @@ class EvaluacionesController extends Controller
         $formulario = '';
 
         switch ($id_ejercicio_nf){
-            case 2:
+            case 4:
                 //salto abalacob
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
@@ -58,7 +58,7 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
-            case 4:
+            case 6:
                 //salto cm
                 $formulario = '<div id="salto_cmj-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
@@ -70,7 +70,7 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
-            case 9:
+            case 7:
                 //salto sj
                 $formulario = '<div id="salto_sj-field" class="form-group">
                 <label class="col-lg-3 control-label">Altura:</label>
@@ -82,7 +82,7 @@ class EvaluacionesController extends Controller
              </div>';
                 break;
 
-            case 10:
+            case 8:
                 //salto continuo
                 $formulario = '<div id="mejor_salto_continuo-field" class="form-group">
                     <label class="col-lg-3 control-label">Mejor salto:</label>
@@ -110,7 +110,7 @@ class EvaluacionesController extends Controller
                     </div>';
                 break;
 
-            case 11:
+            case 9:
                 //peso muerto
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
@@ -122,7 +122,7 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
-            case 12:
+            case 10:
                 //velocidad 10 mts
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
@@ -150,7 +150,7 @@ class EvaluacionesController extends Controller
                      </div>';
                 break;
 
-            case 13:
+            case 11:
                 //remo
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
@@ -162,7 +162,7 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
-            case 14:
+            case 3:
                 //yoyo test
                 $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
                                     <label class="col-lg-3 control-label">Fase Final:</label>
@@ -174,7 +174,7 @@ class EvaluacionesController extends Controller
                                </div>';
                 break;
 
-            case 15:
+            case 12:
                 //sentadilla bulgara
                 $formulario = '<div id="cantidad_repeticiones-field" class="form-group">
                                     <label class="col-lg-3 control-label">Cantidad de Repeticiones:</label>
@@ -219,7 +219,7 @@ class EvaluacionesController extends Controller
         $evaluacion = new Evaluaciones();
 
         switch ($request->input('ejercicio')){
-            case 2:
+            case 4:
                 //salto abalacob
                 $validator =  Validator::make($request->all(), [
                     'salto_abalacob' => 'required|numeric',
@@ -250,7 +250,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 4:
+            case 6:
                 //salto cm
                 $validator =  Validator::make($request->all(), [
                     'salto_cmj' => 'required|numeric',
@@ -280,7 +280,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 9:
+            case 7:
                 //salto sj
                 $validator =  Validator::make($request->all(), [
                     'salto_sj' => 'required|numeric',
@@ -310,7 +310,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 10:
+            case 8:
                 //salto continuo
                 $validator =  Validator::make($request->all(), [
                     'mejor_salto_continuo' => 'required|numeric',
@@ -344,7 +344,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 11:
+            case 9:
                 //peso muerto
                 $validator =  Validator::make($request->all(), [
                     'maximo_peso' => 'required|numeric',
@@ -374,7 +374,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 12:
+            case 10:
                 //velocidad 10 mts
                 $validator =  Validator::make($request->all(), [
                     'velocidad_segundos' => 'required|numeric',
@@ -408,7 +408,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 13:
+            case 11:
                 //remo
                 $validator =  Validator::make($request->all(), [
                     'maximo_peso' => 'required|numeric',
@@ -438,7 +438,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 14:
+            case 3:
                 //yoyo test
                 $validator =  Validator::make($request->all(), [
                     'resistencia_numero_fase' => 'required|numeric',
@@ -468,7 +468,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 15:
+            case 12:
                 //sentadilla bulgara
                 $validator =  Validator::make($request->all(), [
                     'maximo_peso' => 'required|numeric',

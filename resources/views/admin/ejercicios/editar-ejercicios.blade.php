@@ -68,7 +68,7 @@
 
 
 
-                            <div class="form-group">
+                            <div class="form-group hidden">
                                 <label class="col-lg-3 control-label">Fuerza?:</label>
                                 <div class="col-lg-9">
                                     <label class="radio-inline radio-right">
