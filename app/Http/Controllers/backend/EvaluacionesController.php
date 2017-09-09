@@ -30,6 +30,15 @@ class EvaluacionesController extends Controller
     }
 
 
+    //listar todas las series
+    public function listar()
+    {
+        $ejercicios = Ejercicio::all();
+        return view('admin.evaluaciones.listar-evaluaciones',['titulo'=>'Resultado de Evaluaciones', 'ejercicios' => $ejercicios]);
+    }
+
+
+
     public function mostrarForm($id_ejercicio_nf)
     {
         //muestra el formulario correspondiente al ejercicio en indicadores
@@ -202,6 +211,7 @@ class EvaluacionesController extends Controller
                 </form>
             </div>';
     }
+
 
 
     public function cargarResultadosNF(Request $request){
@@ -492,6 +502,8 @@ class EvaluacionesController extends Controller
         }
     }
 
+
+
     public function edit($id)
     {
         //muestra el formulario con los datos de la serie a modificar
@@ -549,12 +561,6 @@ class EvaluacionesController extends Controller
         //
     }
 
-
-    //listar todas las series
-    public function listar()
-    {
-        return view('admin.evaluaciones.listar-evaluaciones',['titulo'=>'Lista de Evaluaciones']);
-    }
 
 
     //devuelve los datos al datatable que les solicito

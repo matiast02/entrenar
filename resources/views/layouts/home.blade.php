@@ -108,6 +108,7 @@
 										<li><a href="{{URL::route('listar.clientes')}}">Gestionar Clientes</a></li>
 										<li><a href="{{URL::route('crear.clientes')}}">Nuevo Clientes</a></li>
 										<li><a href="{{URL::route('buscar.clientes')}}">Test Incremental</a></li>
+										<li><a href="{{URL::route('listar.evaluaciones')}}">Resultados</a></li>
 									</ul>
 								</li>
 
