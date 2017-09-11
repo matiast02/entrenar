@@ -227,7 +227,7 @@
                         $('#buscar-cliente')[0].reset();
                         $("#wizard").html("");
                         numero = 0;
-                        //location.reload();
+//                        location.reload();
                     },
                     error: function(data){
                         //resetear estilos
@@ -349,15 +349,12 @@
             //para cuando quiere eliminar un paso
             $('body').on('click','input[name="boton-eliminar-'+numero+'"]', function () {
                 remove(wizard.steps("getCurrentIndex"));
+                $('#cantidad_series').val($('#cantidad_series').val()-1);
             });
 
 
 
         }
-
-
-
-
 
         $('select').select2({});
 
@@ -429,6 +426,7 @@
                     $('#buscar-cliente')[0].reset();
                     $('#form-nf').find('.form-control-feedback').html('');
                     $('#form-nf').find('.help-block').html('');
+                    location.reload();
                 },
                 error: function(data){;
 

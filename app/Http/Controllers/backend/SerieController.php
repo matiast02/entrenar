@@ -65,6 +65,7 @@ class SerieController extends Controller
             //guardar los datos
             $rm = 0;
             $aux = 0;
+            $pot_imp = 0;
             $num_mejor_serie = 0;
             $cantidad_series  = $request->input('cantidad_series');
 
@@ -98,9 +99,20 @@ class SerieController extends Controller
 
                 //se guarda la  mejor serie (rm calculado) y la ultima serie
                 for ($i = 0; $i<= $cantidad_series -1; $i++){
-                    $aux = 1 + (0.033 * intval($request->input('serie.'.$i.'.can_rep')) * intval($request->input('serie.'.$i.'.pes_ext')));
+                    //si tiene una sola repeticion el rm=peso maximo
+                    if ($request->input('serie'.$i.'can_rep') == 1){
+                        $aux = $request->input('serie'.$i.'pes_ext');
+                    }else{
+                        $aux = 1 + (0.033 * intval($request->input('serie.'.$i.'.can_rep')) * intval($request->input('serie.'.$i.'.pes_ext')));
+                    }
+
                     if ($aux > $rm){
                         $rm = $aux;
+                    }
+
+                    //guardo el nº de la mejor serie en base a la potencia impulsiva
+                    if (intval($request->input('serie.'.$i.'.pot_imp')) > $pot_imp){
+                        $pot_imp = $request->input('serie.'.$i.'.pot_imp');
                         $num_mejor_serie = $i;
                     }
                 }
