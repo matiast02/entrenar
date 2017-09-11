@@ -32,7 +32,7 @@
 
 @section('contenido')
 
-    <form id="buscar-cliente" class="form-horizontal col-md-6"  >
+    <form id="buscar-cliente" class="form-horizontal col-md-4"  >
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">Seleccionar Cliente<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
@@ -52,7 +52,7 @@
 
                             <div id="cliente-field" class="form-group">
                                 <label for="cliente" class="col-lg-3 control-label">Cliente:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-6">
                                     <select class="select form-control" id="cliente" name="cliente">
                                     </select>
                                     <div class="form-control-feedback"></div>
@@ -63,36 +63,16 @@
 
                             <div id="semana-field" class="form-group" >
                                 <label for="semana" class="col-lg-3 control-label">Semana:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-3">
                                     <input class="form-control" type="number" name="semana" id="semana">
                                     <div class="form-control-feedback"></div>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
 
-
-                            <div class="form-group">
+                            <div class="form-group" id="semanitas-mes">
                                 <label class="col-lg-3 control-label">Consultar semana</label>
-                                <div class="col-lg-9">
-                                    <label class="radio-inline radio-right">
-                                        <input type="radio" name="radio_semana" id="radio_semana" value="" >
-                                        Abrir
-                                        <div class="form-control-feedback"></div>
-                                        <span class="help-block"></span>
-                                    </label>
-                                    <label class="radio-inline radio-right">
-                                        <input type="radio" name="radio_mes" id="radio_mes" value="">
-                                        Cerrar
-                                        <div class="form-control-feedback"></div>
-                                        <span class="help-block"></span>
-                                    </label>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group" hidden="hidden" id="semanitas-mes">
-                                <label class="col-lg-3 control-label"></label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-6">
                                     <div id="" class="input-group">
                                         <span class="input-group-addon"><i class="icon-calendar22"></i></span>
                                         <input type="text" id="semana-mes" name="semana-mes" class="form-control daterange-single">
@@ -195,26 +175,6 @@
             }
         });
 
-
-        $(document).ready(function() {
-
-            $('#radio_semana').click(function() {
-                if($('#radio_semana').is(':checked')) {
-                    $("#radio_mes").prop('checked', false);
-                    $("#semanitas-mes").attr("hidden", false);
-                }
-            });
-
-
-            $('#radio_mes').click(function() {
-                if($('#radio_mes').is(':checked')) {
-                    $("#radio_semana").prop('checked', false);
-                    $("#semanitas-mes").attr("hidden", true);
-                }
-            });
-        });
-
-
         $('#semana-mes').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
@@ -233,40 +193,6 @@
 
     <script type="text/javascript">
         function datos() {
-
-            $.ajax({"url":'{!! route('indicadores.resultados-semanales') !!}',
-                "data":{"cliente" :$('#cliente option:selected').val(),
-                        "semana" :$('#semana').val() },
-
-            success:function(data){
-                  $('#resultados').html(data);
-            },
-
-                error: function (data) {
-                    //resetear estilos
-                    $('.form-group').removeClass("has-error has-feedback");
-                    $('#wizard').find('.form-control-feedback').html('');
-                    $('#wizard').find('.help-block').html('');
-                    $('#buscar-cliente').find('.form-control-feedback').html('');
-                    $('#buscar-cliente').find('.help-block').html('');
-
-                    //mostramos los errores
-                    var errors = data.responseJSON;
-                    swal("Oops...", "Algo salio mal!", "error");
-                    $.each(errors, function (i, item) {
-                        if (i === 'message') {
-                            $.each(item, function (k, v) {
-                                k = k.replace(/\./g, "-");
-                                $('#' + k + '-field').addClass("has-error has-feedback");
-                                $('#' + k + '-field').find('.form-control-feedback').html('<i class="icon-cancel-circle2"></i>');
-                                $('#' + k + '-field').find('.help-block').html(v);
-                            });
-                        }
-                    })
-                }
-            });
-
-
 
             // Basic initialization
             table = $('#indicadoresClientes-table').DataTable();
@@ -343,6 +269,37 @@
                         {data: 'carga_entrenamiento', name: 'carga_entrenamiento'},
                         {data: 'operaciones', name: 'operaciones'}
                     ]
+            });
+            $.ajax({"url":'{!! route('indicadores.resultados-semanales') !!}',
+                "data":{"cliente" :$('#cliente option:selected').val(),
+                    "semana" :$('#semana').val() },
+
+                success:function(data){
+                    $('#resultados').html(data);
+                },
+
+                error: function (data) {
+                    //resetear estilos
+                    $('.form-group').removeClass("has-error has-feedback");
+                    $('#wizard').find('.form-control-feedback').html('');
+                    $('#wizard').find('.help-block').html('');
+                    $('#buscar-cliente').find('.form-control-feedback').html('');
+                    $('#buscar-cliente').find('.help-block').html('');
+
+                    //mostramos los errores
+                    var errors = data.responseJSON;
+                    swal("Oops...", "Algo salio mal!", "error");
+                    $.each(errors, function (i, item) {
+                        if (i === 'message') {
+                            $.each(item, function (k, v) {
+                                k = k.replace(/\./g, "-");
+                                $('#' + k + '-field').addClass("has-error has-feedback");
+                                $('#' + k + '-field').find('.form-control-feedback').html('<i class="icon-cancel-circle2"></i>');
+                                $('#' + k + '-field').find('.help-block').html(v);
+                            });
+                        }
+                    })
+                }
             });
 
         }

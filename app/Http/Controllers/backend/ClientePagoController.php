@@ -56,7 +56,7 @@ class ClientePagoController extends Controller
             'cliente' => 'required|numeric',
             'pago' => 'required|numeric',
             'fecha_pago' => 'required|date_format:d/m/Y',
-            'mes_pago' => 'required|date_format:d/m/Y',
+            'mes_pago' => 'required|date_format:Y-m-d',
         ]);
 
 
@@ -267,7 +267,7 @@ class ClientePagoController extends Controller
     public function clientePagarDeuda($id = null,$fecha_deuda = null){
         //<option value="1">Pablo Rivera</option>
         $cliente = Cliente::find($id);
-        $fecha_deuda = date('m/Y', strtotime($fecha_deuda));
+        $fecha_deuda = date('Y-n', strtotime($fecha_deuda));
         $pagos = Pago::all();
         return view('admin.clientespagos.crear-clientespagos',['titulo'=>'Pago Mensual','cliente'=>$cliente,'pagos'=>$pagos,'fecha_deuda'=>$fecha_deuda]);
     }

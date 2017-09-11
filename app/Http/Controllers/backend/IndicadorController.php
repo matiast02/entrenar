@@ -56,7 +56,7 @@ class IndicadorController extends Controller
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
             'fecha_indicador' => 'required|date_format:d/m/Y',
-            'mes' => 'required|date_format:d/m/Y',
+            'mes' => 'required|date_format:Y-m-d',
 
             $semana = 'semana' => 'numeric',
 
@@ -364,7 +364,7 @@ class IndicadorController extends Controller
         ///validamos los campos enviados
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
-            'mes' => 'required|date_format:d/m/Y',
+            'mes' => 'required|date_format:Y-m-d',
         ]);
 
         $cliente = $request->input("cliente");
@@ -477,7 +477,7 @@ class IndicadorController extends Controller
         ///validamos los campos enviados
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
-            'mes' => 'required|date_format:d/m/Y',
+            'mes' => 'required|date_format:Y-m-d',
         ]);
 
         //si falla la validacion, redireccionamos con los errores
@@ -585,7 +585,7 @@ class IndicadorController extends Controller
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
             'fecha_indicador' => 'required|date_format:d/m/Y',
-            'mes' => 'required|date_format:d/m/Y',
+            'mes' => 'required|date_format:Y-m-d',
             $semana = 'semana' => 'numeric',
             'peso_inicial' => 'required|numeric',
             'peso_final' => 'required|numeric',

@@ -53,7 +53,7 @@
 
                             <div id="cliente-field" class="form-group">
                                 <label for="cliente" class="col-lg-3 control-label">Cliente:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-6">
                                     <select class="select" id="cliente" name="cliente">
                                     </select>
                                     <div class="form-control-feedback"></div>
@@ -61,19 +61,39 @@
                                 </div>
                             </div>
 
-
                             <div id="mes-field" class="form-group">
                                 <label class="col-lg-3 control-label">Mes: </label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-6">
                                     <div id="mes-field" class="input-group">
-                                        <span class="input-group-addon"><i class="icon-calendar22"></i></span>
-                                        <input type="text" id="mes" name="mes" class="form-control daterange-single">
+                                        <select id="mes" name="mes" class="form-control">
+                                            <?php
+                                            $mes=date("n");
+                                            $rango=11;
+                                            for ($i=$mes;$i<=$mes+$rango;$i++){
+                                                $mesano=date('Y-n', mktime(0, 0, 0, $i, 1, date("Y") ) );
+                                                $meses=date('F', mktime(0, 0, 0, $i, 1, date("Y") ) );
+                                                if ($meses=="January") $meses="Enero";
+                                                if ($meses=="February") $meses="Febrero";
+                                                if ($meses=="March") $meses="Marzo";
+                                                if ($meses=="April") $meses="Abril";
+                                                if ($meses=="May") $meses="Mayo";
+                                                if ($meses=="June") $meses="Junio";
+                                                if ($meses=="July") $meses="Julio";
+                                                if ($meses=="August") $meses="Agosto";
+                                                if ($meses=="September") $meses="Septiembre";
+                                                if ($meses=="October") $meses="Octubre";
+                                                if ($meses=="November") $meses="Noviembre";
+                                                if ($meses=="December") $meses="Diciembre";
+                                                $ano=date('Y', mktime(0, 0, 0, $i, 1, date("Y") ) );
+                                                echo "<option value='$mesano-01'>$meses / $ano</option>";
+                                            }
+                                            ?>
+                                        </select>
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
                             </div>
-
 
                             <div class="text-right">
                                 <button type="button" id="btn-enviar" onclick="datos()" class="btn btn-primary">Buscar <i class="icon-arrow-right14 position-right"></i></button>
@@ -179,38 +199,6 @@
     <script type="text/javascript">
         function datos() {
 
-            $.ajax({"url":'{!! route('indicadores.resultados-mensuales') !!}',
-                "data":{"cliente" :$('#cliente option:selected').val(),
-                        "mes" :$('#mes').val() },
-
-                success:function(data){
-                    $('#resultados').html(data);
-                },
-
-                error: function (data) {
-                    //resetear estilos
-                    $('.form-group').removeClass("has-error has-feedback");
-                    $('#wizard').find('.form-control-feedback').html('');
-                    $('#wizard').find('.help-block').html('');
-                    $('#buscar-cliente').find('.form-control-feedback').html('');
-                    $('#buscar-cliente').find('.help-block').html('');
-
-                    //mostramos los errores
-                    var errors = data.responseJSON;
-                    swal("Oops...", "Algo salio mal!", "error");
-                    $.each(errors, function (i, item) {
-                        if (i === 'message') {
-                            $.each(item, function (k, v) {
-                                k = k.replace(/\./g, "-");
-                                $('#' + k + '-field').addClass("has-error has-feedback");
-                                $('#' + k + '-field').find('.form-control-feedback').html('<i class="icon-cancel-circle2"></i>');
-                                $('#' + k + '-field').find('.help-block').html(v);
-                            });
-                        }
-                    })
-                }
-            });
-
             table = $('#indicadoresClientes-table').DataTable();
 
             table.destroy();
@@ -284,6 +272,39 @@
                     {data: 'operaciones', name: 'operaciones'}
                 ]
             });
+
+            $.ajax({"url":'{!! route('indicadores.resultados-mensuales') !!}',
+                "data":{"cliente" :$('#cliente option:selected').val(),
+                    "mes" :$('#mes').val() },
+
+                success:function(data){
+                    $('#resultados').html(data);
+                },
+
+                error: function (data) {
+                    //resetear estilos
+                    $('.form-group').removeClass("has-error has-feedback");
+                    $('#wizard').find('.form-control-feedback').html('');
+                    $('#wizard').find('.help-block').html('');
+                    $('#buscar-cliente').find('.form-control-feedback').html('');
+                    $('#buscar-cliente').find('.help-block').html('');
+
+                    //mostramos los errores
+                    var errors = data.responseJSON;
+                    swal("Oops...", "Algo salio mal!", "error");
+                    $.each(errors, function (i, item) {
+                        if (i === 'message') {
+                            $.each(item, function (k, v) {
+                                k = k.replace(/\./g, "-");
+                                $('#' + k + '-field').addClass("has-error has-feedback");
+                                $('#' + k + '-field').find('.form-control-feedback').html('<i class="icon-cancel-circle2"></i>');
+                                $('#' + k + '-field').find('.help-block').html(v);
+                            });
+                        }
+                    })
+                }
+            });
+
         }
 
 

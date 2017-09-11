@@ -54,7 +54,7 @@
 
                             <div id="cliente-field" class="form-group">
                                 <label for="cliente" class="col-lg-3 control-label">Cliente:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-6">
                                     @if(isset($cliente))
                                         <select class="select" id="cliente_id" name="cliente">
                                             <option value="{{$cliente->id}}">{{$cliente->nombre." ".$cliente->apellido}}</option>
@@ -72,7 +72,7 @@
 
                             <div id="pago-field" class="form-group">
                                 <label for="pago" class="col-lg-3 control-label">Mensualidad:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-6">
                                     <select class="form-control" id="pago" name="pago">
                                         @foreach($pagos as $pago)
                                             <option value="{{$pago->id}}">{{ucfirst('Dias: '.$pago->dias_semana. '  -  ' . ' Grupo: ' .$pago->grupo. '  -  ' . ' Monto: $' .$pago->costo_mensual)}}</option>
@@ -84,7 +84,7 @@
 
                             <div class="form-group ">
                                 <label class="col-lg-3 control-label">Fecha de Pago:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-3">
                                     <div id="fecha_pago-field" class="input-group">
                                         <span class="input-group-addon"><i class="icon-calendar22"></i></span>
                                         <input type="text"  placeholder="Presionar aquí" class="form-control datepicker" id="fecha_pago" name ="fecha_pago" >
@@ -96,10 +96,53 @@
 
                             <div class="form-group ">
                                 <label class="col-lg-3 control-label">Mes a Pagar:</label>
-                                <div class="col-lg-9">
+                                <div class="col-lg-4">
                                     <div id="mes_pago-field" class="input-group">
-                                        <span class="input-group-addon"><i class="icon-calendar22"></i></span>
-                                        <input type="text"  placeholder="Presionar aquí" class="form-control datepicker" id="mes_pago" name ="mes_pago" @if(isset($fecha_deuda)) value="{{'01/'.$fecha_deuda}}" readonly="readonly" @endif>
+                                        <select id="mes_pago" name="mes_pago" class="form-control">
+                                            <?php
+                                            $mes=date("n")-2;
+                                            $rango=11;
+                                            //si se indico la fecha de deuda se la muestra y no se la puede cambiar
+                                            if (isset($fecha_deuda)){
+                                                $mes = date('F',strtotime($fecha_deuda));
+                                                if ($mes=="January") $mes="Enero";
+                                                if ($mes=="February") $mes="Febrero";
+                                                if ($mes=="March") $mes="Marzo";
+                                                if ($mes=="April") $mes="Abril";
+                                                if ($mes=="May") $mes="Mayo";
+                                                if ($mes=="June") $mes="Junio";
+                                                if ($mes=="July") $mes="Julio";
+                                                if ($mes=="August") $mes="Agosto";
+                                                if ($mes=="September") $mes="Septiembre";
+                                                if ($mes=="October") $mes="Octubre";
+                                                if ($mes=="November") $mes="Noviembre";
+                                                if ($mes=="December") $mes="Diciembre";
+                                                $anio = date('Y',strtotime($fecha_deuda));
+
+                                                echo "<option value='".date('Y-n',strtotime($fecha_deuda))."-01' readonly='readonly'>".$mes." / ".$anio."</option>";
+                                            }else{
+                                                for ($i=$mes;$i<=$mes+$rango;$i++){
+                                                    $mesano=date('Y-n', mktime(0, 0, 0, $i, 1, date("Y") ) );
+                                                    $meses=date('F', mktime(0, 0, 0, $i, 1, date("Y") ) );
+                                                    if ($meses=="January") $meses="Enero";
+                                                    if ($meses=="February") $meses="Febrero";
+                                                    if ($meses=="March") $meses="Marzo";
+                                                    if ($meses=="April") $meses="Abril";
+                                                    if ($meses=="May") $meses="Mayo";
+                                                    if ($meses=="June") $meses="Junio";
+                                                    if ($meses=="July") $meses="Julio";
+                                                    if ($meses=="August") $meses="Agosto";
+                                                    if ($meses=="September") $meses="Septiembre";
+                                                    if ($meses=="October") $meses="Octubre";
+                                                    if ($meses=="November") $meses="Noviembre";
+                                                    if ($meses=="December") $meses="Diciembre";
+                                                    $ano=date('Y', mktime(0, 0, 0, $i, 1, date("Y") ) );
+                                                    echo "<option value='$mesano-01'>$meses / $ano</option>";
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                        {{--<input type="text"  placeholder="Presionar aquí" class="form-control datepicker" id="mes_pago" name ="mes_pago" @if(isset($fecha_deuda)) value="{{'01/'.$fecha_deuda}}" readonly="readonly" @endif>--}}
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
@@ -131,9 +174,7 @@
         });
 
 
-        $('select').select2({
-            // options
-        });
+        $('select').select2();
 
 
 
