@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Cliente;
 use App\Pago;
+use App\Indicador;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Integer;
 use Yajra\Datatables\Datatables;
@@ -128,19 +129,29 @@ class ClientePagoController extends Controller
                     //guardar en una coleccion las fechas (solo mes y año) de los meses pagados
                     array_push($lista_meses_pagados,date('m-Y',strtotime($mes->mes_pago)));
                 }
+            //si no tiene meses pagados -> controlo si tiene indicadores, si tiene muestro la fecha de los indicadores (esos meses adeuda)
+            if (count($lista_meses_pagados) == 0){
+                    //consulto indicadores ESTA PARTE DEL IF NO ES DE IMPORTANCIA DE MOMENTO
+                $deudas_por_cliente = DB::table('indicadores')
+                                      ->select('clientes.id as id')
+                                      ->join('clientes','indicadores.cliente_id','=','clientes.id')
+                                      ->where('clientes.id',$cliente->id)
+                                      ->groupBy(DB::raw('YEAR(fecha_indicador), MONTH(fecha_indicador)'))
+                                      ->get();
 
-            $deudas_por_cliente =  DB::table('clientes_pagos')
-                ->select('clientes.id as id')
-                ->join('clientes','clientes_pagos.cliente_id','=','clientes.id')
-                ->join('indicadores','clientes.id','=','indicadores.cliente_id')
-                ->join('pagos','clientes_pagos.pago_id','=','pagos.id')
-                ->where('clientes.id',$cliente->id)
-                ->whereNotIn(DB::raw('DATE_FORMAT(indicadores.mes,"%m-%Y")'),collect($lista_meses_pagados))
-                ->groupBy(DB::raw('YEAR(indicadores.fecha_indicador), MONTH(indicadores.fecha_indicador)'))
-                ->get();
+            }else{
+                $deudas_por_cliente =  DB::table('clientes_pagos')
+                    ->select('clientes.id as id')
+                    ->join('clientes','clientes_pagos.cliente_id','=','clientes.id')
+                    ->join('indicadores','clientes.id','=','indicadores.cliente_id')
+                    ->join('pagos','clientes_pagos.pago_id','=','pagos.id')
+                    ->where('clientes.id',$cliente->id)
+                    ->whereNotIn(DB::raw('DATE_FORMAT(indicadores.mes,"%m-%Y")'),collect($lista_meses_pagados))
+                    ->groupBy(DB::raw('YEAR(indicadores.fecha_indicador), MONTH(indicadores.fecha_indicador)'))
+                    ->get();
+            }
 
-
-
+            //si el cliente tiene deudas se lo coloca en la lista de deudores
             if (count($deudas_por_cliente)>0){
                 $id_cliente = $deudas_por_cliente[0]->id;
                 array_push($clientes_deudores, $id_cliente);

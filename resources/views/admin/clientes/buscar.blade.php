@@ -227,7 +227,7 @@
                         $('#buscar-cliente')[0].reset();
                         $("#wizard").html("");
                         numero = 0;
-//                        location.reload();
+                        location.reload();
                     },
                     error: function(data){
                         //resetear estilos
