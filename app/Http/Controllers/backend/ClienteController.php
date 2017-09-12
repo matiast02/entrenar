@@ -29,13 +29,6 @@ class ClienteController extends Controller
     }
 
 
-    public function index()
-    {
-        //
-    }
-
-
-
     public function create()
     {
         $deportes = Deporte::all();
@@ -372,8 +365,6 @@ class ClienteController extends Controller
 
     }
 
-
-
     public function destroy($id)
     {
         $cliente = Cliente::find($id);
@@ -394,6 +385,21 @@ class ClienteController extends Controller
             ], 422);
         }
     }
+
+    public function verAsistencias(){
+        return view('admin.clientes.asistencia',['titulo'=>'Asistencias del cliente']);
+    }
+
+    public function asistencias($id){
+        $indicadores = Indicador::select('fecha_indicador')->where('cliente_id',$id)->groupBy('fecha_indicador')->orderBy('fecha_indicador','DESC')->get();
+        $asistencias = array();
+        foreach ($indicadores as $indicador) {
+            array_push($asistencias,['title'=>'asistencia','start'=>$indicador->fecha_indicador]);
+        }
+        json_encode($asistencias);
+        return $asistencias;
+    }
+
 
 
 }

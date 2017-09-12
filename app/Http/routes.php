@@ -30,6 +30,9 @@ Route::group(['middleware'=>'auth'],function (){
     Route::delete('/clientes/eliminar/{id}',['as'=>'eliminar.clientes','uses'=>'backend\ClienteController@destroy']);
     Route::post('/clientes/buscar-cliente', ['as'=>'search.clientes','uses'=>'backend\ClienteController@search']);
     Route::get('/clientes/buscar', ['as'=>'buscar.clientes','uses'=>'backend\ClienteController@buscar']);
+    //rutas para control de asistencia clientes
+    Route::get('clientes/asistencias',['as'=>'ver.asistencias','uses'=>'backend\ClienteController@verAsistencias']);
+    Route::get('clientes/asistencias/{id}',['as'=>'asistencias','uses'=>'backend\ClienteController@asistencias']);
 
 
     //rutas para control de pagos por clientes
