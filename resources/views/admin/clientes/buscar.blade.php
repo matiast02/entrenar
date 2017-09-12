@@ -227,7 +227,7 @@
                         $('#buscar-cliente')[0].reset();
                         $("#wizard").html("");
                         numero = 0;
-                        location.reload();
+//                        location.reload();
                     },
                     error: function(data){
                         //resetear estilos
@@ -262,13 +262,15 @@
         function steps(){
             $('#panel-series').show();
             add_step(numero);
-            numero++;
             $('#cantidad_series').val(numero);
+            console.log("serie agregada "+numero);
+            numero = numero +1;
+            console.log("serie siguiente "+numero);
         }
 
 
         function remove(index){
-            console.log("remove index "+index+" paso numero "+numero);
+            console.log("serie eliminada "+index+1);
             console.log(wizard.steps('remove',index+1));
         }
 
@@ -348,8 +350,12 @@
             });
             //para cuando quiere eliminar un paso
             $('body').on('click','input[name="boton-eliminar-'+numero+'"]', function () {
-                remove(wizard.steps("getCurrentIndex"));
-                $('#cantidad_series').val($('#cantidad_series').val()-1);
+//                if(numero > 0){
+                    remove(wizard.steps("getCurrentIndex"));
+                    numero = numero - 1;
+                    $('#cantidad_series').val(numero);
+//                }
+
             });
 
 

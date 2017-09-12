@@ -84,7 +84,7 @@
 
                             <div class="form-group ">
                                 <label class="col-lg-3 control-label">Fecha de Pago:</label>
-                                <div class="col-lg-3">
+                                <div class="col-lg-4">
                                     <div id="fecha_pago-field" class="input-group">
                                         <span class="input-group-addon"><i class="icon-calendar22"></i></span>
                                         <input type="text"  placeholder="Presionar aquí" class="form-control datepicker" id="fecha_pago" name ="fecha_pago" >
@@ -96,7 +96,7 @@
 
                             <div class="form-group ">
                                 <label class="col-lg-3 control-label">Mes a Pagar:</label>
-                                <div class="col-lg-4">
+                                <div class="col-lg-5">
                                     <div id="mes_pago-field" class="input-group">
                                         <select id="mes_pago" name="mes_pago" class="form-control">
                                             <?php

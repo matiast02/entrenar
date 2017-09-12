@@ -73,8 +73,7 @@
                 },
                 processing: true,
                 serverSide: true,//evita que la columna con botones sea un parametro en la consulta sql
-                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 1 ] },
-                    { 'bSortable': false,"bSearchable": false, 'aTargets': [ 2 ] }],
+                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 0,1,2,3,4 ] }],
                 ajax: '{!! route('clientepago.datatableDeudasPersonales',$id) !!}',
                 columns: [
                     {data: 'apellido', name: 'apellido'},

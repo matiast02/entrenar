@@ -129,17 +129,7 @@ class ClientePagoController extends Controller
                     //guardar en una coleccion las fechas (solo mes y año) de los meses pagados
                     array_push($lista_meses_pagados,date('m-Y',strtotime($mes->mes_pago)));
                 }
-            //si no tiene meses pagados -> controlo si tiene indicadores, si tiene muestro la fecha de los indicadores (esos meses adeuda)
-            if (count($lista_meses_pagados) == 0){
-                    //consulto indicadores ESTA PARTE DEL IF NO ES DE IMPORTANCIA DE MOMENTO
-                $deudas_por_cliente = DB::table('indicadores')
-                                      ->select('clientes.id as id')
-                                      ->join('clientes','indicadores.cliente_id','=','clientes.id')
-                                      ->where('clientes.id',$cliente->id)
-                                      ->groupBy(DB::raw('YEAR(fecha_indicador), MONTH(fecha_indicador)'))
-                                      ->get();
 
-            }else{
                 $deudas_por_cliente =  DB::table('clientes_pagos')
                     ->select('clientes.id as id')
                     ->join('clientes','clientes_pagos.cliente_id','=','clientes.id')
@@ -149,7 +139,7 @@ class ClientePagoController extends Controller
                     ->whereNotIn(DB::raw('DATE_FORMAT(indicadores.mes,"%m-%Y")'),collect($lista_meses_pagados))
                     ->groupBy(DB::raw('YEAR(indicadores.fecha_indicador), MONTH(indicadores.fecha_indicador)'))
                     ->get();
-            }
+
 
             //si el cliente tiene deudas se lo coloca en la lista de deudores
             if (count($deudas_por_cliente)>0){
@@ -177,7 +167,22 @@ class ClientePagoController extends Controller
 
 
             ->editColumn('mes_pago',function($pago){
-                return date('d-m-Y', strtotime($pago->fecha_pago)); })
+                //para mostrar formato nombre_mes /año
+                $mes = date('F',strtotime($pago->fecha_pago));
+                if ($mes=="January") $mes="Enero";
+                if ($mes=="February") $mes="Febrero";
+                if ($mes=="March") $mes="Marzo";
+                if ($mes=="April") $mes="Abril";
+                if ($mes=="May") $mes="Mayo";
+                if ($mes=="June") $mes="Junio";
+                if ($mes=="July") $mes="Julio";
+                if ($mes=="August") $mes="Agosto";
+                if ($mes=="September") $mes="Septiembre";
+                if ($mes=="October") $mes="Octubre";
+                if ($mes=="November") $mes="Noviembre";
+                if ($mes=="December") $mes="Diciembre";
+                $anio = date('Y',strtotime($pago->fecha_pago));
+                return '<span class="label label-primary">'.$mes.' / '.$anio.'</span>'; })
 
             ->addColumn('deuda',function($pago){
                 //se muestra el datatable de deudores
@@ -251,9 +256,24 @@ class ClientePagoController extends Controller
         return Datatables::of($deudas)
 
             ->editColumn('mes_sin_pagar',function($pago){
-                return '<span class="label label-danger">'.date('m-Y', strtotime($pago->mes_sin_pagar)).'</span>'; })
+                //para mostrar formato nombre_mes /año
+                $mes = date('F',strtotime($pago->mes_sin_pagar));
+                if ($mes=="January") $mes="Enero";
+                if ($mes=="February") $mes="Febrero";
+                if ($mes=="March") $mes="Marzo";
+                if ($mes=="April") $mes="Abril";
+                if ($mes=="May") $mes="Mayo";
+                if ($mes=="June") $mes="Junio";
+                if ($mes=="July") $mes="Julio";
+                if ($mes=="August") $mes="Agosto";
+                if ($mes=="September") $mes="Septiembre";
+                if ($mes=="October") $mes="Octubre";
+                if ($mes=="November") $mes="Noviembre";
+                if ($mes=="December") $mes="Diciembre";
+                $anio = date('Y',strtotime($pago->mes_sin_pagar));
+                return '<span class="label label-danger">'.$mes.' / '.$anio.'</span>'; })
             ->editColumn('deuda',function($pago){
-                return '$'.$pago->deuda;
+                return '<span class="label label-primary">$'.$pago->deuda.'</span>';
             })
 
             ->addColumn('operaciones', '
@@ -264,7 +284,6 @@ class ClientePagoController extends Controller
 							</a>
 							<ul class="dropdown-menu dropdown-menu-right">
 								<li><a href="{{ URL::route( \'clientepago.clientePagarDeuda\', array( $id , $mes_sin_pagar)) }}"><i class="icon-money"></i> Pagar</a></li>
-								<li><a href="#" onclick="eliminar()"><i class="icon-trash"></i> Eliminar</a></li>
 							</ul>
 						</li>
 					</ul>')

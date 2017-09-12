@@ -50,7 +50,7 @@ class EvaluacionesController extends Controller
                 //salto abalacob
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                         <input type="numeric" class="form-control" name="salto_abalacob" id="salto_abalacob">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -62,7 +62,7 @@ class EvaluacionesController extends Controller
                 //salto cm
                 $formulario = '<div id="salto_cmj-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                         <input type="numeric" class="form-control" name="salto_cmj" id="salto_cm">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -74,7 +74,7 @@ class EvaluacionesController extends Controller
                 //salto sj
                 $formulario = '<div id="salto_sj-field" class="form-group">
                 <label class="col-lg-3 control-label">Altura:</label>
-                <div class="col-lg-3">
+                <div class="col-lg-5">
                     <input type="numeric" class="form-control" name="salto_sj" id="salto_sj">
                     <div class="form-control-feedback"></div>
                     <span class="help-block"></span>
@@ -86,7 +86,7 @@ class EvaluacionesController extends Controller
                 //salto continuo
                 $formulario = '<div id="mejor_salto_continuo-field" class="form-group">
                     <label class="col-lg-3 control-label">Mejor salto:</label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                            <input type="numeric" class="form-control" name="mejor_salto_continuo" id="salto_continuo_ms">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
@@ -94,7 +94,7 @@ class EvaluacionesController extends Controller
                     </div>'.
                     '<div id="peor_salto_continuo-field" class="form-group">
                     <label class="col-lg-3 control-label">Peor salto:</label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                            <input type="numeric" class="form-control" name="peor_salto_continuo" id="salto_continuo_ps">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
@@ -102,7 +102,7 @@ class EvaluacionesController extends Controller
                     </div>'.
                     '<div id="cantidad_salto_continuo-field" class="form-group">
                         <label class="col-lg-3 control-label">Cantidad de saltos:</label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                            <input type="numeric" class="form-control" name="cantidad_salto_continuo" id="salto_continuo_cs">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
@@ -114,7 +114,7 @@ class EvaluacionesController extends Controller
                 //peso muerto
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                        <input type="numeric" class="form-control" name="maximo_peso" id="peso_muerto">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -126,7 +126,7 @@ class EvaluacionesController extends Controller
                 //velocidad 10 mts
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                        <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -134,7 +134,7 @@ class EvaluacionesController extends Controller
                                </div>'.
                     '<div id="velocidad_decimas-field" class="form-group">
                         <label class="col-lg-3 control-label">Decimas:</label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                           <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
@@ -142,7 +142,7 @@ class EvaluacionesController extends Controller
                     </div>'.
                     '<div id="velocidad_centesimas-field" class="form-group">
                         <label class="col-lg-3 control-label">Centesimas:</label>
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                           <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
@@ -154,7 +154,7 @@ class EvaluacionesController extends Controller
                 //remo
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                        <input type="numeric" class="form-control" name="maximo_peso" id="remo">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -166,7 +166,7 @@ class EvaluacionesController extends Controller
                 //yoyo test
                 $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
                                     <label class="col-lg-3 control-label">Fase Final:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                        <input type="numeric" class="form-control" name="resistencia_numero_fase" id="yoyo_test">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -178,7 +178,7 @@ class EvaluacionesController extends Controller
                 //sentadilla bulgara
                 $formulario = '<div id="cantidad_repeticiones-field" class="form-group">
                                     <label class="col-lg-3 control-label">Cantidad de Repeticiones:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                       <input type="numeric" class="form-control" name="cantidad_repeticiones" id="sb_cantidad_repeticiones">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -186,7 +186,7 @@ class EvaluacionesController extends Controller
                                 </div>'.
                                 '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-5">
                                       <input type="numeric" class="form-control" name="maximo_peso" id="sb_maximo_peso">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>

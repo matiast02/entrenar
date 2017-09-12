@@ -26,7 +26,7 @@
 @section('contenido')
     <div class="panel panel-flat">
         <div class="panel-heading">
-            <h5 class="panel-title">Basic table<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+            <h5 class="panel-title">Deudores<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -75,8 +75,7 @@
                 },
                 processing: true,
                 serverSide: true,//evita que la columna con botones sea un parametro en la consulta sql
-                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 1 ] },
-                    { 'bSortable': false,"bSearchable": false, 'aTargets': [ 2 ] }],
+                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 0,1,2,3,4 ] }],
                 ajax: '{!! route('clientepago.datatable') !!}',
                 columns: [
                     {data: 'apellido', name: 'apellido'},

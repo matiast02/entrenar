@@ -85,7 +85,7 @@
                 },
                 processing: true,
                 serverSide: true,//evita que la columna con botones sea un parametro en la consulta sql
-                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 6 ] }    ],
+                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 11 ] }    ],
                 ajax: '{!! route('clientes.datatable') !!}',
                 columns: [
                     {data: 'foto', name: 'foto'},
