@@ -47,6 +47,8 @@
                     <th>Fecha Nacimiento</th>
                     <th>Fecha Inicio</th>
                     <th>DNI</th>
+                    <th>Deporte</th>
+                    <th>Categoria</th>
                     <th>Direccion</th>
                     <th>Celular</th>
                     <th>Institucion</th>
@@ -96,6 +98,8 @@
                     {data: 'fecha_nacimiento', name: 'fecha_nacimiento'},
                     {data: 'fecha_inicio_entrenamiento', name: 'fecha_inicio_entrenamiento'},
                     {data: 'dni', name: 'dni'},
+                    {data: 'deporte_id', name: 'deporte_id'},
+                    {data: 'categoria_id', name: 'categoria_id'},
                     {data: 'direccion', name: 'direccion'},
                     {data: 'celular', name: 'celular'},
                     {data: 'institucion', name: 'institucion'},

@@ -5,11 +5,16 @@
 <script type="text/javascript" src="{{URL::asset('js/plugins/ui/moment/moment.min.js')}}"></script>
 <!-- Load plugin -->
 <script type="text/javascript" src="{{URL::asset('js/plugins/pickers/daterangepicker.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/plugins/tables/datatables/datatables.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/tables/datatables/extensions/responsive.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/notifications/sweet_alert.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/visualization/echarts/echarts2.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/visualization/echarts/theme/limitless.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/notifications/jgrowl.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/plugins/forms/styling/uniform.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/forms/wizards/stepy.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/forms/wizards/steps.min.js')}}"></script>
+
 
 @endsection
 
@@ -31,7 +36,7 @@
 
 @section('contenido')
 
-    <form class="form-horizontal col-md-12" id="buscar-cliente" method="POST" >
+    <form class="form-horizontal col-md-12" id="buscar-cliente" >
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">Resultados Evaluaciones<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
@@ -66,7 +71,7 @@
                                             <div class="radio">
                                                 <label for="{{$ejercicio->nombre}}">
 
-                                                    <input type="radio" name="ejercicios[]" class="styled" value="{{$ejercicio->id}}">
+                                                    <input type="radio" name="ejercicios" id="ejercicios" class="styled" value="{{$ejercicio->id}}">
 
                                                     {{$ejercicio->nombre}}
                                                 </label>
@@ -76,10 +81,10 @@
                                 </div>
                             </div>
 
-                            <div id="rango-fechas" class="form-group">
-                                <label for="rango-fechas" class="col-lg-3 control-label">Fechas:</label>
+                            <div id="rango_fechas-field" class="form-group">
+                                <label for="rango_fechas" class="col-lg-3 control-label">Fechas:</label>
                                 <div class="col-lg-9">
-                                    <input type="text" name="rango-fechas" class="form-control daterange-ranges" value="01/04/2016 - 31/01/2017">
+                                    <input type="text" name="rango_fechas" id="rango_fechas" class="form-control daterange-ranges" value="01/04/2016 - 31/01/2017">
                                     <div class="form-control-feedback"></div>
                                     <span class="help-block"></span>
                                 </div>
@@ -88,7 +93,7 @@
                     </div>
                 </div>
                 <div class="text-right">
-                    <button type="submit" id="btn-enviar" onclick="datos()" class="btn btn-primary">Aceptar <i class="icon-arrow-right14 position-right"></i></button>
+                    <button type="submit" id="btn-enviar" class="btn btn-primary">Aceptar <i class="icon-arrow-right14 position-right"></i></button>
                 </div>
             </div>
         </div>
@@ -113,7 +118,6 @@
                     <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Resultado</th>
                         <th>Operaciones</th>
                     </tr>
                     </thead>
@@ -133,7 +137,9 @@
             }
         });
 
+
         $('select').select2({});
+
 
         //buscar usuario
         $("#cliente_id").select2({
@@ -166,6 +172,7 @@
                 }
             }
         });
+
 
 
         $('.daterange-ranges').daterangepicker(
@@ -216,11 +223,14 @@
 
 
     <script type="text/javascript">
-        function datos() {
+
+        $('#buscar-cliente').on('submit',function (e) {
+            e.preventDefault();
 
             table = $('#evaluaciones-table').DataTable();
 
             table.destroy();
+
             // Basic initialization
             table =  $('#evaluaciones-table').DataTable({
                 autoWidth: false,
@@ -242,19 +252,40 @@
                 processing: true,
                 serverSide: true,//evita que la columna con botones sea un parametro en la consulta sql
                 "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 1 ] }],
-                ajax: {"url":'{!! route('evaluaciones.datatable') !!}', "data":{"cliente" :$('#cliente option:selected').val(), "ejercicio": $('#ejercicio').val(),
-                    success: function (data) {
-                    }
-                }},
-                columns: [
+                ajax: {"url":'{!! route('evaluaciones.datatable') !!}', "data":{
+                    "cliente" :$('#cliente_id option:selected').val(),
+                    "ejercicios": $('#ejercicios').val(),
+                    "rango_fechas": $('#rango_fechas').val()},
 
+                    error: function(data){
+                        //resetear estilos
+                        $('.form-group').removeClass("has-error has-feedback");
+                        $('#buscar-cliente').find('.form-control-feedback').html('');
+                        $('#buscar-cliente').find('.help-block').html('');
+
+                        //mostramos los errores
+                        var errors = data.responseJSON;
+                        swal("Oops...", "Algo salio mal!", "error");
+                        $.each(errors, function(i,item){
+                            if(i === 'message'){
+                                $.each(item,function (k,v){
+                                    $('#'+k+'-field').addClass("has-error has-feedback");
+                                    $('#'+k+'-field').find('.form-control-feedback').html('<i class="icon-cancel-circle2"></i>');
+                                    $('#'+k+'-field').find('.help-block').html(v);
+                                });
+                            }
+                        })
+
+                    }},
+
+                columns: [
                     //"data":{"cliente" :$('#cliente option:selected').val()}}, Sirve para el caso de seleccionar un cliente y al apretar un boton que muestre la informacion
-                    {data: 'nombre', name: 'nombre'},
-                    {data: 'rango-fechas', name: 'rango-fechas'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'operaciones', name: 'operaciones'}
                 ]
             });
-        }
+        });
+
 
         function eliminar(id){
             swal({
@@ -291,6 +322,7 @@
             });
         }
     </script>
+
 
 
 @endsection
