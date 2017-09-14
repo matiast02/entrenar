@@ -531,6 +531,7 @@ class EvaluacionesController extends Controller
             'peor_salto_continuo' => 'required',
             'cantidad_salto_continuo' => 'required',
             'resistencia_numero_fase' => 'required|numeric',
+            'cantidad_repeticiones' => 'required|numeric'
 
         ]);
 
@@ -564,9 +565,57 @@ class EvaluacionesController extends Controller
 
 
     //devuelve los datos al datatable que les solicito
-    public function anyData()
+    public function anyData(Request $request)
     {
-        return Datatables::of(Evaluaciones::query())
+        ///validamos los campos enviados
+        $validator =  Validator::make($request->all(), [
+            'cliente' => 'required|numeric',
+            'ejercicios' => 'required|numeric',
+            'rango_fechas' => 'required',
+        ]);
+
+
+        //si falla la validacion, redireccionamos con los errores
+        if ($validator->fails())
+        {
+            $errors = $validator->errors();
+            $errors =  json_decode($errors);
+
+            return response()->json([
+                'success' => false,
+                'message' => $errors
+            ], 422);
+        }
+
+
+
+        $id = $request->input("cliente");
+
+        $ejercicio_id = $request->input('ejercicios');
+        $ejercicio = Ejercicio::findOrFail($ejercicio_id);
+
+        $rango_fechas = $request->input('rango_fechas');
+        $rango_fechas = explode('-',$request->input('rango_fechas'));
+        $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
+        $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
+
+        //ejercicios.fuerza es 0 NO fuerza y 1 Fuerza
+        if ($ejercicio['fuerza'] == 1) {
+
+            $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
+
+        }
+        else if ($ejercicio['fuerza'] == 0){
+
+            $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
+        }
+
+        return Datatables::of($consulta)
+
+            ->editColumn('created_at',function($evaluaciones){
+                return date('d-m-Y', strtotime($evaluaciones->created_at));
+            })
+
             ->addColumn('operaciones', '
                     <ul class="icons-list">
 						<li class="dropdown">
@@ -574,11 +623,12 @@ class EvaluacionesController extends Controller
 								<i class="icon-menu9"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="{{ URL::route( \'series.editar\', array( $id )) }}"><i class="icon-pencil"></i> Editar</a></li>
+								<li><a href="{{ URL::route( \'evaluaciones.editar\', array( $id )) }}"><i class="icon-pencil"></i> Editar</a></li>
 								<li><a href="#" onclick="eliminar({{ $id  }})"><i class="icon-trash"></i> Eliminar</a></li>
 							</ul>
 						</li>
 					</ul>')
+
             ->removeColumn('id')
             ->make(true);
     }

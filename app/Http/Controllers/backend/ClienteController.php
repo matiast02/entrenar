@@ -174,6 +174,17 @@ class ClienteController extends Controller
     public function anyData()
     {
         return Datatables::of(Cliente::query())
+
+            ->editColumn('deporte_id',function($data){
+                $deportes = Deporte::find($data['deporte_id']);
+                return $deportes['nombre'];
+            })
+
+            ->editColumn('categoria_id',function($data){
+                $categorias = Deporte::find($data['categoria_id']);
+                return $categorias['nombre'];
+            })
+
             ->addColumn('foto', function($data){
                 return '<div class="media-left media-middle">
 							<a href="#">

@@ -171,11 +171,11 @@ class EjercicioController extends Controller
         }
     }
 
+
     //listar todos los ejercicios
     public function listar(){
 
         $categoria_ejercicios = Categoria_Ejercicio::all();
-
 
         return view('admin.ejercicios.listar-ejercicios',['titulo'=>'Listado de Ejercicios', 'categoria_ejercicios' => $categoria_ejercicios]);
 
