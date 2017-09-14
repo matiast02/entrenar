@@ -69,7 +69,9 @@ class SerieController extends Controller
             $num_mejor_serie = 0;
             $cantidad_series  = $request->input('cantidad_series');
 
-            if ($cantidad_series == 1){
+
+            //cantidad de series = 0 equivale a una serie
+            if ($cantidad_series == 0){
                 //se guarda el rm con el valor que tiene la potencia impulsiva
                 $serie = New Serie;
                 $serie->cantidad_series = 1;
@@ -116,6 +118,10 @@ class SerieController extends Controller
                         $num_mejor_serie = $i;
                     }
                 }
+
+                //como cantidad de series inicia en 0 se aumenta 1 a cantidad de series y a mejor serie
+                $cantidad_series++;
+                $num_mejor_serie++;
 
                 //mejor serie, la que tiene la mejor potencia impulsiva
                     $serie = New Serie;
