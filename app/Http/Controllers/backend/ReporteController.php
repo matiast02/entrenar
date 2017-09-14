@@ -236,49 +236,49 @@ class ReporteController extends Controller
 
                             //segun el id del ejercicio, corresponden los campos a graficar en las barras
                             switch ($ejercicio_id){
-                                case 2:
+                                case 4:
                                     //salto abalacob
                                     array_push($rm,$evaluacion->salto_abalacob);
                                     array_push($campo,'Altura');
                                     break;
 
-                                case 4:
+                                case 6:
                                     //salto cm
                                     array_push($rm,$evaluacion->salto_cmj);
                                     array_push($campo,'Altura');
                                     break;
 
-                                case 9:
+                                case 7:
                                     //salto sj
                                     array_push($rm,$evaluacion->salto_sj);
                                     array_push($campo,'Altura');
                                     break;
 
-                                case 10:
+                                case 8:
                                     //salto continuo
                                     array_push($rm,$evaluacion->mejor_salto_continuo);
                                     array_push($campo,'Mejor Salto');
                                     break;
 
-                                case 11:
+                                case 9:
                                     //peso muerto
                                     array_push($rm,$evaluacion->maximo_peso);
                                     array_push($campo,'Maximo peso');
                                     break;
 
-                                case 12:
+                                case 10:
                                     //velocidad 10 mts
                                     array_push($rm,$evaluacion->velocidad_segundos);
                                     array_push($campo,'Segundos');
                                     break;
 
-                                case 13:
+                                case 11:
                                     //remo
                                     array_push($rm,$evaluacion->maximo_peso);
                                     array_push($campo,'Maximo peso');
                                     break;
 
-                                case 14:
+                                case 3:
                                     //yoyo test
                                     array_push($rm,$evaluacion->resistencia_numero_fase);
                                     array_push($campo,'Numero de Fase');
