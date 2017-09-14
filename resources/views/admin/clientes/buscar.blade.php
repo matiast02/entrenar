@@ -194,7 +194,7 @@
         });
 
         var wizard = $("#wizard").steps({
-            transitionEffect: "fade",
+            transitionEffect: "none",
             startIndex: 0,
             labels: {
                 cancel: 'Cancelar',
@@ -264,14 +264,49 @@
             add_step(numero);
             $('#cantidad_series').val(numero);
             console.log("serie agregada "+numero);
-            numero = numero +1;
-            console.log("serie siguiente "+numero);
+            numero++;
+//            console.log("serie siguiente "+numero);
+
+            //muestra u oculta el boton segun corresponda
+            $('[id="btn-eliminar-serie"]').each(function( index ) {
+                //si es laa ultima serie, muestro el boton eliminar
+                if((numero-1 == index) && (numero-1 != 0)){
+                    $( this ).show();
+                }else{
+                    //oculto el boton eliminar de las series anteriores
+                    $( this ).hide();
+                }
+            });
         }
 
 
         function remove(index){
-            console.log("serie eliminada "+index+1);
-            console.log(wizard.steps('remove',index+1));
+
+            //elimin la serie siguiente
+            if (numero > 0){
+
+                console.log("serie eliminada "+(index));
+                wizard.steps('previous');//vuelve  a la serie anterior
+                //elimina la serie con el index indicado (actual)
+                console.log(wizard.steps('remove',(index)));
+                //para evitar que numero vuelva a ser 0
+                if(numero > 1){
+                    numero = numero - 1;
+                }
+                $('#cantidad_series').val(numero);
+                //muestra u oculta el boton segun corresponda
+                $('[id="btn-eliminar-serie"]').each(function( index ) {
+                    //si es laa ultima serie, muestro el boton eliminar
+                    if((numero-1 == index) && (numero-1 != 0)){
+                        $( this ).show();
+                    }else{
+                        //oculto el boton eliminar de las series anteriores
+                        $( this ).hide();
+                    }
+                });
+
+            }
+
         }
 
         function add_step(numero){
@@ -339,7 +374,7 @@
                 '<span class="help-block"></span>'+
                 ' </div>'+
                 '</div>'+
-                '<input type="button" class="btn btn-warning" name="boton-eliminar-'+numero+'" value="Eliminar Serie '+Number(numero+1)+'">'+
+                '<input type="button" class="btn btn-warning" id="btn-eliminar-serie" name="boton-eliminar-'+numero+'" value="Eliminar Serie '+Number(numero)+'">'+
                 '<fieldset></div>'+
                 '<div id="boton-eliminar-'+numero+'"></div>'
             });
@@ -348,14 +383,15 @@
             $('body').on('change', 'input[name="serie['+numero+'][pes_ext]"]', function() {
                 $('input[name="serie['+numero+'][masa]"]').val(Number($('input[name="serie['+numero+'][pes_ext]"]').val()) + Number($('#peso_corporal').val()));
             });
-            //para cuando quiere eliminar un paso
-            $('body').on('click','input[name="boton-eliminar-'+numero+'"]', function () {
-//                if(numero > 0){
-                    remove(wizard.steps("getCurrentIndex"));
-                    numero = numero - 1;
-                    $('#cantidad_series').val(numero);
-//                }
 
+//            cantidad de pasos
+//            var wizardLength = $("#wizard").find('h1').length;
+//            console.log("numero "+numero+" cantidad de pasos "+(wizardLength-1));
+
+            //para cuando quiere eliminar un paso
+            $(document).on('click','input[name="boton-eliminar-'+numero+'"]', function (e) {
+                e.preventDefault();
+                remove(wizard.steps("getCurrentIndex"));
             });
 
 
