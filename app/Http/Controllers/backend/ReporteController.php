@@ -283,6 +283,12 @@ class ReporteController extends Controller
                                     array_push($rm,$evaluacion->resistencia_numero_fase);
                                     array_push($campo,'Numero de Fase');
                                     break;
+
+                                case 12:
+                                    //sentadilla bulgara
+                                    array_push($rm,$evaluacion->maximo_peso);
+                                    array_push($campo,"Maximo peso");
+
                             }
                             //datos de lsa fechas de cada registro
                             array_push($fecha, $evaluacion->created_at->format('d-m-Y'));
@@ -303,7 +309,7 @@ class ReporteController extends Controller
 
             //se envia la foto junto con nombre y apellido del cliente
             $perfil = ' <div class="media" style="padding-top:10px;padding-bottom: 30px;">
-                    <div class="media-left">
+                    <div class="media-center">
                         <a href="#" data-popup="lightbox">
                             <img src="'.asset($cliente->foto).'" style="width: 70px; height: 70px;" class="img-circle" alt="'.$cliente->foto.'">
                         </a>
@@ -311,7 +317,7 @@ class ReporteController extends Controller
 
                     <div class="media-body">
                         <h6 class="media-heading"><b>'.$cliente->apellido.', '.$cliente->nombre.'</b></h6>
-                        <h6 class="media-body"><b>Edad:</b> '.$this->calculaedad($cliente->fecha_nacimiento).'</h6>
+                        <h6 class="media-body"><b>Edad:</b> '.$this->calculaedad($cliente->fecha_nacimiento).' años</h6>
                     </div>
                 </div>';
 

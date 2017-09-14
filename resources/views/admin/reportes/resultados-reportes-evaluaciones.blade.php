@@ -47,10 +47,12 @@
             <div class="col-md-4"></div>
         </div>
         <div class="row text-center">
-                <?php echo $perfil; ?>
+            <div class=""><?php echo $perfil; ?></div>
+            <div class="row">
                 @for($i = 0; $i <= count($graficos)-1;$i++)
-                <canvas id="chart{{$i}}" class="text-center" width="600" height="400"></canvas>
+                    <canvas id="chart{{$i}}" class="text-center" width="600" height="400"></canvas>
                 @endfor
+            </div>
         </div>
         <div class="row">
             <div class="col-md-8"></div>
@@ -81,7 +83,7 @@
 
         var option{{$i}} = {
             title: {
-                text: '{{implode(' ',$graficos[$i][3])}} - {{$graficos[$i][0]}}'
+                text: '{{$graficos[$i][0]}}'
             },
             tooltip: {
                 data: ['{{implode(' ',$graficos[$i][3])}}']
