@@ -13,6 +13,7 @@ use App\Cliente;
 use App\Ejercicio;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
+use Symfony\Component\HttpKernel\Client;
 use Yajra\Datatables\Datatables;
 use Validator;
 use DB;
@@ -411,6 +412,72 @@ class ClienteController extends Controller
         return $asistencias;
     }
 
+    public function verEliminados(){
+        return view('admin.clientes.clientes-eliminados',['titulo'=>'Clientes eliminados']);
+    }
 
+    public function listaEliminados(){
+
+        $clientes = Cliente::onlyTrashed()->get();
+
+        return Datatables::of($clientes)
+
+            ->editColumn('deporte_id',function($data){
+                $deportes = Deporte::find($data['deporte_id']);
+                return $deportes['nombre'];
+            })
+
+            ->editColumn('categoria_id',function($data){
+                $categorias = Deporte::find($data['categoria_id']);
+                return $categorias['nombre'];
+            })
+
+            ->addColumn('foto', function($data){
+                return '<div class="media-left media-middle">
+							<a href="#">
+								<img src="'.asset($data->foto).'" class="img-circle" alt="'.$data->foto.'">
+							</a>
+						</div>';
+            })
+            ->editColumn('fecha_nacimiento', function($data){
+                return date('d-m-Y',strtotime($data->fecha_nacimiento));
+            })
+            ->editColumn('fecha_inicio_entrenamiento',function($data){
+                return date('d-m-Y',strtotime($data->fecha_inicio_entrenamiento));
+            })
+            ->addColumn('operaciones', '
+                    <ul class="icons-list">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="icon-menu9"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-right">
+								<li><a href="#" onclick="restaurar({{ $id  }})"><i class="icon-rotate-cw2"></i> Restaurar</a></li>
+							</ul>
+						</li>
+					</ul>')
+            ->removeColumn('id')
+            ->make(true);
+    }
+
+
+    //restaurar cliente eliminado
+    public function restaurar($id){
+        $cliente = Cliente::withTrashed()->find($id)->restore();
+
+        if ($cliente == true){
+            return response()->json([
+                'success' => true,
+                'message' => 'Restaurado'
+            ], 200);
+        }else{
+            //si hay error al restaurar
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al restaurar.'
+            ], 422);
+        }
+
+    }
 
 }
