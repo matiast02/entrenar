@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="text-right">
-                                    <input type="submit" id="ver" class="btn btn-primary" value="Ver">
+                                    <input type="button" id="ver" class="btn btn-primary" value="Ver">
                                 </div>
                             </div>
                         </fieldset>
@@ -76,7 +76,9 @@
             </div>
         </div>
         <div class="panel-body">
-            <div class="fullcalendar-basic"></div>
+            <div class="row">
+                <div class="fullcalendar-basic" id="calendario"></div>
+            </div>
         </div>
 
     </div>
@@ -98,8 +100,6 @@
         });
 
 
-
-        $('select').select2({});
 
         //buscar usuario
         $("#cliente_id").select2({
@@ -134,10 +134,17 @@
         });
 
 
-        $('#ver-asistencias').on('submit',function (e){
-            e.preventDefault();
+
+
+        $('#ver').on('click',function (e){
+            console.log("id cliente "+$('#cliente_id').val());
+            var id_cliente = $('#cliente_id').val();
+            //e.preventDefault();
             $('#calendario').show();
-            $('.fullcalendar-basic').fullCalendar({
+
+            $('#calendario').fullCalendar('destroy');
+
+            $('#calendario').fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
@@ -152,10 +159,10 @@
                     type: 'GET'
                 }
             });
+
+            $('#calendario').fullCalendar('removeEvents');
+            $('#calendario').fullCalendar('refetchEvents');
         });
-
-
-
 
 
 
