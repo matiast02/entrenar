@@ -507,7 +507,7 @@ class EvaluacionesController extends Controller
 
     public function edit($id)
     {
-        //muestra el formulario con los datos de la serie a modificar
+        //muestra el formulario con los datos de las evaluaciones a modificar
         $evaluaciones =  Evaluaciones::findOrFail($id);
 
         return view('admin.evaluaciones.editar-evaluaciones',['titulo'=>'Modificar Evaluación','evaluaciones' => $evaluaciones]);
@@ -568,6 +568,19 @@ class EvaluacionesController extends Controller
     //devuelve los datos al datatable que les solicito
     public function anyData(Request $request)
     {
+        $consulta = "";
+        $id = $request->input("cliente");
+
+        $ejercicio_id = $request->input('ejercicios');
+        $ejercicio = Ejercicio::findOrFail($ejercicio_id);
+
+        $rango_fechas = $request->input('rango_fechas');
+        $rango_fechas = explode('-',$request->input('rango_fechas'));
+        $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
+        $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
+
+
+
         ///validamos los campos enviados
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
@@ -590,24 +603,14 @@ class EvaluacionesController extends Controller
 
 
 
-        $id = $request->input("cliente");
-
-        $ejercicio_id = $request->input('ejercicios');
-        $ejercicio = Ejercicio::findOrFail($ejercicio_id);
-
-        $rango_fechas = $request->input('rango_fechas');
-        $rango_fechas = explode('-',$request->input('rango_fechas'));
-        $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
-        $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
-
-        //ejercicios.fuerza es 0 NO fuerza y 1 Fuerza
+        //ejercicios.fuerza = 0 es NO fuerza y 1 Fuerza
         if ($ejercicio['fuerza'] == 1) {
 
             $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
 
         }
-        else {
 
+        else {
             $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
         }
 

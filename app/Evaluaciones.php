@@ -14,7 +14,7 @@ class Evaluaciones extends Model
     protected $fillable = [
         'maximo_peso', 'velocidad_segundos', 'salto_abalacob', 'salto_cmj', 'salto_sj',
         'mejor_salto_continuo', 'peor_salto_continuo', 'cantidad_salto_continuo',
-        'resistencia_numero_fase',
+        'resistencia_numero_fase', 'cantidad_repeticiones',
     ];
 
     protected $dates = ['deleted_at'];

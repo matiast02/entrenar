@@ -11,7 +11,7 @@
 <script type="text/javascript" src="{{URL::asset('js/plugins/visualization/echarts/echarts2.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/visualization/echarts/theme/limitless.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/notifications/jgrowl.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/plugins/forms/styling/uniform.min.js')}}"></script>
+<script type="text/javascript" src="{{URL::asset('js/plugins/forms/styling/uniform.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/forms/wizards/stepy.min.js')}}"></script>
 <script type="text/javascript" src="{{URL::asset('js/plugins/forms/wizards/steps.min.js')}}"></script>
 
@@ -252,10 +252,12 @@
                 processing: true,
                 serverSide: true,//evita que la columna con botones sea un parametro en la consulta sql
                 "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 1 ] }],
-                ajax: {"url":'{!! route('evaluaciones.datatable') !!}', "data":{
-                    "cliente" :$('#cliente_id option:selected').val(),
-                    "ejercicios": $('#ejercicios').val(),
-                    "rango_fechas": $('#rango_fechas').val()},
+                ajax: {"url":'{!! route('evaluaciones.datatable') !!}',
+                    "data":{
+                        "cliente" :$('#cliente_id option:selected').val(),
+                        "ejercicios": $('input[name=ejercicios]:checked', '#buscar-cliente').val(),
+                        "rango_fechas": $('#rango_fechas').val()
+                    },
 
                     error: function(data){
                         //resetear estilos
