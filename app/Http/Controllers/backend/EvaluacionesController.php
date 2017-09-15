@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Evaluaciones;
 use App\Cliente;
 use App\Ejercicio;
+use App\Serie;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
@@ -605,7 +606,7 @@ class EvaluacionesController extends Controller
             $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
 
         }
-        else if ($ejercicio['fuerza'] == 0){
+        else {
 
             $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
         }
