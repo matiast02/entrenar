@@ -558,9 +558,43 @@ class EvaluacionesController extends Controller
 
 
 
-    public function destroy($id)
+    public function destroy($cliente_id, $ejercicio_id)
     {
-        //
+        $cliente = Cliente::find($cliente_id);
+        $ejercicios = Ejercicio::where(['cliente_id'=>$cliente->id])->get();
+
+
+        //Con el objeto $ejercicio llamo a la funcion delete que ya trae Laravel
+        if ($ejercicios['fuerza'] == 1){
+
+            $ejercicios->series()->detach()->where('cliente_id', $cliente);
+            foreach($ejercicios as $ejercicio){
+                //Tengo que borrar los dos campos que se guardan en cada serie
+                $ejercicio->user()->detach();//belongsToMany
+                $ejercicio->tags()->detach();
+                //no hace falta $articulo->delete() porq en el modelo se indico borrar en cascada
+
+            }
+        }
+        else{
+
+            $ejercicio->evaluaciones()->detach()
+        }
+
+        $ejercicio->delete();
+        //if el ejercicio está borrado
+        if ($ejercicio->trashed()){
+            return response()->json([
+                'success' => true,
+                'message' => 'Eliminado'
+            ], 200);
+        }else{
+            //si hay error al eliminar
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al eliminar.'
+            ], 422);
+        }
     }
 
 
