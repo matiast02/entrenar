@@ -558,31 +558,42 @@ class EvaluacionesController extends Controller
 
 
 
-    public function destroy($cliente_id, $ejercicio_id)
+    public function destroy($serie_id)
     {
-        $cliente = Cliente::find($cliente_id);
-        $ejercicios = Ejercicio::where(['cliente_id'=>$cliente->id])->get();
+        //Obtengo el ejercicio que se está editando. Ej: Remo, peso_muerto, etc.
+        $serie = Serie::find($serie_id);
 
+        //Borro la relacion de la tabla intermedia
+        $serie->clientes()->detach();
 
-
-        //Con el objeto $ejercicio llamo a la funcion delete que ya trae Laravel
-        if ($ejercicios['fuerza'] == 1){
-
-            for($i=0;$i<=1;$i++ ){
-                //Tengo que borrar los dos campos que se guardan en cada serie
-                $ejercicios->series()->detach();//belongsToMany
-                //no hace falta $articulo->delete() porq en el modelo se indico borrar en cascada
-
-            }
-        }
-        else{
-
-            $ejercicios->evaluaciones()->detach()->where('cliente_id', $cliente);
-        }
-
-        $ejercicios->delete();
+        $serie->delete();
         //if el ejercicio está borrado
-        if ($ejercicios->trashed()){
+        if ($serie->trashed()){
+            return response()->json([
+                'success' => true,
+                'message' => 'Eliminado'
+            ], 200);
+        }else{
+            //si hay error al eliminar
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al eliminar.'
+            ], 422);
+        }
+    }
+
+
+    public function destroyNoFuerza($evaluacion_id)
+    {
+        //Obtengo el ejercicio que se está editando. Ej: Remo, peso_muerto, etc.
+        $evaluacion = Evaluaciones::find($evaluacion_id);
+
+        //Borro la relacion de la tabla intermedia
+        $evaluacion->clientes()->detach();
+
+        $evaluacion->delete();
+        //if el ejercicio está borrado
+        if ($evaluacion->trashed()){
             return response()->json([
                 'success' => true,
                 'message' => 'Eliminado'
@@ -640,11 +651,13 @@ class EvaluacionesController extends Controller
         if ($ejercicio['fuerza'] == 1) {
 
             $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
+            $eliminar = 'eliminar';
 
         }
 
         else {
             $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
+            $eliminar = 'eliminarNF';
         }
 
         return Datatables::of($consulta)
@@ -661,7 +674,7 @@ class EvaluacionesController extends Controller
 							</a>
 							<ul class="dropdown-menu dropdown-menu-right">
 								<li><a href="{{ URL::route( \'evaluaciones.editar\', array( $id )) }}"><i class="icon-pencil"></i> Editar</a></li>
-								<li><a href="#" onclick="eliminar({{ $id  }})"><i class="icon-trash"></i> Eliminar</a></li>
+								<li><a href="#" onclick="'.$eliminar.'({{ $id  }})"><i class="icon-trash"></i> Eliminar</a></li>
 							</ul>
 						</li>
 					</ul>')

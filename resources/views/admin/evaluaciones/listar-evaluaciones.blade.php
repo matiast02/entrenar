@@ -292,7 +292,7 @@
         function eliminar(id){
             swal({
                 title: "Esta seguro que desea eliminar?",
-                text: "Esta a punto de borrar los resultados de una evaluación!",
+                text: "Esta a punto de borrar los resultados de una serie!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -303,6 +303,42 @@
                 $.ajax({
                     type: 'delete',
                     url: 'eliminar/'+id,
+                    data : {"_token": "{{ csrf_token() }}"},
+                    dataType: 'json',
+                    success: function(data){
+                        swal(
+                                "Eliminado!",
+                                "Los resultados de la serie fueron eliminados correctamente.",
+                                "success"
+                        );
+                        $('#evaluaciones-table').DataTable().ajax.reload();
+                    },
+                    error: function(data) {
+
+                        var errors = data.responseJSON;
+                        swal("Oops...", "Algo salío mal!", "error");
+                    }
+
+                });
+
+            });
+        }
+
+
+        function eliminarNF(id){
+            swal({
+                title: "Esta seguro que desea eliminar?",
+                text: "Esta a punto de borrar los resultados de una evaluación!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Si, eliminar!",
+                closeOnConfirm: false,
+                html: false
+            }, function() {
+                $.ajax({
+                    type: 'delete',
+                    url: 'eliminar/nf/'+id,
                     data : {"_token": "{{ csrf_token() }}"},
                     dataType: 'json',
                     success: function(data){

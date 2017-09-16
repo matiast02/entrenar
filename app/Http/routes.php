@@ -100,6 +100,7 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('/evaluaciones/editar/{id}',['as'=>'evaluaciones.editar','uses'=>'backend\EvaluacionesController@edit']);
     Route::patch('/evaluaciones/update/{id}',['as'=>'evaluaciones.update','uses'=>'backend\EvaluacionesController@update']);
     Route::delete('/evaluaciones/eliminar/{id}',['as'=>'evaluaciones.ejercicios','uses'=>'backend\EvaluacionesController@destroy']);
+    Route::delete('/evaluaciones/eliminar/nf/{id}',['as'=>'evaluaciones.ejerciciosNoFuerza','uses'=>'backend\EvaluacionesController@destroyNoFuerza']);
     Route::get('/evaluaciones/mostrar-formulario/{id_ejercicio_nf}',['as'=>'mostrar-form-nf','uses'=>'backend\EvaluacionesController@mostrarForm']);
     Route::post('/evaluaciones/cargar-resultados',['as'=>'cargar-resultado-nf','uses'=>'backend\EvaluacionesController@cargarResultadosNF']);
 
