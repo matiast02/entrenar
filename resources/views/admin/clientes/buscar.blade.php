@@ -227,7 +227,7 @@
                         $('#buscar-cliente')[0].reset();
                         $("#wizard").html("");
                         numero = 0;
-                        setTimeout(function(){ location.reload(); }, 1280);
+                        setTimeout(function(){ location.reload(); }, 1500);
 
                     },
                     error: function(data){
@@ -250,8 +250,6 @@
                                 });
                             }
                         })
-                        //console.log(errors);
-                        // Render the errors with js ...
                     }
                 });
 
@@ -469,7 +467,7 @@
                     $('#buscar-cliente')[0].reset();
                     $('#form-nf').find('.form-control-feedback').html('');
                     $('#form-nf').find('.help-block').html('');
-                    location.reload();
+                    setTimeout(function(){ location.reload(); }, 1500);
                 },
                 error: function(data){;
 
