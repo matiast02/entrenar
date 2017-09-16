@@ -70,34 +70,7 @@ class SerieController extends Controller
             $cantidad_series  = $request->input('cantidad_series');
 
 
-            //cantidad de series = 0 equivale a una serie
-            if ($cantidad_series == 0){
-                //se guarda el rm con el valor que tiene la potencia impulsiva
-                $serie = New Serie;
-                $serie->cantidad_series = 1;
-                $serie->peso_corporal = $request->input('peso_corporal');
-                $serie->peso_externo = $request->input('serie.0.pes_ext');
-                $serie->masa = $serie->peso_corporal + $serie->peso_externo;
-                $serie->potencia_impulsiva = $request->input('serie.0.pot_imp');
-                $serie->potencia_relativa = $serie->potencia_impulsiva / $serie->peso_corporal;
-                $serie->velocidad_impulsiva = $request->input('serie.0.vel_imp');
-                $serie->fuerza_impulsiva = $request->input('serie.0.fue_imp');
-                $serie->cantidad_repeticiones = $request->input('serie.0.can_rep');
-                $serie->mejor_serie =  1;
-                $serie->mejor_serie_boolean = true;
-                $serie->ultima_serie = false;
-                $serie->rm = $serie->potencia_impulsiva;
-                $serie->pse = $request->input('serie.0.pse');
-                $serie->rm_pse_porcentual = (4.99 * $serie->pse ) + 43.093 ;
-                $serie->rm_porcentual = (($serie->peso_externo + $serie->peso_corpoal)*100) / $serie->rm;
-                $serie->save();
-                return $serie->id;
-                //realizar attach cliente_serie
-                $cliente = Cliente::findOrFail($request->input('cliente'));
-                $cliente->series()->attach($serie->id,array('cliente_id'=>$cliente->id,'ejercicio_id'=>($request->input('ejercicio'))));
 
-
-            }else{
 
                 //se guarda la  mejor serie (rm calculado) y la ultima serie
                 for ($i = 0; $i<= $cantidad_series -1; $i++){
@@ -119,13 +92,10 @@ class SerieController extends Controller
                     }
                 }
 
-                //como cantidad de series inicia en 0 se aumenta 1 a cantidad de series y a mejor serie
-                $cantidad_series++;
-                $num_mejor_serie++;
 
                 //mejor serie, la que tiene la mejor potencia impulsiva
                     $serie = New Serie;
-                    $serie->cantidad_series = $cantidad_series;
+                    $serie->cantidad_series = $cantidad_series+1;//como cantidad de series inicia en 0 se aumenta 1 a cantidad de series y a mejor serie
                     $serie->peso_corporal = $request->input('peso_corporal');
                     $serie->peso_externo = $request->input('serie.'.$num_mejor_serie.'.pes_ext');
                     $serie->masa = $serie->peso_corporal + $serie->peso_externo;
@@ -134,10 +104,15 @@ class SerieController extends Controller
                     $serie->velocidad_impulsiva = $request->input('serie.'.$num_mejor_serie.'.vel_imp');
                     $serie->fuerza_impulsiva = $request->input('serie.'.$num_mejor_serie.'.fue_imp');
                     $serie->cantidad_repeticiones = $request->input('serie.'.$num_mejor_serie.'.can_rep');
-                    $serie->mejor_serie =  $num_mejor_serie;
+                    $serie->mejor_serie =  $num_mejor_serie+1;//como cantidad de series inicia en 0 se aumenta 1 a cantidad de series y a mejor serie
                     $serie->mejor_serie_boolean = true;
                     $serie->ultima_serie = false;
-                    $serie->rm = $rm;
+                    if($cantidad_series == 1){
+                        $serie->rm = $serie->peso_externo;
+                    }else{
+                        $serie->rm = $rm;
+                    }
+
                     $serie->pse = $request->input('serie.'.$num_mejor_serie.'.pse');
                     $serie->rm_pse_porcentual = (4.99 * $serie->pse ) + 43.093 ;
                     $serie->rm_porcentual = (($serie->peso_externo + $serie->peso_corpoal)*100) / $serie->rm;
@@ -152,8 +127,7 @@ class SerieController extends Controller
 
                 //ultima serie
                     $serie = New Serie;
-                    $serie->cantidad_series = $cantidad_series;
-                    $cantidad_series--;
+                    $serie->cantidad_series = $cantidad_series+1;
                     $serie->peso_corporal = $request->input('peso_corporal');
                     $serie->peso_externo = $request->input('serie.'.$cantidad_series.'.pes_ext');
                     $serie->masa = $serie->peso_corporal + $serie->peso_externo;
@@ -162,12 +136,18 @@ class SerieController extends Controller
                     $serie->velocidad_impulsiva = $request->input('serie.'.$cantidad_series.'.vel_imp');
                     $serie->fuerza_impulsiva = $request->input('serie.'.$cantidad_series.'.fue_imp');
                     $serie->cantidad_repeticiones = $request->input('serie.'.$cantidad_series.'.can_rep');
-                    $serie->mejor_serie =  $num_mejor_serie;
+                    $serie->mejor_serie =  $num_mejor_serie+1;
                     //$serie->mejor_serie_boolean = false;
                     $serie->ultima_serie = true;
-                    //se calcula el rm de la ultima serie
-                    $rm_ultima = 1 + (0.033 * intval($request->input('serie.'.$cantidad_series.'.can_rep')) * intval($request->input('serie.'.$cantidad_series.'.pes_ext')));
-                    $serie->rm = $rm_ultima;
+
+                    if($cantidad_series == 1){
+                        $serie->rm = $serie->peso_externo;
+                    }else{
+                        //se calcula el rm de la ultima serie
+                        $rm_ultima = 1 + (0.033 * intval($request->input('serie.'.$cantidad_series.'.can_rep')) * intval($request->input('serie.'.$cantidad_series.'.pes_ext')));
+                        $serie->rm = $rm_ultima;
+                    }
+
                     $serie->pse = $request->input('serie.'.$cantidad_series.'.pse');
                     $serie->rm_pse_porcentual = (4.99 * $serie->pse ) + 43.093 ;
                     $serie->rm_porcentual = (($peso_optimo + $serie->peso_corpoal)*100) / $serie->rm;
@@ -179,7 +159,7 @@ class SerieController extends Controller
 
                // return 'rm mejor serie: '.$rm.' ultima serie: '.$rm_ultima.' cantidad de series: '.$cantidad_series;
 
-            }
+
             return response()->json([
                 'success' => true,
                 'message' => $num_mejor_serie
