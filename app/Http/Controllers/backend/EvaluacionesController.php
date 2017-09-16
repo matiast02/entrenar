@@ -564,14 +564,13 @@ class EvaluacionesController extends Controller
         $ejercicios = Ejercicio::where(['cliente_id'=>$cliente->id])->get();
 
 
+
         //Con el objeto $ejercicio llamo a la funcion delete que ya trae Laravel
         if ($ejercicios['fuerza'] == 1){
 
-            $ejercicios->series()->detach()->where('cliente_id', $cliente);
-            foreach($ejercicios as $ejercicio){
+            for($i=0;$i<=1;$i++ ){
                 //Tengo que borrar los dos campos que se guardan en cada serie
-                $ejercicio->user()->detach();//belongsToMany
-                $ejercicio->tags()->detach();
+                $ejercicios->series()->detach();//belongsToMany
                 //no hace falta $articulo->delete() porq en el modelo se indico borrar en cascada
 
             }
