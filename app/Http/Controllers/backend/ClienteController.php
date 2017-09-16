@@ -346,6 +346,7 @@ class ClienteController extends Controller
 
             if($request->file('foto')) {
 
+
                 //eliminar la imagen anterior si no es la imagen por defecto
                 if ($cliente->foto !== 'images/perfiles/default.jpg'){
                     \File::delete($cliente->foto);
@@ -355,7 +356,7 @@ class ClienteController extends Controller
                 $rutaDeCarpeta = 'images/perfiles/'; // ruta de la carpeta donde guardar la imagen
                 $extension = $request->file('foto')->getClientOriginalExtension(); // extencion de la imagen
                 $nombreArchivo = $rutaDeCarpeta . $cliente->id . '.' . $extension; // renameing image
-                //$request->file('ImagePrincipal')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
+                //$request->file('foto')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
                 Image::make($request->file('foto')->getRealPath())->resize(500,500)->save($nombreArchivo);
                 $cliente->foto = $nombreArchivo;
                 $cliente->save();
@@ -452,7 +453,7 @@ class ClienteController extends Controller
 								<i class="icon-menu9"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="#" onclick="restaurar({{ $id  }})"><i class="icon-rotate-cw2"></i> Restaurar</a></li>
+								<li><a href="#" onclick="restaurar({{ $id }})"><i class="icon-rotate-cw2"></i> Restaurar</a></li>
 							</ul>
 						</li>
 					</ul>')

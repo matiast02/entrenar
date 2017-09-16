@@ -309,7 +309,7 @@
                     $('#editar-cliente').find('.help-block').html('');
                     $('#editar-cliente')[0].reset();
 
-                    setTimeout(function(){window.location.replace("{{route('listar.clientes')}}") }, 1280);
+                  //  setTimeout(function(){window.location.replace("{{route('listar.clientes')}}") }, 1280);
 
                 },
                 error: function(data){
