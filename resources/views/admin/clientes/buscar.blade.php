@@ -389,7 +389,7 @@
 //            console.log("numero "+numero+" cantidad de pasos "+(wizardLength-1));
 
             //para cuando quiere eliminar un paso
-            $(document).on('click','input[name="boton-eliminar-'+numero+'"]', function (e) {
+            $('input[name="boton-eliminar-'+numero).click( function (e) {
                 e.preventDefault();
                 remove(wizard.steps("getCurrentIndex"));
             });

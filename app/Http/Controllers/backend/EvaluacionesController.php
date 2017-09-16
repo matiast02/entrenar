@@ -578,12 +578,12 @@ class EvaluacionesController extends Controller
         }
         else{
 
-            $ejercicio->evaluaciones()->detach()
+            $ejercicios->evaluaciones()->detach()->where('cliente_id', $cliente);
         }
 
-        $ejercicio->delete();
+        $ejercicios->delete();
         //if el ejercicio está borrado
-        if ($ejercicio->trashed()){
+        if ($ejercicios->trashed()){
             return response()->json([
                 'success' => true,
                 'message' => 'Eliminado'
