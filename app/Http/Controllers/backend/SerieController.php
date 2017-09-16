@@ -107,7 +107,7 @@ class SerieController extends Controller
                     $serie->mejor_serie =  $num_mejor_serie+1;//como cantidad de series inicia en 0 se aumenta 1 a cantidad de series y a mejor serie
                     $serie->mejor_serie_boolean = true;
                     $serie->ultima_serie = false;
-                    if($cantidad_series == 1){
+                    if($serie->cantidad_repeticiones == 1){
                         $serie->rm = $serie->peso_externo;
                     }else{
                         $serie->rm = $rm;
@@ -140,7 +140,7 @@ class SerieController extends Controller
                     //$serie->mejor_serie_boolean = false;
                     $serie->ultima_serie = true;
 
-                    if($cantidad_series == 1){
+                    if($serie->cantidad_repeticiones == 1){
                         $serie->rm = $serie->peso_externo;
                     }else{
                         //se calcula el rm de la ultima serie
