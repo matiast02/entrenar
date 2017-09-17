@@ -563,8 +563,8 @@ class EvaluacionesController extends Controller
         //Obtengo el ejercicio de Fuerza que se está editando. Ej: Pecho, Sentadilla, etc.
         $serie = Serie::find($serie_id);
 
-        $cliente = $serie->clientes->id;
-        return $cliente;
+        $cliente = $serie->clientes()->first();
+
 
         $series = Serie::where('created_at',$serie->created_at)->get();
         $ids  = array();
@@ -575,8 +575,10 @@ class EvaluacionesController extends Controller
 
         //Borro la relacion de la tabla intermedia
         $cliente->series()->detach($ids);
+        foreach ($series as $serie){
+            $serie->delete();
+        }
 
-        $series->delete();
         //if el ejercicio está borrado
         if ($series->trashed()){
             return response()->json([
