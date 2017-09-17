@@ -560,15 +560,25 @@ class EvaluacionesController extends Controller
 
     public function destroy($serie_id)
     {
-        //Obtengo el ejercicio que se está editando. Ej: Remo, peso_muerto, etc.
+        //Obtengo el ejercicio de Fuerza que se está editando. Ej: Pecho, Sentadilla, etc.
         $serie = Serie::find($serie_id);
 
-        //Borro la relacion de la tabla intermedia
-        $serie->clientes()->detach();
+        $cliente = $serie->clientes->id;
+        return $cliente;
 
-        $serie->delete();
+        $series = Serie::where('created_at',$serie->created_at)->get();
+        $ids  = array();
+
+        foreach ($series as $serie){
+            array_push($ids,$serie->id);
+        }
+
+        //Borro la relacion de la tabla intermedia
+        $cliente->series()->detach($ids);
+
+        $series->delete();
         //if el ejercicio está borrado
-        if ($serie->trashed()){
+        if ($series->trashed()){
             return response()->json([
                 'success' => true,
                 'message' => 'Eliminado'
@@ -585,7 +595,7 @@ class EvaluacionesController extends Controller
 
     public function destroyNoFuerza($evaluacion_id)
     {
-        //Obtengo el ejercicio que se está editando. Ej: Remo, peso_muerto, etc.
+        //Obtengo el ejercicio de No Fuerza que se está editando. Ej: Remo, peso_muerto, etc.
         $evaluacion = Evaluaciones::find($evaluacion_id);
 
         //Borro la relacion de la tabla intermedia
