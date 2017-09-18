@@ -560,13 +560,25 @@ class EvaluacionesController extends Controller
 
     public function destroy($serie_id)
     {
-        //Obtengo el ejercicio que se está editando. Ej: Remo, peso_muerto, etc.
+        //Obtengo el ejercicio de Fuerza que se está editando. Ej: Pecho, Sentadilla, etc.
         $serie = Serie::find($serie_id);
 
-        //Borro la relacion de la tabla intermedia
-        $serie->clientes()->detach();
+        $cliente = $serie->clientes()->first();
 
-        $serie->delete();
+
+        $series = Serie::where('created_at',$serie->created_at)->get();
+        $ids  = array();
+
+        foreach ($series as $serie){
+            array_push($ids,$serie->id);
+        }
+
+        //Borro la relacion de la tabla intermedia
+        $cliente->series()->detach($ids);
+        foreach ($series as $serie){
+            $serie->delete();
+        }
+
         //if el ejercicio está borrado
         if ($serie->trashed()){
             return response()->json([
@@ -583,9 +595,10 @@ class EvaluacionesController extends Controller
     }
 
 
+
     public function destroyNoFuerza($evaluacion_id)
     {
-        //Obtengo el ejercicio que se está editando. Ej: Remo, peso_muerto, etc.
+        //Obtengo el ejercicio de No Fuerza que se está editando. Ej: Remo, peso_muerto, etc.
         $evaluacion = Evaluaciones::find($evaluacion_id);
 
         //Borro la relacion de la tabla intermedia
@@ -659,9 +672,9 @@ class EvaluacionesController extends Controller
             return Datatables::of($consulta)
 
 
-                ->editColumn('created_at',function($evaluaciones){
-                    return date('d-m-Y', strtotime($evaluaciones->created_at));
-                })
+            ->editColumn('created_at',function($evaluaciones){
+                return date('d-m-Y - H:i:s', strtotime($evaluaciones->created_at));
+            })
 
                 ->addColumn('operaciones', '
                     <ul class="icons-list">

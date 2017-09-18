@@ -117,7 +117,7 @@
                 <table class="table datatable-responsive-row-control dataTable no-footer dtr-column" id="evaluaciones-table" role="grid">
                     <thead>
                     <tr>
-                        <th>Ejercicio</th>
+                        <th>Fecha y Hora</th>
                         <th>Operaciones</th>
                     </tr>
                     </thead>
@@ -268,7 +268,7 @@
 
                         //mostramos los errores
                         var errors = data.responseJSON;
-                        swal("Oops...", "Algo salio mal!", "error");
+                        swal("Oops...", "Algo salio mal!. \n Por favor verifique que los campos \n clientes y ejercicios se encuentren completos", "error");
                         $.each(errors, function(i,item){
                             if(i === 'message'){
                                 $.each(item,function (k,v){
