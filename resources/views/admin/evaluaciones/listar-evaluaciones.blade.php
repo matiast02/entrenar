@@ -63,7 +63,7 @@
                                 </div>
                             </div>
 
-                            <div id="ejercicio-field" class="form-group">
+                            <div id="ejercicios-field" class="form-group">
                                 <label class="col-lg-3 control-label">Ejercicios:</label>
                                 <div class="col-lg-9">
                                     @foreach($ejercicios as $ejercicio)
@@ -117,7 +117,7 @@
                 <table class="table datatable-responsive-row-control dataTable no-footer dtr-column" id="evaluaciones-table" role="grid">
                     <thead>
                     <tr>
-                        <th>Fecha</th>
+                        <th>Ejercicio</th>
                         <th>Operaciones</th>
                     </tr>
                     </thead>
@@ -237,6 +237,7 @@
                 responsive: true,
                 paging: false,
                 retrieve: true,
+                "order": [[ 0, "desc" ]],
                 dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
                 language: {
                     search: '<span>Filtrar:</span> _INPUT_',

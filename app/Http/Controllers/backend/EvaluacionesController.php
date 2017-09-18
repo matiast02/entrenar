@@ -609,9 +609,16 @@ class EvaluacionesController extends Controller
 
 
 
-    //devuelve los datos al datatable que les solicito
+    //lista los ejercicios para ser eliminados o editados dependiendo si es de fuerza o no
     public function anyData(Request $request)
     {
+        //validamos los campos enviados
+        $validator =  Validator::make($request->all(), [
+            'cliente' => 'required|numeric',
+            'ejercicios' => 'required|numeric',
+            'rango_fechas' => 'required',
+        ]);
+
         $consulta = "";
         $id = $request->input("cliente");
 
@@ -623,16 +630,6 @@ class EvaluacionesController extends Controller
         $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
         $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
 
-
-
-        ///validamos los campos enviados
-        $validator =  Validator::make($request->all(), [
-            'cliente' => 'required|numeric',
-            'ejercicios' => 'required|numeric',
-            'rango_fechas' => 'required',
-        ]);
-
-
         //si falla la validacion, redireccionamos con los errores
         if ($validator->fails())
         {
@@ -643,30 +640,30 @@ class EvaluacionesController extends Controller
                 'success' => false,
                 'message' => $errors
             ], 422);
-        }
+        }else{
+            //ejercicios.fuerza = 0 es NO fuerza y 1 Fuerza
+            if ($ejercicio['fuerza'] == 1) {
+
+                $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)
+                    ->groupBy('created_at')->orderBY('created_at','DESC')->get();
+                $eliminar = 'eliminar';
+
+            }
+
+            else {
+
+                $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
+                $eliminar = 'eliminarNF';
+            }
+
+            return Datatables::of($consulta)
 
 
+                ->editColumn('created_at',function($evaluaciones){
+                    return date('d-m-Y', strtotime($evaluaciones->created_at));
+                })
 
-        //ejercicios.fuerza = 0 es NO fuerza y 1 Fuerza
-        if ($ejercicio['fuerza'] == 1) {
-
-            $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
-            $eliminar = 'eliminar';
-
-        }
-
-        else {
-            $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
-            $eliminar = 'eliminarNF';
-        }
-
-        return Datatables::of($consulta)
-
-            ->editColumn('created_at',function($evaluaciones){
-                return date('d-m-Y', strtotime($evaluaciones->created_at));
-            })
-
-            ->addColumn('operaciones', '
+                ->addColumn('operaciones', '
                     <ul class="icons-list">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -679,8 +676,11 @@ class EvaluacionesController extends Controller
 						</li>
 					</ul>')
 
-            ->removeColumn('id')
-            ->make(true);
+                ->removeColumn('id')
+                ->make(true);
+        }
+
+
     }
 
 }
