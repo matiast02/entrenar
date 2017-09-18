@@ -580,7 +580,7 @@ class EvaluacionesController extends Controller
         }
 
         //if el ejercicio está borrado
-        if ($series->trashed()){
+        if ($serie->trashed()){
             return response()->json([
                 'success' => true,
                 'message' => 'Eliminado'
