@@ -595,6 +595,7 @@ class EvaluacionesController extends Controller
     }
 
 
+
     public function destroyNoFuerza($evaluacion_id)
     {
         //Obtengo el ejercicio de No Fuerza que se está editando. Ej: Remo, peso_muerto, etc.
@@ -675,7 +676,7 @@ class EvaluacionesController extends Controller
         return Datatables::of($consulta)
 
             ->editColumn('created_at',function($evaluaciones){
-                return date('d-m-Y', strtotime($evaluaciones->created_at));
+                return date('d-m-Y - H:i:s', strtotime($evaluaciones->created_at));
             })
 
             ->addColumn('operaciones', '
