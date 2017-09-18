@@ -118,6 +118,9 @@
                     <thead>
                     <tr>
                         <th>Fecha y Hora</th>
+                        <th>Peso Corporal</th>
+                        <th>Peso Externo</th>
+                        <th>Masa</th>
                         <th>Operaciones</th>
                     </tr>
                     </thead>
@@ -252,7 +255,7 @@
                 },
                 processing: true,
                 serverSide: true,//evita que la columna con botones sea un parametro en la consulta sql
-                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 1 ] }],
+                "aoColumnDefs": [{ 'bSortable': false,"bSearchable": false, 'aTargets': [ 0 ] }],
                 ajax: {"url":'{!! route('evaluaciones.datatable') !!}',
                     "data":{
                         "cliente" :$('#cliente_id option:selected').val(),
@@ -284,6 +287,9 @@
                 columns: [
                     //"data":{"cliente" :$('#cliente option:selected').val()}}, Sirve para el caso de seleccionar un cliente y al apretar un boton que muestre la informacion
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'peso_corporal', name: 'peso_corporal'},
+                    {data: 'peso_externo' , name: 'peso_externo'},
+                    {data: 'masa', name: 'masa'},
                     {data: 'operaciones', name: 'operaciones'}
                 ]
             });

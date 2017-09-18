@@ -665,15 +665,15 @@ class EvaluacionesController extends Controller
 
             else {
 
-                $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)->get();
+                $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)
+                    ->orderBY('created_at','DESC')->get();
                 $eliminar = 'eliminarNF';
             }
 
             return Datatables::of($consulta)
 
-
             ->editColumn('created_at',function($evaluaciones){
-                return date('d-m-Y - H:i:s', strtotime($evaluaciones->created_at));
+                return "<i class='icon-calendar'></i> ".date('d-m-Y', strtotime($evaluaciones->created_at))."  <i class='icon-watch2'></i> ".date('H:i:s', strtotime($evaluaciones->created_at));
             })
 
                 ->addColumn('operaciones', '
