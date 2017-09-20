@@ -864,9 +864,9 @@ class EvaluacionesController extends Controller
                                               </thead>
                                               <tbody>';
                             $filas .= '<tr>
-                                          <td>'.$evaluacion->mejor_salto.'</td>
-                                          <td>'.$evaluacion->peor_salto.'</td>
-                                          <td>'.$evaluacion->cantidad_saltos.'</td>
+                                          <td>'.$evaluacion->mejor_salto_continuo.'</td>
+                                          <td>'.$evaluacion->peor_salto_continuo.'</td>
+                                          <td>'.$evaluacion->cantidad_salto_continuo.'</td>
                                           <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
                                        </tr>';
 
@@ -898,9 +898,9 @@ class EvaluacionesController extends Controller
                                               </thead>
                                               <tbody>';
                             $filas .= '<tr>
-                                          <td>'.$evaluacion->segundos.'</td>
-                                          <td>'.$evaluacion->decimas.'</td>
-                                          <td>'.$evaluacion->centesimas.'</td>
+                                          <td>'.$evaluacion->velocidad_segundos.'</td>
+                                          <td>'.$evaluacion->velocidad_decimas.'</td>
+                                          <td>'.$evaluacion->velocidad_centesimas.'</td>
                                           <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
                                        </tr>';
 
