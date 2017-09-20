@@ -103,6 +103,8 @@ Route::group(['middleware'=>'auth'],function (){
     Route::delete('/evaluaciones/eliminar/nf/{id}',['as'=>'evaluaciones.ejerciciosNoFuerza','uses'=>'backend\EvaluacionesController@destroyNoFuerza']);
     Route::get('/evaluaciones/mostrar-formulario/{id_ejercicio_nf}',['as'=>'mostrar-form-nf','uses'=>'backend\EvaluacionesController@mostrarForm']);
     Route::post('/evaluaciones/cargar-resultados',['as'=>'cargar-resultado-nf','uses'=>'backend\EvaluacionesController@cargarResultadosNF']);
+    Route::get('/evaluaciones/resultados',['as'=>'vista.resultados','uses' => 'backend\EvaluacionesController@vistaResultados']);
+    Route::post('/evaluaciones/listar-resultados',['as'=>'listar.resultados','uses' => 'backend\EvaluacionesController@listarResultados']);
 
 
     //rutas para control de deportes

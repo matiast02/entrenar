@@ -696,4 +696,277 @@ class EvaluacionesController extends Controller
 
     }
 
+    public  function vistaResultados(){
+        $ejercicios = Ejercicio::all();
+        return view('admin.evaluaciones.vista-resultados',['titulo'=>'Consulta de Resultados','ejercicios'=> $ejercicios]);
+    }
+
+    public function listarResultados(Request $request)
+    {
+
+        //validamos los campos enviados
+        $validator = Validator::make($request->all(), [
+            'cliente' => 'required|numeric',
+            'ejercicios' => 'required|numeric',
+            'rango_fechas' => 'required',
+        ]);
+
+        $consulta = "";
+        $id = $request->input("cliente");
+
+        $ejercicio_id = $request->input('ejercicios');
+
+
+        //si falla la validacion, redireccionamos con los errores
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            $errors = json_decode($errors);
+
+            return response()->json([
+                'success' => false,
+                'message' => $errors
+            ], 422);
+        } else {
+
+            $ejercicio = Ejercicio::findOrFail($ejercicio_id);
+
+            $rango_fechas = $request->input('rango_fechas');
+            $rango_fechas = explode('-', $request->input('rango_fechas'));
+            $fecha_inicio = date('Y-m-d', strtotime(strtr($rango_fechas[0], '/', '-')));
+            $fecha_fin = date('Y-m-d', strtotime(strtr($rango_fechas[1], '/', '-')));
+
+            $tabla= '<table class="table bg-slate-600">';
+            //ejercicios.fuerza = 0 es NO fuerza y 1 Fuerza
+            if ($ejercicio['fuerza'] == 1) {
+
+                $series = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id', $ejercicio_id)
+                   ->orderBY('created_at', 'DESC')->get();
+
+                $tabla .= '<thead>
+                             <tr>
+                                 <th>Cant Series</th>
+                                 <th>Peso Corp</th>
+                                 <th>Peso Ext</th>
+                                 <th>Masa</th>
+                                 <th>Pot Impulsiva</th>
+                                 <th>Pot Relativa</th>
+                                 <th>Vel Impulsiva</th>
+                                 <th>Fuerza Impulsiva</th>
+                                 <th>Mejor Serie</th>
+                                 <th>RM</th>
+                                 <th>Fecha</th>
+                                 <th>pse</th>
+                                 <th>rm %</th>
+                                 <th>Mejor Serie</th>
+                                 <th>Ultima Serie</th>
+                             </tr>
+                            </thead>
+                            <tbody>';
+
+                //se argma la tabla
+                foreach ($series as $serie){
+                    $tabla .= '<tr>
+                                 <td>'.$serie->cantidad_series.'</td>
+                                 <td>'.$serie->peso_corporal.'</td>
+                                 <td>'.$serie->peso_externo.'</td>
+                                 <td>'.$serie->masa.'</td>
+                                 <td>'.$serie->potencia_impulsiva.'</td>
+                                 <td>'.$serie->potencia_relativa.'</td>
+                                 <td>'.$serie->velocidad_impulsiva.'</td>
+                                 <td>'.$serie->fuerza_impulsiva.'</td>
+                                 <td>'.$serie->mejor_serie.'</td>
+                                 <td>'.$serie->rm.'</td>
+                                 <td>'.date('d-m-Y H:m:s',strtotime($serie->created_at)).'</td>
+                                 <td>'.$serie->pse.'</td>
+                                 <td>'.round($serie->rm_porcentual,2).'</td>';
+                    if($serie->mejor_serie_boolean == 1){
+                        $tabla .= '<td><span class="label label-success">SI</span></td>';
+                    }else {
+                        $tabla .= '<td><span class="label label-danger">NO</span></td>';
+                    }
+
+                    if($serie->ultima_serie == 1){
+                       $tabla .= '<td><span class="label label-success">SI</span></td>';
+                    }else {
+                       $tabla .= '<td><span class="label label-danger">NO</span></td>';
+                    }
+
+                }
+
+                $tabla .= '</tbody>
+                     <table>';
+
+            } else {
+
+                //si no es de fuerza se tiene que conttrolar el id para ver que campos corresponde mostrar
+                $evaluaciones = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id', $ejercicio_id)
+                    ->orderBY('created_at', 'DESC')->get();
+                $tabla = '<div class="col-md-4"><table class="table bg-slate-600"><thead>';
+                $titulos_tabla = '';
+                $filas = '';
+                //segun el id del ejercio se muestran los datos en la tabla
+
+                foreach ($evaluaciones as $evaluacion) {
+
+                    switch ($request->input('ejercicios')) {
+                        case 4:
+                            //salto abalacob
+                            $titulos_tabla = '<tr>
+                                                  <th>Altura</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->salto_abalacob.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
+                                       </tr>';
+                            break;
+
+                        case 6:
+                            //salto cm
+                            $titulos_tabla = '<tr>
+                                                  <th>Altura</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->salto_cmj.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
+                                       </tr>';
+
+                            break;
+
+                        case 7:
+                            //salto sj
+                            $titulos_tabla = '<tr>
+                                                  <th>Altura</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->salto_sj.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
+                                       </tr>';
+
+                            break;
+
+                        case 8:
+                            //salto continuo
+                            $titulos_tabla = '<tr>
+                                                  <th>Mejor Salto</th>
+                                                  <th>Peor Salto</th>
+                                                  <th>Cantidad Saltos</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->mejor_salto.'</td>
+                                          <td>'.$evaluacion->peor_salto.'</td>
+                                          <td>'.$evaluacion->cantidad_saltos.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
+                                       </tr>';
+
+                            break;
+
+                        case 9:
+                            //peso muerto
+                            $titulos_tabla = '<tr>
+                                                  <th>Maximo Peso</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->maximo_peso.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
+                                       </tr>';
+
+                            break;
+
+                        case 10:
+                            //velocidad 10 mts
+                            $titulos_tabla = '<tr>
+                                                  <th>Segundos</th>
+                                                  <th>Decimas</th>
+                                                  <th>Centesimas</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->segundos.'</td>
+                                          <td>'.$evaluacion->decimas.'</td>
+                                          <td>'.$evaluacion->centesimas.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
+                                       </tr>';
+
+                            break;
+
+                        case 11:
+                            //remo
+                            $titulos_tabla = '<tr>
+                                                  <th>Maximo Peso</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->maximo_peso.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
+                                       </tr>';
+
+                            break;
+
+                        case 3:
+                            //yoyo test
+                            $titulos_tabla = '<tr>
+                                                  <th>Fase Final</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->fase_final.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
+                                       </tr>';
+
+                            break;
+
+                        case 12:
+                            //sentadilla bulgara
+                            $titulos_tabla = '<tr>
+                                                  <th>Cantidad de Repeticiones</th>
+                                                  <th>Maximo Peso</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->cantidad_repeticiones.'</td>
+                                          <td>'.$evaluacion->maximo_peso.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
+                                       </tr>';
+
+                            break;
+                    }
+                }
+
+                $tabla .= $titulos_tabla . $filas .'</tbody></table></div>';
+
+
+            }
+
+
+            return $tabla;
+
+
+
+        }
+    }
+
+
 }

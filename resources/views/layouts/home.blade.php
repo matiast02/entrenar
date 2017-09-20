@@ -110,7 +110,8 @@
 										<li><a href="{{URL::route('ver.asistencias')}}">Asistencias</a></li>
                                         <li><a href="{{URL::route('eliminados.clientes')}}">Clientes Eliminados</a></li>
 										<li><a href="{{URL::route('buscar.clientes')}}">Test Incremental</a></li>
-										<li><a href="{{URL::route('listar.evaluaciones')}}">Resultados</a></li>
+										<li><a href="{{URL::route('listar.evaluaciones')}}">Resultados Evaluaciones</a></li>
+										<li><a href="{{URL::route('vista.resultados')}}">Resultados Ejercicios</a></li>
 									</ul>
 								</li>
 
