@@ -505,22 +505,191 @@ class EvaluacionesController extends Controller
 
 
 
-    public function edit($id)
+    public function edit($evaluacion_id)
     {
         //muestra el formulario con los datos de las evaluaciones a modificar
-        $evaluaciones =  Evaluaciones::findOrFail($id);
+        $evaluacion = Evaluaciones::findOrFail($evaluacion_id);
+        //muestra el formulario correspondiente al ejercicio de no fuerza
+        $formulario = '';
+        $pivot = DB::table('ejercicios')->select('*')->join('clientes_evaluaciones','ejercicio_id','=','ejercicios.id')->where('clientes_evaluaciones.evaluaciones_id',$evaluacion->id)->get();
+        $ejercicio = Ejercicio::find($pivot[0]->ejercicio_id);
 
-        return view('admin.evaluaciones.editar-evaluaciones',['titulo'=>'Modificar Evaluación','evaluaciones' => $evaluaciones]);
+        switch ($ejercicio->id){
+            case 4:
+                //salto abalacob
+                $formulario = '<div id="salto_abalacob-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Altura:</label>
+                                    <div class="col-lg-5">
+                                        <input type="numeric" class="form-control" name="salto_abalacob" id="salto_abalacob" value='.$evaluacion->salto_abalacob.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                 </div>';
+                break;
+
+            case 6:
+                //salto cm
+                $formulario = '<div id="salto_cmj-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Altura:</label>
+                                    <div class="col-lg-5">
+                                        <input type="numeric" class="form-control" name="salto_cmj" id="salto_cm" value='.$evaluacion->salto_cmj.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                 </div>';
+                break;
+
+            case 7:
+                //salto sj
+                $formulario = '<div id="salto_sj-field" class="form-group">
+                <label class="col-lg-3 control-label">Altura:</label>
+                <div class="col-lg-5">
+                    <input type="numeric" class="form-control" name="salto_sj" id="salto_sj" value='.$evaluacion->salto_sj.'>
+                    <div class="form-control-feedback"></div>
+                    <span class="help-block"></span>
+                </div>
+             </div>';
+                break;
+
+            case 8:
+                //salto continuo
+                $formulario = '<div id="mejor_salto_continuo-field" class="form-group">
+                    <label class="col-lg-3 control-label">Mejor salto:</label>
+                        <div class="col-lg-5">
+                           <input type="numeric" class="form-control" name="mejor_salto_continuo" id="salto_continuo_ms" value='.$evaluacion->mejor_salto_continuo.'>
+                            <div class="form-control-feedback"></div>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>'.
+                    '<div id="peor_salto_continuo-field" class="form-group">
+                    <label class="col-lg-3 control-label">Peor salto:</label>
+                        <div class="col-lg-5">
+                           <input type="numeric" class="form-control" name="peor_salto_continuo" id="salto_continuo_ps" value='.$evaluacion->peor_salto_continuo.'>
+                            <div class="form-control-feedback"></div>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>'.
+                    '<div id="cantidad_salto_continuo-field" class="form-group">
+                        <label class="col-lg-3 control-label">Cantidad de saltos:</label>
+                        <div class="col-lg-5">
+                           <input type="numeric" class="form-control" name="cantidad_salto_continuo" id="salto_continuo_cs" value='.$evaluacion->cantidad_salto_continuo.'>
+                            <div class="form-control-feedback"></div>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>';
+                break;
+
+            case 9:
+                //peso muerto
+                $formulario = '<div id="maximo_peso-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Maximo Peso:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="maximo_peso" id="peso_muerto" value='.$evaluacion->maximo_peso.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>';
+                break;
+
+            case 10:
+                //velocidad 10 mts
+                $formulario = '<div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Segundos:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s" value='.$evaluacion->velocidad_segundos.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                               </div>'.
+                    '<div id="velocidad_decimas-field" class="form-group">
+                        <label class="col-lg-3 control-label">Decimas:</label>
+                        <div class="col-lg-5">
+                          <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d" value='.$evaluacion->velocidad_decimas.'>
+                            <div class="form-control-feedback"></div>
+                            <span class="help-block"></span>
+                        </div>
+                    </div>'.
+                    '<div id="velocidad_centesimas-field" class="form-group">
+                        <label class="col-lg-3 control-label">Centesimas:</label>
+                        <div class="col-lg-5">
+                          <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c" value='.$evaluacion->velocidad_centesimas.'>
+                            <div class="form-control-feedback"></div>
+                            <span class="help-block"></span>
+                        </div>
+                     </div>';
+                break;
+
+            case 11:
+                //remo
+                $formulario = '<div id="maximo_peso-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Maximo Peso:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="maximo_peso" id="remo" value='.$evaluacion->maximo_peso.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>';
+                break;
+
+            case 3:
+                //yoyo test
+                $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Fase Final:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="resistencia_numero_fase" id="yoyo_test" value='.$evaluacion->resistencia_numero_fase.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                               </div>';
+                break;
+
+            case 12:
+                //sentadilla bulgara
+                $formulario = '<div id="cantidad_repeticiones-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Cantidad de Repeticiones:</label>
+                                    <div class="col-lg-5">
+                                      <input type="numeric" class="form-control" name="cantidad_repeticiones" id="sb_cantidad_repeticiones" value='.$evaluacion->cantidad_repeticiones.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>'.
+                    '<div id="maximo_peso-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Maximo Peso:</label>
+                                    <div class="col-lg-5">
+                                      <input type="numeric" class="form-control" name="maximo_peso" id="sb_maximo_peso" value='.$evaluacion->maximo_peso.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                 </div>';
+                break;
+        }
+
+        //devuelve el formulario correspondiente
+        $html =  '<div class="panel-heading">
+                    <h6 class="panel-title">Nombre ejercicio<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                    <div class="heading-elements">
+                        <ul class="icons-list">
+                            <li><a data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body">
+                <form class="form-horizontal col-lg-8" method="POST" id="form-nf">
+                     '.$formulario.'
+                     <input type="submit" class="btn btn-success col-lg-offset-10" value="Cargar">
+                </form>
+            </div>';
+
+        return view('admin.evaluaciones.editar-evaluaciones',['titulo'=>'Modificar Evaluación','evaluacion'=>$evaluacion,'formulario'=>$formulario]);
     }
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $evaluaciones_id)
     {
-        $evaluaciones = Evaluaciones::findOrFail($id);
 
         //validamos los campos enviados
-        $validator =  Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
 
             //QUe en la tabla ejercicios el nombre del ejercicio sea unico
             'maximo_peso' => 'required|numeric',
@@ -537,23 +706,30 @@ class EvaluacionesController extends Controller
         ]);
 
         //si falla la validacion, redireccionamos con los errores
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             $errors = $validator->errors();
-            $errors =  json_decode($errors);
+            $errors = json_decode($errors);
 
             return response()->json([
                 'success' => false,
                 'message' => $errors
             ], 422);
-        }
-        //si no falla la validacion, se carga la serie en la BD
-        $evaluaciones->update($request->all());
+        } else {
+            //si no falla la validacion, se carga la categoria en la BD
+            //guardar los datos
+            $ejercicio->nombre = $nombre;
+            $ejercicio->categoria_ejercicios_id = $categoria_ejercicios_id;
+            $ejercicio->fuerza = $fuerza;
+            $ejercicio->update();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'record updated'
-        ], 200);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'record updated'
+            ], 200);
+
+        }
+
     }
 
 
@@ -660,6 +836,7 @@ class EvaluacionesController extends Controller
                 $consulta = Cliente::findOrFail($id)->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)
                     ->groupBy('created_at')->orderBY('created_at','DESC')->get();
                 $eliminar = 'eliminar';
+                $link_editar = '';
 
             }
 
@@ -668,12 +845,31 @@ class EvaluacionesController extends Controller
                 $consulta = Cliente::findOrFail($id)->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->where('ejercicio_id',$ejercicio_id)
                     ->orderBY('created_at','DESC')->get();
                 $eliminar = 'eliminarNF';
+                $link_editar = '<li><a href="{{ URL::route( \'evaluaciones.editar\', array( $id )) }}"><i class="icon-pencil"></i> Editar</a></li>';
             }
 
             return Datatables::of($consulta)
 
             ->editColumn('created_at',function($evaluaciones){
                 return "<i class='icon-calendar'></i> ".date('d-m-Y', strtotime($evaluaciones->created_at))."  <i class='icon-watch2'></i> ".date('H:i:s', strtotime($evaluaciones->created_at));
+            })
+
+            ->editColumn('peso_corporal',function($evaluacion){
+                if (is_null($evaluacion->peso_corporal)){
+                    return "-";
+                }
+            })
+
+            ->editColumn('peso_externo',function($evaluacion){
+                 if (is_null($evaluacion->peso_externo)){
+                        return "-";
+                    }
+            })
+
+            ->editColumn('masa',function($evaluacion){
+                    if (is_null($evaluacion->masa)){
+                        return "-";
+                    }
             })
 
                 ->addColumn('operaciones', '
@@ -683,7 +879,7 @@ class EvaluacionesController extends Controller
 								<i class="icon-menu9"></i>
 							</a>
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="{{ URL::route( \'evaluaciones.editar\', array( $id )) }}"><i class="icon-pencil"></i> Editar</a></li>
+								'.$link_editar.'
 								<li><a href="#" onclick="'.$eliminar.'({{ $id  }})"><i class="icon-trash"></i> Eliminar</a></li>
 							</ul>
 						</li>
@@ -696,10 +892,16 @@ class EvaluacionesController extends Controller
 
     }
 
+
+
     public  function vistaResultados(){
+
         $ejercicios = Ejercicio::all();
+
         return view('admin.evaluaciones.vista-resultados',['titulo'=>'Consulta de Resultados','ejercicios'=> $ejercicios]);
     }
+
+
 
     public function listarResultados(Request $request)
     {

@@ -30,6 +30,7 @@ class ClienteController extends Controller
     }
 
 
+
     public function create()
     {
         $deportes = Deporte::all();
@@ -171,6 +172,7 @@ class ClienteController extends Controller
     }
 
 
+
     //devuelve los datos al datatable que les solicito, en este caso lista de clientes
     public function anyData()
     {
@@ -216,11 +218,13 @@ class ClienteController extends Controller
     }
 
 
+
     public function buscar(){
         $ejercicios = Ejercicio::all();
         $cat_ejer = Categoria_Ejercicio::all();
         return   view('admin.clientes.buscar',['titulo'=>'Buscar Clientes','ejercicios'=>$ejercicios,'cat_ejer'=>$cat_ejer]);
     }
+
 
 
     public function search(Request $keyword)
@@ -235,6 +239,7 @@ class ClienteController extends Controller
             $clientes
             , 200);
     }
+
 
 
     public function edit($id)
@@ -378,6 +383,8 @@ class ClienteController extends Controller
 
     }
 
+
+
     public function destroy($id)
     {
         $cliente = Cliente::find($id);
@@ -399,9 +406,13 @@ class ClienteController extends Controller
         }
     }
 
+
+
     public function verAsistencias(){
         return view('admin.clientes.asistencia',['titulo'=>'Asistencias del cliente']);
     }
+
+
 
     public function asistencias($id){
         $indicadores = Indicador::select('fecha_indicador')->where('cliente_id',$id)->groupBy('fecha_indicador')->orderBy('fecha_indicador','DESC')->get();
@@ -413,9 +424,13 @@ class ClienteController extends Controller
         return $asistencias;
     }
 
+
+
     public function verEliminados(){
         return view('admin.clientes.clientes-eliminados',['titulo'=>'Clientes eliminados']);
     }
+
+
 
     public function listaEliminados(){
 
