@@ -515,6 +515,7 @@ class EvaluacionesController extends Controller
         $ejercicio = Ejercicio::find($pivot[0]->ejercicio_id);
 
         switch ($ejercicio->id){
+
             case 4:
                 //salto abalacob
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
@@ -526,6 +527,7 @@ class EvaluacionesController extends Controller
                                     </div>
                                  </div>';
                 break;
+
 
             case 6:
                 //salto cm
@@ -539,6 +541,7 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
+
             case 7:
                 //salto sj
                 $formulario = '<div id="salto_sj-field" class="form-group">
@@ -550,6 +553,7 @@ class EvaluacionesController extends Controller
                 </div>
              </div>';
                 break;
+
 
             case 8:
                 //salto continuo
@@ -579,6 +583,7 @@ class EvaluacionesController extends Controller
                     </div>';
                 break;
 
+
             case 9:
                 //peso muerto
                 $formulario = '<div id="maximo_peso-field" class="form-group">
@@ -590,6 +595,7 @@ class EvaluacionesController extends Controller
                                     </div>
                                 </div>';
                 break;
+
 
             case 10:
                 //velocidad 10 mts
@@ -619,6 +625,7 @@ class EvaluacionesController extends Controller
                      </div>';
                 break;
 
+
             case 11:
                 //remo
                 $formulario = '<div id="maximo_peso-field" class="form-group">
@@ -631,6 +638,7 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
+
             case 3:
                 //yoyo test
                 $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
@@ -642,6 +650,7 @@ class EvaluacionesController extends Controller
                                     </div>
                                </div>';
                 break;
+
 
             case 12:
                 //sentadilla bulgara
@@ -662,6 +671,7 @@ class EvaluacionesController extends Controller
                                     </div>
                                  </div>';
                 break;
+
         }
 
         //devuelve el formulario correspondiente
@@ -688,48 +698,356 @@ class EvaluacionesController extends Controller
     public function update(Request $request, $evaluaciones_id)
     {
 
-        //validamos los campos enviados
-        $validator = Validator::make($request->all(), [
+        $evaluacion = Evaluaciones::findOrFail($evaluaciones_id);
 
-            //QUe en la tabla ejercicios el nombre del ejercicio sea unico
-            'maximo_peso' => 'required|numeric',
-            'velocidad_segundos' => 'required',
-            'salto_abalacob' => 'required',
-            'salto_cmj' => 'required',
-            'salto_sj' => 'required',
-            'mejor_salto_continuo' => 'required',
-            'peor_salto_continuo' => 'required',
-            'cantidad_salto_continuo' => 'required',
-            'resistencia_numero_fase' => 'required|numeric',
-            'cantidad_repeticiones' => 'required|numeric'
+        $pivot = DB::table('ejercicios')->select('*')->join('clientes_evaluaciones','ejercicio_id','=','ejercicios.id')->where('clientes_evaluaciones.evaluaciones_id',$evaluacion->id)->get();
 
-        ]);
-
-        //si falla la validacion, redireccionamos con los errores
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            $errors = json_decode($errors);
-
-            return response()->json([
-                'success' => false,
-                'message' => $errors
-            ], 422);
-        } else {
-            //si no falla la validacion, se carga la categoria en la BD
-            //guardar los datos
-            $ejercicio->nombre = $nombre;
-            $ejercicio->categoria_ejercicios_id = $categoria_ejercicios_id;
-            $ejercicio->fuerza = $fuerza;
-            $ejercicio->update();
+        $ejercicio = Ejercicio::find($pivot[0]->ejercicio_id);
 
 
-            return response()->json([
-                'success' => true,
-                'message' => 'record updated'
-            ], 200);
+        switch ($ejercicio->id) {
+
+            case 3:
+                //yoyo test
+                $resistencia_numero_fase = $request->input('resistencia_numero_fase');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'resistencia_numero_fase' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->resistencia_numero_fase = $resistencia_numero_fase;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 4:
+                //salto abalacob
+
+                $salto_abalacob = $request->input('salto_abalacob');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'salto_abalacob' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->salto_abalacob = $salto_abalacob;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 6:
+                //salto cmj
+                $salto_cmj = $request->input('salto_cmj');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'salto_cmj' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->salto_cmj = $salto_cmj;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 7:
+                //salto sj
+                $salto_sj = $request->input('salto_sj');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'salto_sj' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->salto_sj = $salto_sj;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 8:
+                //salto continuo
+                $mejor_salto_continuo = $request->input('mejor_salto_continuo');
+                $peor_salto_continuo = $request->input('peor_salto_continuo');
+                $cantidad_salto_continuo = $request->input('cantidad_salto_continuo');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'mejor_salto_continuo' => 'required|numeric',
+                    'peor_salto_continuo' => 'required|numeric',
+                    'cantidad_salto_continuo' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->mejor_salto_continuo = $mejor_salto_continuo;
+                    $evaluacion->peor_salto_continuo = $peor_salto_continuo;
+                    $evaluacion->cantidad_salto_continuo = $cantidad_salto_continuo;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 9:
+                //peso muerto
+                $maximo_peso = $request->input('maximo_peso');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'maximo_peso' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->maximo_peso = $maximo_peso;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 10:
+                //velocidad 10 mts
+                $velocidad_segundos = $request->input('velocidad_segundos');
+                $velocidad_decimas = $request->input('velocidad_decimas');
+                $velocidad_centesimas = $request->input('velocidad_centesimas');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'velocidad_segundos' => 'required|numeric',
+                    'velocidad_decimas' => 'required|numeric',
+                    'velocidad_centesimas' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->velocidad_segundos = $velocidad_segundos;
+                    $evaluacion->velocidad_decimas = $velocidad_decimas;
+                    $evaluacion->velocidad_centesimas = $velocidad_centesimas;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 11:
+                //remo
+                $maximo_peso = $request->input('maximo_peso');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'maximo_peso' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->maximo_peso = $maximo_peso;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 12:
+                //sentadilla bulgara
+                $cantidad_repeticiones = $request->input('cantidad_repeticiones');
+                $maximo_peso = $request->input('maximo_peso');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'cantidad_repeticiones' => 'required|numeric',
+                    'maximo_peso' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->cantidad_repeticiones = $cantidad_repeticiones;
+                    $evaluacion->maximo_peso = $maximo_peso;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
 
         }
-
     }
 
 
