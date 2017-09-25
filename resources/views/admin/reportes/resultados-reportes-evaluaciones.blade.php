@@ -46,15 +46,18 @@
             </div>
             <div class="col-md-4"></div>
         </div>
-        <div class="row text-center">
-            <div class=""><?php echo $perfil; ?></div>
+        <div class="row text-center" id="reporte">
+            <div class="" id="perfil"><?php echo $perfil; ?></div>
             <div class="row">
                 @for($i = 0; $i <= count($graficos)-1;$i++)
                     <canvas id="chart{{$i}}" class="text-center" width="600" height="400"></canvas>
                 @endfor
             </div>
+            <div class="row" style="margin:2%;">
+                <button id="btn-imprimir" style="display:none;" class="btn btn-primary" onclick="print('perfil')">Imprimir</button>
+            </div>
         </div>
-        <div class="row">
+        <div class="row" style="display:none;">
             <div class="col-md-8"></div>
             <div class="col-md-4">
                 <form id="form-pdf" action="{{route('pdfs.crear_pdf_deportista')}}" method="POST">
@@ -63,11 +66,12 @@
                     <input type="hidden" name="tipo" value="1">
                     <input type="hidden" name="img" id="img">
                     <input type="hidden" name="ejercicio" id="ejercicio">
-                    <button type="submit" id="btn-form-pdf" class="btn btn-primary" style="display:none;margin-bottom: 30px;">Generar PDF<i class="icon-arrow-right14 position-right"></i></button>
+                    <button type="submit" id="btn-form-pdf" class="btn btn-primary" style="margin-bottom: 30px;">Generar PDF<i class="icon-arrow-right14 position-right"></i></button>
                 </form>
             </div>
-
         </div>
+        {{--Div oculto donde se cargan las imagenes de los graficos--}}
+        <div class="row" style="display:none;" id="imprimir"></div>
     </div>
 
     </div>
@@ -132,6 +136,18 @@
             @for($i = 0; $i <= count($graficos)-1;$i++)
             grafico{{$i}}.setOption(option{{$i}});//grafica los datos de respuesta
             @endfor
+            //espera 2 segundos para generar y cargar las imagenes en el div oculto
+            setTimeout(function(){
+                @for($i = 0; $i <= count($graficos)-1;$i++)
+                var canvas{{$i}} = document.getElementById('chart{{$i}}');
+                var image{{$i}} = new Image();
+                image{{$i}}.id = "pic{{$i}}";
+                image{{$i}}.src = canvas{{$i}}.toDataURL('image/png');
+                $('#imprimir').append('<img src="'+image{{$i}}.src+'" width="500" height="200" style="margin-left:20%;margin-top:5%;"/>');
+                @endfor
+                //una vez que se crean todas las imagenes
+                $('#btn-imprimir').show();
+            },2000);
         };
 
         //envia la imagen del grafico
@@ -145,6 +161,26 @@
             console.log(image.src);
         });
 
+        $(document).ready(function(){
+
+        });
+
+        function print(divId) {
+
+
+            var perfil = document.getElementById(divId).innerHTML;
+            var mywindow = window.open('', 'Print', 'height=600,width=800');
+
+            mywindow.document.write('<html><head><title>Reporte de {{$cliente->apellido.', '.$cliente->nombre}}</title></head>');
+            mywindow.document.write('<body><div style="display:in-line;margin-left:50%;"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
+            mywindow.document.write($('#imprimir').html());
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+            mywindow.focus()
+            mywindow.print();
+            mywindow.close();
+            return true;
+        }
 
     </script>
 

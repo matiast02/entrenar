@@ -170,7 +170,8 @@ class ReporteController extends Controller
     public function generarReporteEvaluaciones(Request $request){
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
-            'ejercicios.*' => 'required|numeric',
+            'ejercicios' => 'required',
+            'ejercicios.*' => 'numeric',
             'rango-fechas' => 'required',
         ]);
 
@@ -178,10 +179,7 @@ class ReporteController extends Controller
             $errors = $validator->errors();
             $errors =  json_decode($errors);
 
-            return response()->json([
-                'success' => false,
-                'message' => $errors
-            ], 422);
+            return Redirect::back()->withErrors($errors);
 
         }else{
 
@@ -329,7 +327,7 @@ class ReporteController extends Controller
             }else{
 
                 $titulo = 'Resultado Evaluaciones';
-                return view('admin.reportes.resultados-reportes-evaluaciones',compact('titulo','graficos','perfil'));
+                return view('admin.reportes.resultados-reportes-evaluaciones',compact('titulo','graficos','perfil','cliente'));
 
             }
         }

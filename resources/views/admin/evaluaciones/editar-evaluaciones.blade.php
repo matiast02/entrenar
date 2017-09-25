@@ -86,9 +86,12 @@
                 type: 'patch',
                 url: "{{route('evaluaciones.update',$evaluacion->id)}}",
                 data: $("#editar-evaluaciones").serialize(),
+                dataType: 'json',
                 success: function (data) {
                     $('#resultados').html(data);
                     //resetear estilos
+                    swal("Bien!", "Los datos se guardaron correctamente.", "success");
+
                     $('.form-group').removeClass("has-error has-feedback");
                     $('#editar-evaluaciones').find('.form-control-feedback').html('');
                     $('#editar-evaluaciones').find('.help-block').html('');
