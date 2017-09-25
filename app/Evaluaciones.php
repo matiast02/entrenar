@@ -24,6 +24,7 @@ class Evaluaciones extends Model
     }
 
     public function ejercicios(){
-        return $this->belongsToMany('App\Ejercicios','clientes_evaluaciones','evaluaciones_id','ejercicio_id')->withTimestamps();
+        return $this->belongsToMany('App\Ejercicio','clientes_evaluaciones','evaluaciones_id','ejercicio_id')
+                    ->withPivot('cliente_id','evaluaciones_id','ejercicio_id')->withTimestamps();
     }
 }
