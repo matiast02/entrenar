@@ -163,14 +163,10 @@ Route::group(['middleware'=>'auth'],function (){
     Route::post('/reportes/generar-reporte-evaluaciones',['as'=>'generar-reporte-evaluaciones','uses'=>'backend\ReporteController@generarReporteEvaluaciones']);
 
 
-    //rutas para pdf
-    Route::get('/pdfs/reportes', ['as'=>'pdfs.reportes','uses'=>'backend\PdfController@index']);
-    Route::get('/pdfs/crear_reporte_porpais/{tipo}', ['as'=>'pdfs.crear_reporte_porpais','uses'=>'backend\PdfController@crear_reporte_porpais']);
+
     Route::post('/pdfs/crear_pdf_deportista', ['as'=>'pdfs.crear_pdf_deportista','uses'=>'backend\ReporteController@crear_pdf_deportista']);
 
 
-
-    Route::get('/pdfs/crear_reporte/{tipo}', ['as'=>'pdfs.crear_reporte','uses'=>'backend\PdfController@crear_reporte']);
 
 
 });

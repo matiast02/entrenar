@@ -172,16 +172,8 @@
 									<a href="#"><i class="fa fa-bar-chart"></i> <span>Reportes</span></a>
 									<ul>
 										<li><a href="{{URL::route('deportista.reportes')}}">Reporte por Deportista</a></li>
-										<li><a href="{{URL::route('deportista.reportes')}}">Reporte por categorias</a></li>
+										{{--<li><a href="{{URL::route('deportista.reportes')}}">Reporte por categorias</a></li>--}}
 										<li><a href="{{URL::route('reporte-evaluaciones')}}">Reporte de Evaluaciones</a></li>
-									</ul>
-								</li>
-
-								<li>
-									<a href="#"><i class="fa fa-bar-chart"></i> <span>Pdfs</span></a>
-									<ul>
-										<li><a href="{{URL::route('pdfs.reportes')}}">PDF</a></li>
-										{{--<li class="active"><a href="javascript:void(0);" onclick="cargarlistado(3,1);" ><i class="fa fa-circle-o"></i> PDF </a></li>--}}
 									</ul>
 								</li>
 

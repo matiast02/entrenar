@@ -49,7 +49,7 @@
 				<form action="{{ url('/login') }}"  method="POST">
 					<div class="panel panel-body login-form">
 						<div class="text-center">
-							<div class="icon-object border-warning-400 text-warning-400"><i class="icon-people"></i></div>
+							<div class="img-circle"><img src="{{asset('images/logo.jpeg')}}" width="140" height="140" alt="logo templum"></div>
 							<h5 class="content-group-lg">Login<small class="display-block">Ingrese sus datos</small></h5>
 						</div>
 

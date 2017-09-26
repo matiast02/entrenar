@@ -58,6 +58,7 @@
             </div>
         </div>
         <div class="row" style="display:none;">
+            <div id="logo" style="float:left;margin5%;"><img src="{{asset('images/logo.jpeg')}}" style="width: 70px; height: 70px;"></div>
             <div class="col-md-8"></div>
             <div class="col-md-4">
                 <form id="form-pdf" action="{{route('pdfs.crear_pdf_deportista')}}" method="POST">
@@ -169,10 +170,13 @@
 
 
             var perfil = document.getElementById(divId).innerHTML;
+            var logo = document.getElementById('logo').innerHTML;
             var mywindow = window.open('', 'Print', 'height=600,width=800');
 
             mywindow.document.write('<html><head><title>Reporte de {{$cliente->apellido.', '.$cliente->nombre}}</title></head>');
-            mywindow.document.write('<body><div style="display:in-line;margin-left:50%;"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
+            mywindow.document.write('<body>');
+            mywindow.document.write(logo);
+            mywindow.document.write('<div style="display:in-line;margin-left:50%;"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
             mywindow.document.write($('#imprimir').html());
             mywindow.document.write('</body></html>');
             mywindow.document.close();
