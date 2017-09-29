@@ -1344,7 +1344,7 @@ class EvaluacionesController extends Controller
                             break;
 
                         case 6:
-                            //salto cm
+                            //salto cmj
                             $titulos_tabla = '<tr>
                                                   <th>Altura</th>
                                                   <th>Fecha</th>
