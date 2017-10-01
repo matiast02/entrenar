@@ -35,7 +35,7 @@
 
 @section('contenido')
 
-    <form class="form-horizontal col-md-12" id="editar-evaluaciones" method="POST">
+    <form class="form-horizontal col-md-8" id="editar-evaluaciones" method="POST">
         <div class="panel panel-flat">
             <div class="panel-heading">
                 <h5 class="panel-title">Modificar Evaluaciones<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>

@@ -47,7 +47,8 @@ class EvaluacionesController extends Controller
         $formulario = '';
 
         switch ($id_ejercicio_nf){
-            case 4:
+
+            case 1:
                 //salto abalacob
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
@@ -59,8 +60,8 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
-            case 6:
-                //salto cm
+            case 2:
+                //salto cmj
                 $formulario = '<div id="salto_cmj-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
                                     <div class="col-lg-5">
@@ -71,7 +72,7 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
-            case 7:
+            case 3:
                 //salto sj
                 $formulario = '<div id="salto_sj-field" class="form-group">
                 <label class="col-lg-3 control-label">Altura:</label>
@@ -83,7 +84,7 @@ class EvaluacionesController extends Controller
              </div>';
                 break;
 
-            case 8:
+            case 4:
                 //salto continuo
                 $formulario = '<div id="mejor_salto_continuo-field" class="form-group">
                     <label class="col-lg-3 control-label">Mejor salto:</label>
@@ -111,7 +112,7 @@ class EvaluacionesController extends Controller
                     </div>';
                 break;
 
-            case 9:
+            case 5:
                 //peso muerto
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
@@ -123,7 +124,7 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
-            case 10:
+            case 6:
                 //velocidad 10 mts
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
@@ -151,7 +152,7 @@ class EvaluacionesController extends Controller
                      </div>';
                 break;
 
-            case 11:
+            case 7:
                 //remo
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
@@ -163,7 +164,7 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
-            case 3:
+            case 8:
                 //yoyo test
                 $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
                                     <label class="col-lg-3 control-label">Fase Final:</label>
@@ -175,7 +176,7 @@ class EvaluacionesController extends Controller
                                </div>';
                 break;
 
-            case 12:
+            case 9:
                 //sentadilla bulgara
                 $formulario = '<div id="cantidad_repeticiones-field" class="form-group">
                                     <label class="col-lg-3 control-label">Cantidad de Repeticiones:</label>
