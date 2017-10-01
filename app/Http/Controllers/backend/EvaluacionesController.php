@@ -220,7 +220,7 @@ class EvaluacionesController extends Controller
         $evaluacion = new Evaluaciones();
 
         switch ($request->input('ejercicio')){
-            case 4:
+            case 1:
                 //salto abalacob
                 $validator =  Validator::make($request->all(), [
                     'salto_abalacob' => 'required|numeric',
@@ -251,8 +251,8 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 6:
-                //salto cm
+            case 2:
+                //salto cmj
                 $validator =  Validator::make($request->all(), [
                     'salto_cmj' => 'required|numeric',
                     'cliente' => 'required|numeric',
@@ -281,7 +281,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 7:
+            case 3:
                 //salto sj
                 $validator =  Validator::make($request->all(), [
                     'salto_sj' => 'required|numeric',
@@ -311,7 +311,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 8:
+            case 4:
                 //salto continuo
                 $validator =  Validator::make($request->all(), [
                     'mejor_salto_continuo' => 'required|numeric',
@@ -345,7 +345,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 9:
+            case 5:
                 //peso muerto
                 $validator =  Validator::make($request->all(), [
                     'maximo_peso' => 'required|numeric',
@@ -375,7 +375,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 10:
+            case 6:
                 //velocidad 10 mts
                 $validator =  Validator::make($request->all(), [
                     'velocidad_segundos' => 'required|numeric',
@@ -409,7 +409,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 11:
+            case 7:
                 //remo
                 $validator =  Validator::make($request->all(), [
                     'maximo_peso' => 'required|numeric',
@@ -439,7 +439,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 3:
+            case 8:
                 //yoyo test
                 $validator =  Validator::make($request->all(), [
                     'resistencia_numero_fase' => 'required|numeric',
@@ -469,7 +469,7 @@ class EvaluacionesController extends Controller
                 }
                 break;
 
-            case 12:
+            case 9:
                 //sentadilla bulgara
                 $validator =  Validator::make($request->all(), [
                     'maximo_peso' => 'required|numeric',
@@ -516,7 +516,7 @@ class EvaluacionesController extends Controller
 
         switch ($ejercicio->id){
 
-            case 4:
+            case 1:
                 //salto abalacob
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
@@ -529,8 +529,8 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 6:
-                //salto cm
+            case 2:
+                //salto cmj
                 $formulario = '<div id="salto_cmj-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
                                     <div class="col-lg-5">
@@ -542,7 +542,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 7:
+            case 3:
                 //salto sj
                 $formulario = '<div id="salto_sj-field" class="form-group">
                 <label class="col-lg-3 control-label">Altura:</label>
@@ -555,7 +555,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 8:
+            case 4:
                 //salto continuo
                 $formulario = '<div id="mejor_salto_continuo-field" class="form-group">
                     <label class="col-lg-3 control-label">Mejor salto:</label>
@@ -584,7 +584,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 9:
+            case 5:
                 //peso muerto
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
@@ -597,7 +597,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 10:
+            case 6:
                 //velocidad 10 mts
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
@@ -626,7 +626,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 11:
+            case 7:
                 //remo
                 $formulario = '<div id="maximo_peso-field" class="form-group">
                                     <label class="col-lg-3 control-label">Maximo Peso:</label>
@@ -639,7 +639,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 3:
+            case 8:
                 //yoyo test
                 $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
                                     <label class="col-lg-3 control-label">Fase Final:</label>
@@ -652,7 +652,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 12:
+            case 9:
                 //sentadilla bulgara
                 $formulario = '<div id="cantidad_repeticiones-field" class="form-group">
                                     <label class="col-lg-3 control-label">Cantidad de Repeticiones:</label>
@@ -707,43 +707,7 @@ class EvaluacionesController extends Controller
 
         switch ($ejercicio->id) {
 
-            case 3:
-                //yoyo test
-                $resistencia_numero_fase = $request->input('resistencia_numero_fase');
-
-
-                //validamos los campos enviados
-                $validator = Validator::make($request->all(), [
-                    'resistencia_numero_fase' => 'required|numeric',
-                ]);
-
-
-                //si falla la validacion, redireccionamos con los errores
-                if ($validator->fails()) {
-                    $errors = $validator->errors();
-                    $errors = json_decode($errors);
-
-                    return response()->json([
-                        'success' => false,
-                        'message' => $errors
-                    ], 422);
-
-                } else {
-
-                    $evaluacion->resistencia_numero_fase = $resistencia_numero_fase;
-                    $evaluacion->update();
-
-
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'record updated'
-                    ], 200);
-                }
-
-                break;
-
-
-            case 4:
+            case 1:
                 //salto abalacob
 
                 $salto_abalacob = $request->input('salto_abalacob');
@@ -780,7 +744,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 6:
+            case 2:
                 //salto cmj
                 $salto_cmj = $request->input('salto_cmj');
 
@@ -816,7 +780,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 7:
+            case 3:
                 //salto sj
                 $salto_sj = $request->input('salto_sj');
 
@@ -852,7 +816,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 8:
+            case 4:
                 //salto continuo
                 $mejor_salto_continuo = $request->input('mejor_salto_continuo');
                 $peor_salto_continuo = $request->input('peor_salto_continuo');
@@ -894,7 +858,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 9:
+            case 5:
                 //peso muerto
                 $maximo_peso = $request->input('maximo_peso');
 
@@ -930,7 +894,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 10:
+            case 6:
                 //velocidad 10 mts
                 $velocidad_segundos = $request->input('velocidad_segundos');
                 $velocidad_decimas = $request->input('velocidad_decimas');
@@ -972,7 +936,7 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 11:
+            case 7:
                 //remo
                 $maximo_peso = $request->input('maximo_peso');
 
@@ -1008,7 +972,43 @@ class EvaluacionesController extends Controller
                 break;
 
 
-            case 12:
+            case 8:
+                //yoyo test
+                $resistencia_numero_fase = $request->input('resistencia_numero_fase');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'resistencia_numero_fase' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->resistencia_numero_fase = $resistencia_numero_fase;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 9:
                 //sentadilla bulgara
                 $cantidad_repeticiones = $request->input('cantidad_repeticiones');
                 $maximo_peso = $request->input('maximo_peso');
@@ -1329,7 +1329,8 @@ class EvaluacionesController extends Controller
                 foreach ($evaluaciones as $evaluacion) {
 
                     switch ($request->input('ejercicios')) {
-                        case 4:
+
+                        case 1:
                             //salto abalacob
                             $titulos_tabla = '<tr>
                                                   <th>Altura</th>
@@ -1343,7 +1344,7 @@ class EvaluacionesController extends Controller
                                        </tr>';
                             break;
 
-                        case 6:
+                        case 2:
                             //salto cmj
                             $titulos_tabla = '<tr>
                                                   <th>Altura</th>
@@ -1358,7 +1359,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 7:
+                        case 3:
                             //salto sj
                             $titulos_tabla = '<tr>
                                                   <th>Altura</th>
@@ -1373,7 +1374,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 8:
+                        case 4:
                             //salto continuo
                             $titulos_tabla = '<tr>
                                                   <th>Mejor Salto</th>
@@ -1392,7 +1393,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 9:
+                        case 5:
                             //peso muerto
                             $titulos_tabla = '<tr>
                                                   <th>Maximo Peso</th>
@@ -1407,7 +1408,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 10:
+                        case 6:
                             //velocidad 10 mts
                             $titulos_tabla = '<tr>
                                                   <th>Segundos</th>
@@ -1426,7 +1427,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 11:
+                        case 7:
                             //remo
                             $titulos_tabla = '<tr>
                                                   <th>Maximo Peso</th>
@@ -1441,7 +1442,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 3:
+                        case 8:
                             //yoyo test
                             $titulos_tabla = '<tr>
                                                   <th>Fase Final</th>
@@ -1456,7 +1457,7 @@ class EvaluacionesController extends Controller
 
                             break;
 
-                        case 12:
+                        case 9:
                             //sentadilla bulgara
                             $titulos_tabla = '<tr>
                                                   <th>Cantidad de Repeticiones</th>
@@ -1477,12 +1478,10 @@ class EvaluacionesController extends Controller
 
                 $tabla .= $titulos_tabla . $filas .'</tbody></table></div>';
 
-
             }
 
 
             return $tabla;
-
 
 
         }

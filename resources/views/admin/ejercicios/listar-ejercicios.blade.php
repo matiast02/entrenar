@@ -44,7 +44,7 @@
                 <tr>
                     <th>Nombre</th>
                     <th>Categoria Ejercicio</th>
-                    <th>Fuerza</th>
+                    <th>Potencia</th>
                     <th>Creado</th>
                     <th>Modificado</th>
                     <th>Operaciones</th>

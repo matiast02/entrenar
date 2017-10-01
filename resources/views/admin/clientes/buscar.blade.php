@@ -52,8 +52,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="text-center">
-                                    <input type="button" id="btn-fuerza" class="btn btn-success" value="Fuerza">
-                                    <input type="button" id="btn-no-fuerza" class="btn btn-warning" value="No fuerza">
+                                    <input type="button" id="btn-fuerza" class="btn btn-success" value="Potencia">
+                                    <input type="button" id="btn-no-fuerza" class="btn btn-warning" value="Fuerza">
                                 </div>
                             </div>
 
@@ -227,7 +227,7 @@
                         $('#buscar-cliente')[0].reset();
                         $("#wizard").html("");
                         numero = 0;
-                        setTimeout(function(){ location.reload(); }, 1500);
+                        setTimeout(function(){ location.reload(); }, 1300);
 
                     },
                     error: function(data){
@@ -467,7 +467,7 @@
                     $('#buscar-cliente')[0].reset();
                     $('#form-nf').find('.form-control-feedback').html('');
                     $('#form-nf').find('.help-block').html('');
-                    setTimeout(function(){ location.reload(); }, 1500);
+                    setTimeout(function(){ location.reload(); }, 1300);
                 },
                 error: function(data){;
 
