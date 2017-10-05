@@ -76,6 +76,76 @@
                                 </div>
                             </div>
 
+                            <div id="campos-field" class="form-group">
+                                <label class="col-lg-3 control-label">Datos Potencia</label>
+                                <div class="col-lg-9">
+                                        <div class="col-lg-4">
+                                            <div class="checkbox">
+                                                <label for="rm">
+                                                    <input type="checkbox" name="campos[]" class="styled" value="rm">
+                                                    rm
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="peso_corporal">
+                                                <input type="checkbox" name="campos[]" class="styled" value="peso_corporal">
+                                                peso_corporal
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="peso_externo">
+                                                <input type="checkbox" name="campos[]" class="styled" value="peso_externo">
+                                                peso_externo
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="masa">
+                                                <input type="checkbox" name="campos[]" class="styled" value="masa">
+                                                masa
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="potencia_impulsiva">
+                                                <input type="checkbox" name="campos[]" class="styled" value="potencia_impulsiva">
+                                                potencia_impulsiva
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="potencia_relativa">
+                                                <input type="checkbox" name="campos[]" class="styled" value="potencia_relativa">
+                                                potencia_relativa
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="velocidad_impulsiva">
+                                                <input type="checkbox" name="campos[]" class="styled" value="velocidad_impulsiva">
+                                                velocidad_impulsiva
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="checkbox">
+                                            <label for="fuerza_impulsiva">
+                                                <input type="checkbox" name="campos[]" class="styled" value="fuerza_impulsiva">
+                                                fuerza_impulsiva
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div id="rango-fechas" class="form-group">
                                 <label for="rango-fechas" class="col-lg-3 control-label">Fechas</label>
                                 <div class="col-lg-9">

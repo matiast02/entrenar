@@ -82,7 +82,10 @@
 
 @section('scripts')
     <script type="text/javascript">
-
+        //$graficos[$i][0] nombre ejercicio
+        //$graficos[$i][1] datos
+        //$graficos[$i][2] fechas
+        //$graficos[$i][3] nombre de los campos
         @for($i = 0; $i <= count($graficos)-1;$i++)
         var grafico{{$i}} = echarts.init(document.getElementById('chart{{$i}}'));
 
@@ -90,20 +93,33 @@
             title: {
                 text: '{{$graficos[$i][0]}}'
             },
+            grid: {
+                show: 'true',
+                width: '200',
+                containLabel:'true'
+            },
+            calculable : true,
             tooltip: {
-                data: ['{{implode(' ',$graficos[$i][3])}}']
+                data: [@for($j=0; $j<= count($graficos[$i][3])-1;$j++) '{{$graficos[$i][3][$j]}}' @if($j < count($graficos[$i][3])-1) , @endif  @endfor]
             },
             legend: {
-                data:['{{implode(' ',$graficos[$i][3])}}']
+                {{--data:['{{implode(' ',$graficos[$i][3])}}']--}}
+                data: [@for($j=0; $j<= count($graficos[$i][3])-1;$j++) '{{$graficos[$i][3][$j]}}' @if($j < count($graficos[$i][3])-1) , @endif  @endfor]
             },
             xAxis: {
                 data: [@for($j=0; $j <= count($graficos[$i][2])-1;$j++) "{{$graficos[$i][2][$j]}}" @if($j < count($graficos[$i][2])-1),@endif  @endfor]
             },
             yAxis: {},
-            series: [{
-                name: '{{implode(' ',$graficos[$i][3])}}',
+            series: [
+                //recorre los array de valores para cada campo solicitado
+                @for($j=0; $j <= count($graficos[$i][1])-1;$j++)
+                {
+                name: '{{$graficos[$i][3][$j]}}',
                 type: 'bar',
-                data: [@for($j=0; $j <= count($graficos[$i][1])-1;$j++) {{$graficos[$i][1][$j]}} @if($j < count($graficos[$i][1])-1) , @endif @endfor],
+                data: [
+                          @foreach($graficos[$i][1][$j] as $indice=>$valor)
+                          {{$valor}} @if($indice < count($graficos[$i][1][$j])-1) ,@endif
+                          @endforeach],
                 itemStyle: {
                     normal: {
                         label: {
@@ -114,12 +130,13 @@
                         }
                     }
                 },
+                barMaxWidth: 30,
                 markLine: {
                     data: [{type: 'average', name: 'Average'}]
                 }
-            }],
+            },@endfor],
             itemStyle: {
-                    normal: {
+                emphasis: {
                         // shadow size
                         shadowBlur: 200,
                         // horizontal offset of shadow

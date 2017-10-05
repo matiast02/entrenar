@@ -172,6 +172,7 @@ class ReporteController extends Controller
             'cliente' => 'required|numeric',
             'ejercicios' => 'required',
             'ejercicios.*' => 'numeric',
+            'campos.*' => 'required',
             'rango-fechas' => 'required',
         ]);
 
@@ -192,7 +193,7 @@ class ReporteController extends Controller
 
             foreach ($request->input('ejercicios') as $ejercicio_id){
                 $ejercicio = Ejercicio::find($ejercicio_id);
-
+                //si es de fuerza
                 if ($ejercicio->fuerza == 1){
                     $rm = array();
                     $fecha = array();
@@ -202,19 +203,31 @@ class ReporteController extends Controller
                         //se almacenan en array los datos para pasarlos a formato json
                         $series_por_cliente = $cliente->series()->whereBetween('series.created_at', array($fecha_inicio, $fecha_fin))->where('series.mejor_serie_boolean','=',true)->get();
                     }
+                    //defino el array campo para mostrar en grafico el nombde de cada campo solicitado
+                    $campos = array();
 
-
-                    foreach ($series_por_cliente as $serie){ //filtrar por fechas en series()
-                        if ($serie->pivot->ejercicio_id == $ejercicio_id){
-                            array_push($rm,$serie->rm);
-                            array_push($fecha, $serie->created_at->format('d-m-Y'));
+                    //por cada campo solicitado (fuerza_imp,velo_imp,etc)
+                    foreach ($request->input('campos') as $campo ){
+                        array_push($campos,$campo);
+                        $valores = array();//alamacena los valores del campo solicitado
+                        foreach ($series_por_cliente as $serie){ //filtrar por fechas en series()
+                            if ($serie->pivot->ejercicio_id == $ejercicio_id){
+                                array_push($valores,$serie->$campo);//construye el array de valores del campo seleccionado
+                                //para evitar que esten repetidas las fechas se controlan
+                                if (!in_array($serie->created_at->format('d-m-Y'),$fecha)){
+                                    array_push($fecha, $serie->created_at->format('d-m-Y'));//guarada en el array fechas las fechas del ejercicio
+                                }
+                            }
                         }
+                        array_push($rm,$valores);//almacena el array de valores de cada campo en el array de rm
                     }
+
 
                     if(count($rm) > 0 ){
-                        array_push($graficos,array($ejercicio->nombre,$rm,$fecha,array('RM')));
+                        array_push($graficos,array($ejercicio->nombre,$rm,$fecha,$campos));
                     }
 
+//                    return var_dump($graficos[0][1]);
 
                 }else{
                     //sino es de fuerza entonces consulto en la tabla evaluaciones
@@ -227,7 +240,7 @@ class ReporteController extends Controller
                         //se almacenan en array los datos para pasarlos a formato json
                         $evaluaciones_por_cliente = $cliente->evaluaciones()->whereBetween('evaluaciones.created_at', array($fecha_inicio, $fecha_fin))->get();
                     }
-
+                    $valores = array();//alamacena los valores del campo solicitado
                     foreach ($evaluaciones_por_cliente as $evaluacion){ //filtrar por fechas en series()
 
                         if ($evaluacion->pivot->ejercicio_id == $ejercicio_id){
@@ -236,62 +249,65 @@ class ReporteController extends Controller
                             switch ($ejercicio_id){
                                 case 4:
                                     //salto abalacob
-                                    array_push($rm,$evaluacion->salto_abalacob);
+                                    array_push($valores,$evaluacion->salto_abalacob);
                                     array_push($campo,'Altura');
                                     break;
 
                                 case 6:
                                     //salto cm
-                                    array_push($rm,$evaluacion->salto_cmj);
+                                    array_push($valores,$evaluacion->salto_cmj);
                                     array_push($campo,'Altura');
                                     break;
 
                                 case 7:
                                     //salto sj
-                                    array_push($rm,$evaluacion->salto_sj);
+                                    array_push($valores,$evaluacion->salto_sj);
                                     array_push($campo,'Altura');
                                     break;
 
                                 case 8:
                                     //salto continuo
-                                    array_push($rm,$evaluacion->mejor_salto_continuo);
+                                    array_push($valores,$evaluacion->mejor_salto_continuo);
                                     array_push($campo,'Mejor Salto');
                                     break;
 
                                 case 9:
                                     //peso muerto
-                                    array_push($rm,$evaluacion->maximo_peso);
+                                    array_push($valores,$evaluacion->maximo_peso);
                                     array_push($campo,'Maximo peso');
                                     break;
 
                                 case 10:
                                     //velocidad 10 mts
-                                    array_push($rm,$evaluacion->velocidad_segundos);
+                                    array_push($valores,$evaluacion->velocidad_segundos);
                                     array_push($campo,'Segundos');
                                     break;
 
                                 case 11:
                                     //remo
-                                    array_push($rm,$evaluacion->maximo_peso);
+                                    array_push($valores,$evaluacion->maximo_peso);
                                     array_push($campo,'Maximo peso');
                                     break;
 
                                 case 3:
                                     //yoyo test
-                                    array_push($rm,$evaluacion->resistencia_numero_fase);
+                                    array_push($valores,$evaluacion->resistencia_numero_fase);
                                     array_push($campo,'Numero de Fase');
                                     break;
 
                                 case 12:
                                     //sentadilla bulgara
-                                    array_push($rm,$evaluacion->maximo_peso);
+                                    array_push($valores,$evaluacion->maximo_peso);
                                     array_push($campo,"Maximo peso");
 
                             }
-                            //datos de lsa fechas de cada registro
-                            array_push($fecha, $evaluacion->created_at->format('d-m-Y'));
+                            //datos de lsa fechas de cada registro, para evitar que esten repetidos
+                            if (!in_array($evaluacion->created_at->format('d-m-Y'),$fecha)){
+                                array_push($fecha, $evaluacion->created_at->format('d-m-Y'));
+                            }
                         }
                     }
+                    array_push($rm,$valores);//almacena el array de valores de cada campo en el array de rm
 
                     if(count($rm) > 0){
                         array_push($graficos,array($ejercicio->nombre,$rm,$fecha,$campo));
@@ -300,6 +316,7 @@ class ReporteController extends Controller
 
 
                 }
+//                return var_dump($graficos);
             }
 
 
