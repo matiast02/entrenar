@@ -50,7 +50,7 @@
             <div class="" id="perfil"><?php echo $perfil; ?></div>
             <div class="row">
                 @for($i = 0; $i <= count($graficos)-1;$i++)
-                    <canvas id="chart{{$i}}" class="text-center" width="600" height="400"></canvas>
+                    <canvas id="chart{{$i}}" class="text-center" width="800" height="400"></canvas>
                 @endfor
             </div>
             <div class="row" style="margin:2%;">
@@ -95,7 +95,7 @@
             },
             grid: {
                 show: 'true',
-                width: '200',
+                width: 'auto',
                 containLabel:'true'
             },
             calculable : true,
@@ -107,7 +107,11 @@
                 data: [@for($j=0; $j<= count($graficos[$i][3])-1;$j++) '{{$graficos[$i][3][$j]}}' @if($j < count($graficos[$i][3])-1) , @endif  @endfor]
             },
             xAxis: {
-                data: [@for($j=0; $j <= count($graficos[$i][2])-1;$j++) "{{$graficos[$i][2][$j]}}" @if($j < count($graficos[$i][2])-1),@endif  @endfor]
+                data: [@for($j=0; $j <= count($graficos[$i][2])-1;$j++) "{{$graficos[$i][2][$j]}}" @if($j < count($graficos[$i][2])-1),@endif  @endfor],
+                type : 'category',
+                axisTick: {
+                    alignWithLabel: true
+                }
             },
             yAxis: {},
             series: [
