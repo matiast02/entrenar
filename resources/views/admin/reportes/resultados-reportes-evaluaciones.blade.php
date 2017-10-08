@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="row" style="display:none;">
-            <div id="logo" style="float:left;margin5%;"><img src="{{asset('images/logo.jpeg')}}" style="width: 70px; height: 70px;"></div>
+            <div id="logo" style="float:left;margin:5%;"><img src="{{asset('images/logo.jpeg')}}" style="width: 70px; height: 70px;"></div>
             <div class="col-md-8"></div>
             <div class="col-md-4">
                 <form id="form-pdf" action="{{route('pdfs.crear_pdf_deportista')}}" method="POST">
@@ -196,8 +196,18 @@
 
             mywindow.document.write('<html><head><title>Reporte de {{$cliente->apellido.', '.$cliente->nombre}}</title></head>');
             mywindow.document.write('<body>');
-            mywindow.document.write(logo);
-            mywindow.document.write('<div style="display:in-line;margin-left:50%;"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
+            mywindow.document.write('<div id="cabcera" style="display:inline-block;">');
+            mywindow.document.write('<div id="logo" style="float:left;"><img src="{{asset('images/logo.jpeg')}}" style="width: 70px; height: 70px;"></div>');
+                mywindow.document.write('<div id="perfil-cliente" style="float:left;margin-left:200px;">');
+                    mywindow.document.write('<div id="foto-perfil" style="float:left"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
+                    mywindow.document.write('<div id="datos-cliente" style="display:inline-block;margin-left:5px;margin-top:-10px;font-size: 0.7em;"><ul style="padding-left:0px;list-style:none;">');
+                    mywindow.document.write('<li><a style="text-decoration:none">{{$cliente->nombre}}, {{$cliente->apellido}}</a></li>');
+                    mywindow.document.write('<li><a style="text-decoration:none"><b>Deporte:</b> {{$cliente->deportes->nombre}}</a></li>');
+                    mywindow.document.write('<li><a style="text-decoration:none"><b>Categoria:</b> {{$cliente->categorias->nombre}}</a></li>');
+                    mywindow.document.write('<li><a><b>Inicio:</b> {{date('d/m/Y',strtotime($cliente->fecha_inicio_entrenamiento))}}</a></li>');
+                    mywindow.document.write('</ul></div>');
+                mywindow.document.write('</div>');
+            mywindow.document.write('</div>');
             mywindow.document.write($('#imprimir').html());
             mywindow.document.write('</body></html>');
             mywindow.document.close();
