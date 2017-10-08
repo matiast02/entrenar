@@ -7,18 +7,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Indicador extends Model
 {
-    use SoftDeletes;
-
     public $table = 'indicadores';
+    use SoftDeletes;
 
     protected $fillable = [
         'cliente_id', 'fecha_indicador', 'semana', 'peso_inicial', 'peso_final', 'diferencia_peso_porcentual',
         'hora_entrada', 'hora_salida', 'pse', 'sueno', 'dolor', 'deseo_entrenar', 'desayuno', 'sumatoria',
         'pse_global_sesion', 'tiempo_entrenamiento', 'carga_entrenamiento',
     ];
-
-
     protected $dates = ['deleted_at'];
+
+
 
     //Indicamos que un cliente tiene muchos indicadores
     public function clientes(){

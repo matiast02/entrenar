@@ -155,10 +155,10 @@ Route::group(['middleware'=>'auth'],function (){
 
 
     //rutas para el control de reportes
-    Route::get('/reportes/reporte-por-deportista', ['as'=>'deportista.reportes','uses'=>'backend\ReporteController@index']);
-    Route::post('/reportes/reporte-por-deportista', ['as'=>'reporte-por-deportista.reportes','uses'=>'backend\ReporteController@reportePorEjercicio']);
-
-    Route::get('/reportes/crear_pdf_deportista/{tipo}/{cliente}', ['as'=>'reporte.crear_pdf_deportista','uses'=>'backend\ReporteController@crear_pdf_deportista']);
+//    Route::get('/reportes/reporte-por-deportista', ['as'=>'deportista.reportes','uses'=>'backend\ReporteController@index']);
+//    Route::post('/reportes/reporte-por-deportista', ['as'=>'reporte-por-deportista.reportes','uses'=>'backend\ReporteController@reportePorEjercicio']);
+//
+//    Route::get('/reportes/crear_pdf_deportista/{tipo}/{cliente}', ['as'=>'reporte.crear_pdf_deportista','uses'=>'backend\ReporteController@crear_pdf_deportista']);
     Route::get('/reportes/reporte-evaluaciones',['as'=>'reporte-evaluaciones','uses'=>'backend\ReporteController@vistaReporteEvaluaciones']);
     Route::post('/reportes/generar-reporte-evaluaciones',['as'=>'generar-reporte-evaluaciones','uses'=>'backend\ReporteController@generarReporteEvaluaciones']);
 

@@ -64,11 +64,11 @@
                             </div>
 
 
-                            <div id="fuerza-field" class="form-group ">
+                            <div id="fuerza-field" class="form-group " hidden>
                                 <label class="col-lg-3 control-label">Ejercicios de Fuerza?</label>
                                 <div class="col-lg-9">
                                     <label class="radio-inline radio-right">
-                                        <input type="radio" name="fuerza" id="fuerza" value="1" >
+                                        <input type="radio" name="fuerza" id="fuerza" value="1" checked>
                                         Si
                                     </label>
                                     <label class="radio-inline radio-right">

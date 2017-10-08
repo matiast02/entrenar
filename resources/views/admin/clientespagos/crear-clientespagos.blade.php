@@ -100,7 +100,8 @@
                                     <div id="mes_pago-field" class="input-group">
                                         <select id="mes_pago" name="mes_pago" class="form-control">
                                             <?php
-                                            $mes=date("n")-2;
+                                                // date("n") - 2 (muestra los dos anteriores al actual)
+                                            $mes=date("n");
                                             $rango=11;
                                             //si se indico la fecha de deuda se la muestra y no se la puede cambiar
                                             if (isset($fecha_deuda)){

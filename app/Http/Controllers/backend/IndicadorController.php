@@ -390,7 +390,7 @@ class IndicadorController extends Controller
         } else{
 
 
-        $indicadores = DB::table('indicadores')->where('cliente_id',$cliente)->where(DB::raw('date_format(fecha_indicador, \'%m\')'),$mes)->where('deleted_at',null)->whereIn('semana', collect($resultado));
+        $indicadores = DB::table('indicadores')->where('cliente_id',$cliente)->where(DB::raw('date_format(fecha_indicador, \'%m\')'),$mes)->whereNull('deleted_at')->whereIn('semana', collect($resultado));
 
         //se muestra el datatable
 
@@ -492,7 +492,7 @@ class IndicadorController extends Controller
             ], 422);
         } else{
 
-            $semanas = DB::table('indicadores')->where('cliente_id',$cliente)->where(DB::raw('date_format(fecha_indicador, \'%m\')'),$mes)->where('deleted_at',null)->whereIn('semana', collect($resultado))->get();
+            $semanas = DB::table('indicadores')->where('cliente_id',$cliente)->where(DB::raw('date_format(fecha_indicador, \'%m\')'),$mes)->whereNull('deleted_at')->whereIn('semana', collect($resultado))->get();
 
             $respuesta = '<div "table-responsive pre-scrollable">
                             <table class="table">

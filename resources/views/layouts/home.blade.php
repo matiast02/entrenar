@@ -171,7 +171,7 @@
 								<li>
 									<a href="#"><i class="fa fa-bar-chart"></i> <span>Reportes</span></a>
 									<ul>
-										<li><a href="{{URL::route('deportista.reportes')}}">Reporte por Deportista</a></li>
+										{{--<li><a href="{{URL::route('deportista.reportes')}}">Reporte por Deportista</a></li>--}}
 										{{--<li><a href="{{URL::route('deportista.reportes')}}">Reporte por categorias</a></li>--}}
 										<li><a href="{{URL::route('reporte-evaluaciones')}}">Reporte de Evaluaciones</a></li>
 									</ul>

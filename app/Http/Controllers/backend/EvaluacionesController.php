@@ -1176,18 +1176,24 @@ class EvaluacionesController extends Controller
             ->editColumn('peso_corporal',function($evaluacion){
                 if (is_null($evaluacion->peso_corporal)){
                     return "-";
+                }else{
+                    return $evaluacion->peso_corporal;
                 }
             })
 
             ->editColumn('peso_externo',function($evaluacion){
                  if (is_null($evaluacion->peso_externo)){
                         return "-";
-                    }
+                    }else{
+                     return $evaluacion->peso_externo;
+                 }
             })
 
             ->editColumn('masa',function($evaluacion){
                     if (is_null($evaluacion->masa)){
                         return "-";
+                    }else{
+                        return $evaluacion->masa;
                     }
             })
 

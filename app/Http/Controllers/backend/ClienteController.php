@@ -146,7 +146,7 @@ class ClienteController extends Controller
 
             }else{
                 //imagen standar
-                $cliente->foto = 'images/perfiles/foto_perfil.jpg';
+                $cliente->foto = 'images/perfiles/default.jpg';
                 $cliente->save();
             }
 
