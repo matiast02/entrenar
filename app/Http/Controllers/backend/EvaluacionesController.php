@@ -49,7 +49,7 @@ class EvaluacionesController extends Controller
         switch ($id_ejercicio_nf){
 
             case 1:
-                //salto abalacob
+                //salto abalakov
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
                                     <div class="col-lg-5">
@@ -195,6 +195,18 @@ class EvaluacionesController extends Controller
                                     </div>
                                  </div>';
                 break;
+
+            case 10:
+                //peso muerto 1 Pierna
+                $formulario = '<div id="maximo_peso-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Maximo Peso:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="maximo_peso" id="peso_muerto">
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>';
+                break;
         }
 
         //devuelve el formulario correspondiente
@@ -222,7 +234,7 @@ class EvaluacionesController extends Controller
 
         switch ($request->input('ejercicio')){
             case 1:
-                //salto abalacob
+                //salto abalakov
                 $validator =  Validator::make($request->all(), [
                     'salto_abalacob' => 'required|numeric',
                     'cliente' => 'required|numeric',
@@ -501,6 +513,36 @@ class EvaluacionesController extends Controller
                     ], 200);
                 }
                 break;
+
+            case 10:
+                //peso muerto 1 Pierna
+                $validator =  Validator::make($request->all(), [
+                    'maximo_peso' => 'required|numeric',
+                    'cliente' => 'required|numeric',
+                    'ejercicio' => 'required|numeric'
+                ]);
+                if ($validator->fails())
+                {
+                    //Crea un array con los errores
+                    $errors = $validator->errors();
+                    $errors =  json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                }else{
+                    $evaluacion->maximo_peso = $request->input('maximo_peso');
+                    $evaluacion->save();
+                    //se inserta en la tabla pivot
+                    $evaluacion->clientes()->attach([$evaluacion->id => ['cliente_id'=>$request->input('cliente'),'ejercicio_id'=>$request->input('ejercicio')]]);
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Resultados cargados'
+                    ], 200);
+                }
+                break;
         }
     }
 
@@ -518,7 +560,7 @@ class EvaluacionesController extends Controller
         switch ($ejercicio->id){
 
             case 1:
-                //salto abalacob
+                //salto abalakov
                 $formulario = '<div id="salto_abalacob-field" class="form-group">
                                     <label class="col-lg-3 control-label">Altura:</label>
                                     <div class="col-lg-5">
@@ -673,6 +715,19 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
+
+            case 10:
+                //peso muerto 1 Pierna
+                $formulario = '<div id="maximo_peso-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Maximo Peso:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="maximo_peso" id="peso_muerto" value='.$evaluacion->maximo_peso.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>';
+                break;
+
         }
 
         //devuelve el formulario correspondiente
@@ -709,7 +764,7 @@ class EvaluacionesController extends Controller
         switch ($ejercicio->id) {
 
             case 1:
-                //salto abalacob
+                //salto abalakov
 
                 $salto_abalacob = $request->input('salto_abalacob');
 
@@ -1035,6 +1090,42 @@ class EvaluacionesController extends Controller
                 } else {
 
                     $evaluacion->cantidad_repeticiones = $cantidad_repeticiones;
+                    $evaluacion->maximo_peso = $maximo_peso;
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
+
+
+            case 10:
+                //peso muerto 1 Pierna
+                $maximo_peso = $request->input('maximo_peso');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'maximo_peso' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
                     $evaluacion->maximo_peso = $maximo_peso;
                     $evaluacion->update();
 
@@ -1477,6 +1568,21 @@ class EvaluacionesController extends Controller
                                           <td>'.$evaluacion->cantidad_repeticiones.'</td>
                                           <td>'.$evaluacion->maximo_peso.'</td>
                                           <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
+                                       </tr>';
+
+                            break;
+
+                        case 10:
+                            //peso muerto 1 Pierna
+                            $titulos_tabla = '<tr>
+                                                  <th>Maximo Peso</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->maximo_peso.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
                                        </tr>';
 
                             break;
