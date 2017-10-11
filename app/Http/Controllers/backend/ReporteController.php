@@ -195,6 +195,8 @@ class ReporteController extends Controller
             $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
             $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
 
+            $fecha_nac = $cliente->fecha_nacimiento;
+            $edad = $this->calculaedad($fecha_nac);
 
             $graficos = array();
 

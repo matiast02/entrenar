@@ -203,7 +203,7 @@
                     mywindow.document.write('<div id="datos-cliente" style="display:inline-block;margin-left:5px;margin-top:-10px;font-size: 0.7em;"><ul style="padding-left:0px;list-style:none;">');
 
 
-                    {{--mywindow.document.write('<li><a style="text-decoration:none"><b>Edad:</b> {{$this->calculaedad($cliente->fecha_nacimiento) . ' años' }}</a></li>');--}}
+                    mywindow.document.write('<li><a style="text-decoration:none"><b>Edad:</b> {{   }}</a></li>');
 
                     mywindow.document.write('<li><a style="text-decoration:none"><b>DNI:</b> {{$cliente->dni}}</a></li>');
                     mywindow.document.write('<li><a><b>Fecha Nac.:</b> {{date('d/m/Y',strtotime($cliente->fecha_nacimiento))}}</a></li>');
