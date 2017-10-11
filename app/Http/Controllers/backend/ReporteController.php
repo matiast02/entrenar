@@ -195,9 +195,6 @@ class ReporteController extends Controller
             $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
             $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
 
-            $fecha_nac = $cliente->fecha_nacimiento;
-            $edad = $this->calculaedad($fecha_nac);
-
             $graficos = array();
 
             foreach ($request->input('ejercicios') as $ejercicio_id){
@@ -358,9 +355,9 @@ class ReporteController extends Controller
                 return Redirect::back()->withErrors(['No se encontraron datos para esa solicitud']);
 
             }else{
-
+                $edad = $this->calculaedad($cliente->fecha_nacimiento);
                 $titulo = 'Resultado Evaluaciones';
-                return view('admin.reportes.resultados-reportes-evaluaciones',compact('titulo','graficos','perfil','cliente'));
+                return view('admin.reportes.resultados-reportes-evaluaciones',compact('titulo','graficos','perfil','cliente','edad'));
 
             }
         }

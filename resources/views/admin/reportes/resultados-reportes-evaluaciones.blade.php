@@ -201,10 +201,7 @@
                 mywindow.document.write('<div id="perfil-cliente" style="float:left;margin-left:200px;">');
                     mywindow.document.write('<div id="foto-perfil" style="float:left"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
                     mywindow.document.write('<div id="datos-cliente" style="display:inline-block;margin-left:5px;margin-top:-10px;font-size: 0.7em;"><ul style="padding-left:0px;list-style:none;">');
-
-
-                    mywindow.document.write('<li><a style="text-decoration:none"><b>Edad:</b> {{   }}</a></li>');
-
+                    mywindow.document.write('<li><a style="text-decoration:none"><b>Edad:</b> {{$edad}}</a></li>');
                     mywindow.document.write('<li><a style="text-decoration:none"><b>DNI:</b> {{$cliente->dni}}</a></li>');
                     mywindow.document.write('<li><a><b>Fecha Nac.:</b> {{date('d/m/Y',strtotime($cliente->fecha_nacimiento))}}</a></li>');
                     mywindow.document.write('<li><a style="text-decoration:none"><b>Deporte:</b> {{$cliente->deportes->nombre}}</a></li>');
