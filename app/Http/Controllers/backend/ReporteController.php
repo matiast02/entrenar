@@ -24,12 +24,15 @@ class ReporteController extends Controller
     }
 
 
+
     public function index()
     {
         $ejercicios = Ejercicio::all();
 
         return view('admin.reportes.index',['titulo'=>'Reporte por Deportista','ejercicios'=>$ejercicios]);
     }
+
+
 
     public function reportePorEjercicio(Request $request){
         $validator =  Validator::make($request->all(), [
@@ -160,11 +163,14 @@ class ReporteController extends Controller
         return $ano_diferencia;
     }
 
+
+
     public function vistaReporteEvaluaciones(){
         $ejercicios = Ejercicio::all();
         $titulo = 'Reporte de Evaluaciones por Deportista';
         return view('admin.reportes.reporte-evaluaciones',compact('titulo','ejercicios'));
     }
+
 
 
     public function generarReporteEvaluaciones(Request $request){
@@ -188,6 +194,7 @@ class ReporteController extends Controller
             $rango_fechas = explode('-',$request->input('rango-fechas'));
             $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
             $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
+
 
             $graficos = array();
 
@@ -247,58 +254,65 @@ class ReporteController extends Controller
 
                             //segun el id del ejercicio, corresponden los campos a graficar en las barras
                             switch ($ejercicio_id){
-                                case 4:
-                                    //salto abalacob
+                                case 1:
+                                    //salto abalakov
                                     array_push($valores,$evaluacion->salto_abalacob);
                                     array_push($campo,'Altura');
                                     break;
 
-                                case 6:
-                                    //salto cm
+                                case 2:
+                                    //salto CMJ
                                     array_push($valores,$evaluacion->salto_cmj);
                                     array_push($campo,'Altura');
                                     break;
 
-                                case 7:
-                                    //salto sj
+                                case 3:
+                                    //salto SJ
                                     array_push($valores,$evaluacion->salto_sj);
                                     array_push($campo,'Altura');
                                     break;
 
-                                case 8:
+                                case 4:
                                     //salto continuo
                                     array_push($valores,$evaluacion->mejor_salto_continuo);
                                     array_push($campo,'Mejor Salto');
                                     break;
 
-                                case 9:
+                                case 5:
                                     //peso muerto
                                     array_push($valores,$evaluacion->maximo_peso);
                                     array_push($campo,'Maximo peso');
                                     break;
 
-                                case 10:
+                                case 6:
                                     //velocidad 10 mts
                                     array_push($valores,$evaluacion->velocidad_segundos);
                                     array_push($campo,'Segundos');
                                     break;
 
-                                case 11:
+                                case 7:
                                     //remo
                                     array_push($valores,$evaluacion->maximo_peso);
                                     array_push($campo,'Maximo peso');
                                     break;
 
-                                case 3:
+                                case 8:
                                     //yoyo test
                                     array_push($valores,$evaluacion->resistencia_numero_fase);
                                     array_push($campo,'Numero de Fase');
                                     break;
 
-                                case 12:
+                                case 9:
                                     //sentadilla bulgara
                                     array_push($valores,$evaluacion->maximo_peso);
                                     array_push($campo,"Maximo peso");
+                                    break;
+
+                                case 10:
+                                    //peso muerto 1 Pierna
+                                    array_push($valores,$evaluacion->maximo_peso);
+                                    array_push($campo,'Maximo peso');
+                                    break;
 
                             }
                             //datos de lsa fechas de cada registro, para evitar que esten repetidos
