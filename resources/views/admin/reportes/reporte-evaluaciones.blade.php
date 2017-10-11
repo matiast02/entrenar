@@ -82,7 +82,7 @@
                                         <div class="col-lg-4">
                                             <div class="checkbox">
                                                 <label for="rm">
-                                                    <input type="checkbox" name="campos[]" class="styled" value="rm">
+                                                    <input type="checkbox" name="campos[]" class="styled" value="rm" checked>
                                                     rm
                                                 </label>
                                             </div>
