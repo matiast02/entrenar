@@ -195,6 +195,7 @@ class ReporteController extends Controller
             $fecha_inicio = date('Y-m-d',strtotime(strtr($rango_fechas[0], '/', '-')));
             $fecha_fin = date('Y-m-d',strtotime(strtr($rango_fechas[1],'/','-')));
 
+
             $graficos = array();
 
             foreach ($request->input('ejercicios') as $ejercicio_id){
