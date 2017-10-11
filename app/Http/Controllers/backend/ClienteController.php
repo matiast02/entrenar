@@ -354,16 +354,26 @@ class ClienteController extends Controller
 
                 //eliminar la imagen anterior si no es la imagen por defecto
                 if ($cliente->foto !== 'images/perfiles/default.jpg'){
+                    //elimina la foto anterior y crea una nueva
                     \File::delete($cliente->foto);
+                    //cambiar la imagen
+                    $rutaDeCarpeta = 'images/perfiles/'; // ruta de la carpeta donde guardar la imagen
+                    $extension = $request->file('foto')->getClientOriginalExtension(); // extencion de la imagen
+                    $nombreArchivo = $rutaDeCarpeta . $cliente->id . '.' . $extension; // renameing image
+                    //$request->file('foto')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
+                    Image::make($request->file('foto')->getRealPath())->resize(500,500)->save($nombreArchivo);
+                    $cliente->foto = $nombreArchivo;
+                }else{
+                    //si tiene la foto de perfil por defecto, no la elimina pero remplaza la ruta de con la de la img nueva
+                    $rutaDeCarpeta = 'images/perfiles/'; // ruta de la carpeta donde guardar la imagen
+                    $extension = $request->file('foto')->getClientOriginalExtension(); // extencion de la imagen
+                    $nombreArchivo = $rutaDeCarpeta . $cliente->id . '.' . $extension; // renameing image
+                    //$request->file('foto')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
+                    Image::make($request->file('foto')->getRealPath())->resize(500,500)->save($nombreArchivo);
+                    $cliente->foto = $nombreArchivo;
                 }
 
-                //cambiar la imagen
-                $rutaDeCarpeta = 'images/perfiles/'; // ruta de la carpeta donde guardar la imagen
-                $extension = $request->file('foto')->getClientOriginalExtension(); // extencion de la imagen
-                $nombreArchivo = $rutaDeCarpeta . $cliente->id . '.' . $extension; // renameing image
-                //$request->file('foto')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
-                Image::make($request->file('foto')->getRealPath())->resize(500,500)->save($nombreArchivo);
-                $cliente->foto = $nombreArchivo;
+
                 $cliente->save();
 
             }
