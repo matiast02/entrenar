@@ -359,7 +359,7 @@ class ClienteController extends Controller
                     //cambiar la imagen
                     $rutaDeCarpeta = 'images/perfiles/'; // ruta de la carpeta donde guardar la imagen
                     $extension = $request->file('foto')->getClientOriginalExtension(); // extencion de la imagen
-                    $nombreArchivo = $rutaDeCarpeta . $cliente->id . '.' . $extension; // renameing image
+                    $nombreArchivo = $rutaDeCarpeta . uniqid('img_') . '.' . $extension; // renameing image
                     //$request->file('foto')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
                     Image::make($request->file('foto')->getRealPath())->resize(500,500)->save($nombreArchivo);
                     $cliente->foto = $nombreArchivo;
@@ -367,7 +367,7 @@ class ClienteController extends Controller
                     //si tiene la foto de perfil por defecto, no la elimina pero remplaza la ruta de con la de la img nueva
                     $rutaDeCarpeta = 'images/perfiles/'; // ruta de la carpeta donde guardar la imagen
                     $extension = $request->file('foto')->getClientOriginalExtension(); // extencion de la imagen
-                    $nombreArchivo = $rutaDeCarpeta . $cliente->id . '.' . $extension; // renameing image
+                    $nombreArchivo = $rutaDeCarpeta . uniqid('img_') . '.' . $extension; // renameing image
                     //$request->file('foto')->move($rutaDeCarpeta, $nombreArchivo); // moviendo la imagen a la carpeta
                     Image::make($request->file('foto')->getRealPath())->resize(500,500)->save($nombreArchivo);
                     $cliente->foto = $nombreArchivo;
