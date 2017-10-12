@@ -202,7 +202,7 @@ class ClientePagoController extends Controller
                     ->join('clientes','clientes_pagos.cliente_id','=','clientes.id')
                     ->join('indicadores','clientes.id','=','indicadores.cliente_id')
                     ->join('pagos','clientes_pagos.pago_id','=','pagos.id')
-//                    ->where(DB::raw('indicadores.deleted_at is NULL and clientes.id = '.$pago->cliente_id))
+                    ->whereNull('indicadores.deleted_at')
                     ->where('clientes.id',$pago->cliente_id)
                     ->whereNotIn(DB::raw('DATE_FORMAT(indicadores.mes,"%m-%Y")'),collect($lista_meses_pagados))
                     ->groupBy(DB::raw('YEAR(indicadores.fecha_indicador), MONTH(indicadores.fecha_indicador)'))

@@ -225,7 +225,10 @@ class ReporteController extends Controller
                                 }
                             }
                         }
-                        array_push($rm,$valores);//almacena el array de valores de cada campo en el array de rm
+                        if (count($valores) > 0){
+                            array_push($rm,$valores);//almacena el array de valores de cada campo en el array de rm
+                        }
+
                     }
 
 
@@ -320,7 +323,9 @@ class ReporteController extends Controller
                             }
                         }
                     }
-                    array_push($rm,$valores);//almacena el array de valores de cada campo en el array de rm
+                    if (count($valores) > 0){
+                        array_push($rm,$valores);//almacena el array de valores de cada campo en el array de rm
+                    }
 
                     if(count($rm) > 0){
                         array_push($graficos,array($ejercicio->nombre,$rm,$fecha,$campo));
@@ -350,7 +355,7 @@ class ReporteController extends Controller
                 </div>';
 
             //si no existen datos se informa que no hay datos registrados para ese ejercicio
-            if (count($graficos) < 1){
+            if (count($graficos) == 0){
 
                 return Redirect::back()->withErrors(['No se encontraron datos para esa solicitud']);
 
