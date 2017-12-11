@@ -131,7 +131,7 @@
 
 
                             <div id="indice_hecto-field" class="form-group">
-                                <label class="col-lg-3 control-label">Índice Hecto:</label>
+                                <label class="col-lg-3 control-label">Índice Ecto:</label>
                                 <div class="col-lg-9">
                                     <input type="number" step="any" class="form-control" name="indice_hecto" value="{{$antropometria->indice_hecto}}">
                                     <div class="form-control-feedback"></div>
@@ -153,7 +153,7 @@
                             <div id="ideal-field" class="form-group">
                                 <label class="col-lg-3 control-label">Ideal:</label>
                                 <div class="col-lg-9">
-                                    <input type="number" step="any" class="form-control" name="ideal" value="{{$antropometria->ideal}}">
+                                    <input type="text" step="any" class="form-control" name="ideal" value="{{$antropometria->ideal}}">
                                     <div class="form-control-feedback"></div>
                                     <span class="help-block"></span>
                                 </div>

@@ -73,7 +73,7 @@ class ClienteController extends Controller
             'email' => 'required|email|unique:clientes',
 
             'deporte_id' => 'required|numeric',
-            'categoria_id' => 'required',
+            'categoria_id' => 'required|numeric',
             'institucion' => 'required|min:3',
             'gym' => 'required',
             'fecha_inicio_entrenamiento' => 'required|date_format:d/m/Y',
@@ -184,7 +184,7 @@ class ClienteController extends Controller
             })
 
             ->editColumn('categoria_id',function($data){
-                $categorias = Deporte::find($data['categoria_id']);
+                $categorias = Categoria::find($data['categoria_id']);
                 return $categorias['nombre'];
             })
 
@@ -454,7 +454,7 @@ class ClienteController extends Controller
             })
 
             ->editColumn('categoria_id',function($data){
-                $categorias = Deporte::find($data['categoria_id']);
+                $categorias = Categoria::find($data['categoria_id']);
                 return $categorias['nombre'];
             })
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-09-2017 a las 18:54:40
+-- Tiempo de generación: 08-12-2017 a las 21:15:38
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -46,13 +46,6 @@ CREATE TABLE `antropometrias` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `antropometrias`
---
-
-INSERT INTO `antropometrias` (`id`, `cliente_id`, `fecha_antropometria`, `peso_corporal`, `talla`, `porcentaje_adiposo`, `porcentaje_muscular`, `indice_endo`, `indice_meso`, `indice_hecto`, `clasificacion`, `ideal`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, '2017-09-09', 80.50, 73.30, 10.00, 10.60, 23.50, 25.60, 36.00, '10', 15.00, NULL, '2017-09-09 07:11:03', '2017-09-09 07:11:03');
-
 -- --------------------------------------------------------
 
 --
@@ -66,14 +59,6 @@ CREATE TABLE `categorias` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `categorias`
---
-
-INSERT INTO `categorias` (`id`, `nombre`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Sobrepeso', '2017-09-09 06:34:42', '2017-09-09 06:34:42', NULL),
-(2, 'Vida Comun', '2017-09-09 06:34:45', '2017-09-09 06:34:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -94,11 +79,11 @@ CREATE TABLE `categoria_ejercicios` (
 --
 
 INSERT INTO `categoria_ejercicios` (`id`, `nombre`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Fuerza Tren Superior', NULL, '2017-09-09 06:36:12', '2017-09-09 06:36:12'),
-(2, 'Fuerza Tren Inferior', NULL, '2017-09-09 06:36:15', '2017-09-09 06:36:15'),
-(3, 'Velocidad', NULL, '2017-09-09 06:36:22', '2017-09-09 06:36:22'),
-(4, 'Resistencia', NULL, '2017-09-09 06:36:27', '2017-09-09 06:36:27'),
-(5, 'Saltos', NULL, '2017-09-09 06:36:33', '2017-09-09 06:36:33');
+(1, 'Fuerza Tren Superior', NULL, '2017-12-07 22:41:43', '2017-12-07 22:41:43'),
+(2, 'Fuerza Tren Inferior', NULL, '2017-12-07 22:41:49', '2017-12-07 22:41:49'),
+(3, 'Resistencia', NULL, '2017-12-07 22:41:55', '2017-12-07 22:41:55'),
+(4, 'Velocidad', NULL, '2017-12-07 22:42:00', '2017-12-07 22:42:00'),
+(5, 'Salto', NULL, '2017-12-08 00:29:13', '2017-12-08 00:29:13');
 
 -- --------------------------------------------------------
 
@@ -127,14 +112,6 @@ CREATE TABLE `clientes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `clientes`
---
-
-INSERT INTO `clientes` (`id`, `nombre`, `apellido`, `fecha_nacimiento`, `dni`, `direccion`, `celular`, `email`, `deporte_id`, `categoria_id`, `institucion`, `gym`, `fecha_inicio_entrenamiento`, `foto`, `test_control_id`, `estado`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Pablo', 'Rivera', '1989-01-21', '33753907', 'Urquiza', '3875124345', 'pablo@hotmail.com', 1, 2, 'Vicky', 'Vicky', '2017-01-01', 'images/perfiles/1.jpg', 0, 1, NULL, '2017-09-09 06:35:20', '2017-09-09 06:35:20'),
-(2, 'Daniel', 'Vale', '1989-01-01', '35467894', 'Catamarca', '124567899', 'daniel@gmail.com', 1, 1, 'Vicky', 'Vickyyyy', '2017-01-01', 'images/perfiles/2.jpg', 0, 1, NULL, '2017-09-13 19:39:10', '2017-09-13 19:39:10');
 
 -- --------------------------------------------------------
 
@@ -167,35 +144,6 @@ CREATE TABLE `clientes_evaluaciones` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `clientes_evaluaciones`
---
-
-INSERT INTO `clientes_evaluaciones` (`id`, `cliente_id`, `evaluaciones_id`, `ejercicio_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 9, NULL, '2017-09-09 06:44:28', '2017-09-09 06:44:28'),
-(2, 1, 2, 9, NULL, '2017-09-09 06:54:18', '2017-09-09 06:54:18'),
-(3, 1, 3, 11, NULL, '2017-09-09 06:54:35', '2017-09-09 06:54:35'),
-(4, 1, 4, 12, NULL, '2017-09-09 06:54:46', '2017-09-09 06:54:46'),
-(5, 1, 5, 10, NULL, '2017-09-09 06:55:03', '2017-09-09 06:55:03'),
-(6, 1, 6, 3, NULL, '2017-09-09 06:55:17', '2017-09-09 06:55:17'),
-(7, 1, 7, 6, NULL, '2017-09-09 06:55:37', '2017-09-09 06:55:37'),
-(8, 1, 8, 7, NULL, '2017-09-09 06:55:58', '2017-09-09 06:55:58'),
-(9, 1, 9, 8, NULL, '2017-09-09 06:56:17', '2017-09-09 06:56:17'),
-(10, 1, 10, 4, NULL, '2017-09-09 06:58:21', '2017-09-09 06:58:21'),
-(11, 1, 11, 9, NULL, '2017-09-12 05:04:28', '2017-09-12 05:04:28'),
-(12, 1, 12, 9, NULL, '2017-09-12 05:09:56', '2017-09-12 05:09:56'),
-(13, 1, 13, 9, NULL, '2017-09-13 19:30:24', '2017-09-13 19:30:24'),
-(14, 1, 14, 11, NULL, '2017-09-13 19:31:29', '2017-09-13 19:31:29'),
-(15, 1, 15, 11, NULL, '2017-09-13 19:31:43', '2017-09-13 19:31:43'),
-(16, 1, 16, 9, NULL, '2017-09-13 19:32:05', '2017-09-13 19:32:05'),
-(17, 1, 17, 12, NULL, '2017-09-13 19:32:23', '2017-09-13 19:32:23'),
-(18, 1, 18, 10, NULL, '2017-09-13 19:32:47', '2017-09-13 19:32:47'),
-(19, 1, 19, 3, NULL, '2017-09-13 19:33:04', '2017-09-13 19:33:04'),
-(20, 1, 20, 4, NULL, '2017-09-13 19:33:22', '2017-09-13 19:33:22'),
-(21, 1, 21, 6, NULL, '2017-09-13 19:34:43', '2017-09-13 19:34:43'),
-(22, 1, 22, 7, NULL, '2017-09-13 19:34:57', '2017-09-13 19:34:57'),
-(23, 1, 23, 8, NULL, '2017-09-13 19:35:15', '2017-09-13 19:35:15');
-
 -- --------------------------------------------------------
 
 --
@@ -213,13 +161,6 @@ CREATE TABLE `clientes_pagos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `clientes_pagos`
---
-
-INSERT INTO `clientes_pagos` (`id`, `cliente_id`, `pago_id`, `fecha_pago`, `mes_pago`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(10, 1, 1, '2017-09-12', '2017-09-01', NULL, '2017-09-12 06:25:25', '2017-09-12 06:25:25');
-
 -- --------------------------------------------------------
 
 --
@@ -236,27 +177,6 @@ CREATE TABLE `clientes_series` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `clientes_series`
---
-
-INSERT INTO `clientes_series` (`id`, `cliente_id`, `serie_id`, `ejercicio_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 5, NULL, '2017-09-09 07:12:40', '2017-09-09 07:12:40'),
-(2, 1, 2, 5, NULL, '2017-09-09 07:12:40', '2017-09-09 07:12:40'),
-(3, 1, 3, 2, NULL, '2017-09-09 07:24:08', '2017-09-09 07:24:08'),
-(4, 1, 4, 2, NULL, '2017-09-09 07:24:08', '2017-09-09 07:24:08'),
-(5, 1, 5, 5, NULL, '2017-09-11 04:47:04', '2017-09-11 04:47:04'),
-(6, 1, 6, 5, NULL, '2017-09-11 04:47:04', '2017-09-11 04:47:04'),
-(7, 1, 8, 5, NULL, '2017-09-11 05:11:38', '2017-09-11 05:11:38'),
-(8, 1, 9, 2, NULL, '2017-09-11 05:47:03', '2017-09-11 05:47:03'),
-(9, 1, 10, 2, NULL, '2017-09-11 05:47:04', '2017-09-11 05:47:04'),
-(10, 1, 11, 2, NULL, '2017-09-11 05:56:19', '2017-09-11 05:56:19'),
-(11, 1, 12, 2, NULL, '2017-09-11 05:56:19', '2017-09-11 05:56:19'),
-(12, 1, 13, 5, NULL, '2017-09-11 06:15:45', '2017-09-11 06:15:45'),
-(13, 1, 14, 5, NULL, '2017-09-11 06:15:45', '2017-09-11 06:15:45'),
-(14, 1, 15, 5, NULL, '2017-09-12 05:23:51', '2017-09-12 05:23:51'),
-(15, 1, 16, 5, NULL, '2017-09-12 05:23:51', '2017-09-12 05:23:51');
-
 -- --------------------------------------------------------
 
 --
@@ -270,14 +190,6 @@ CREATE TABLE `deportes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `deportes`
---
-
-INSERT INTO `deportes` (`id`, `nombre`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Futbol', NULL, '2017-09-09 06:34:03', '2017-09-09 06:34:03'),
-(2, 'Tenis', NULL, '2017-09-09 06:34:07', '2017-09-09 06:34:07');
 
 -- --------------------------------------------------------
 
@@ -300,18 +212,16 @@ CREATE TABLE `ejercicios` (
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Pechp', 1, 1, '2017-09-09 06:38:21', '2017-09-09 06:36:58', '2017-09-09 06:38:21'),
-(2, 'Sentadilla', 2, 1, NULL, '2017-09-09 06:37:05', '2017-09-09 06:37:05'),
-(3, 'Yoyo Test', 4, 0, NULL, '2017-09-09 06:37:27', '2017-09-09 06:37:27'),
-(4, 'Salto Abalacob', 5, 0, NULL, '2017-09-09 06:37:59', '2017-09-09 06:37:59'),
-(5, 'Pecho', 1, 1, NULL, '2017-09-09 06:38:31', '2017-09-09 06:38:31'),
-(6, 'Salto cmj', 5, 0, NULL, '2017-09-09 06:38:58', '2017-09-09 06:38:58'),
-(7, 'Salto sj', 5, 0, NULL, '2017-09-09 06:39:09', '2017-09-09 06:39:09'),
-(8, 'Salto Continuo', 5, 0, NULL, '2017-09-09 06:39:22', '2017-09-09 06:39:22'),
-(9, 'Peso Muerto', 1, 0, NULL, '2017-09-09 06:39:33', '2017-09-09 06:39:33'),
-(10, 'Velocidad 10 mts', 3, 0, NULL, '2017-09-09 06:39:45', '2017-09-09 06:39:45'),
-(11, 'Remo', 1, 0, NULL, '2017-09-09 06:39:54', '2017-09-09 06:39:54'),
-(12, 'Sentadilla Bulgara ', 2, 0, NULL, '2017-09-09 06:40:04', '2017-09-09 06:40:04');
+(1, 'Salto Abalakov', 5, 0, NULL, '2017-12-08 00:32:08', '2017-12-08 00:32:08'),
+(2, 'Salto Cmj', 5, 0, NULL, '2017-12-08 00:33:11', '2017-12-08 00:33:11'),
+(3, 'Salto Sj', 5, 0, NULL, '2017-12-08 00:33:32', '2017-12-08 00:33:32'),
+(4, 'Salto Continuo', 5, 0, NULL, '2017-12-08 00:33:54', '2017-12-08 00:33:54'),
+(5, 'Peso Muerto', 2, 0, NULL, '2017-12-08 00:34:14', '2017-12-08 00:34:14'),
+(6, 'Velocidad 10 mts', 4, 0, NULL, '2017-12-08 00:34:38', '2017-12-08 00:34:38'),
+(7, 'Remo', 1, 0, NULL, '2017-12-08 00:37:25', '2017-12-08 00:37:25'),
+(8, 'Yoyo Test', 3, 0, NULL, '2017-12-08 00:37:46', '2017-12-08 00:37:46'),
+(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2017-12-08 00:38:14', '2017-12-08 00:38:14'),
+(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2017-12-08 00:38:45', '2017-12-08 00:38:45');
 
 -- --------------------------------------------------------
 
@@ -321,51 +231,22 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `
 
 CREATE TABLE `evaluaciones` (
   `id` int(10) UNSIGNED NOT NULL,
-  `maximo_peso` float DEFAULT NULL,
-  `velocidad_segundos` float DEFAULT NULL,
-  `salto_abalacob` float DEFAULT NULL,
-  `salto_cmj` float DEFAULT NULL,
-  `salto_sj` float DEFAULT NULL,
-  `mejor_salto_continuo` float DEFAULT NULL,
-  `peor_salto_continuo` float DEFAULT NULL,
-  `cantidad_salto_continuo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `resistencia_numero_fase` float DEFAULT NULL,
+  `maximo_peso` double DEFAULT NULL,
+  `velocidad_segundos` double DEFAULT NULL,
+  `salto_abalakov` double DEFAULT NULL,
+  `salto_cmj` double DEFAULT NULL,
+  `salto_sj` double DEFAULT NULL,
+  `mejor_salto_continuo` double DEFAULT NULL,
+  `peor_salto_continuo` double DEFAULT NULL,
+  `cantidad_salto_continuo` int(11) DEFAULT NULL,
+  `resistencia_numero_fase` int(11) DEFAULT NULL,
   `cantidad_repeticiones` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `velocidad_decimas` float DEFAULT NULL,
-  `velocidad_centesimas` float DEFAULT NULL
+  `velocidad_decimas` double(8,2) DEFAULT NULL,
+  `velocidad_centesimas` double(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `evaluaciones`
---
-
-INSERT INTO `evaluaciones` (`id`, `maximo_peso`, `velocidad_segundos`, `salto_abalacob`, `salto_cmj`, `salto_sj`, `mejor_salto_continuo`, `peor_salto_continuo`, `cantidad_salto_continuo`, `resistencia_numero_fase`, `cantidad_repeticiones`, `deleted_at`, `created_at`, `updated_at`, `velocidad_decimas`, `velocidad_centesimas`) VALUES
-(1, 100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:44:28', '2017-09-09 06:44:28', NULL, NULL),
-(2, 150, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:54:18', '2017-09-09 06:54:18', NULL, NULL),
-(3, 100, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:54:35', '2017-09-09 06:54:35', NULL, NULL),
-(4, 50, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, '2017-09-09 06:54:46', '2017-09-09 06:54:46', NULL, NULL),
-(5, NULL, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:55:03', '2017-09-09 06:55:03', 3, 5),
-(6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15, NULL, NULL, '2017-09-09 06:55:17', '2017-09-09 06:55:17', NULL, NULL),
-(7, NULL, NULL, NULL, 60, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:55:37', '2017-09-09 06:55:37', NULL, NULL),
-(8, NULL, NULL, NULL, NULL, 30, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:55:58', '2017-09-09 06:55:58', NULL, NULL),
-(9, NULL, NULL, NULL, NULL, NULL, 50, 30, '6', NULL, NULL, NULL, '2017-09-09 06:56:17', '2017-09-09 06:56:17', NULL, NULL),
-(10, NULL, NULL, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-09 06:58:21', '2017-09-09 06:58:21', NULL, NULL),
-(11, 23, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-12 05:04:28', '2017-09-12 05:04:28', NULL, NULL),
-(12, 33.4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-12 05:09:56', '2017-09-12 05:09:56', NULL, NULL),
-(13, 80, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:30:24', '2017-09-13 19:30:24', NULL, NULL),
-(14, 90, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:31:29', '2017-09-13 19:31:29', NULL, NULL),
-(15, 90.5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:31:43', '2017-09-13 19:31:43', NULL, NULL),
-(16, 80.5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:32:05', '2017-09-13 19:32:05', NULL, NULL),
-(17, 50.6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, '2017-09-13 19:32:23', '2017-09-13 19:32:23', NULL, NULL),
-(18, NULL, 10.5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:32:47', '2017-09-13 19:32:47', 10.3, 10),
-(19, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15.6, NULL, NULL, '2017-09-13 19:33:04', '2017-09-13 19:33:04', NULL, NULL),
-(20, NULL, NULL, 15.5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:33:22', '2017-09-13 19:33:22', NULL, NULL),
-(21, NULL, NULL, NULL, 12.3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:34:43', '2017-09-13 19:34:43', NULL, NULL),
-(22, NULL, NULL, NULL, NULL, 30.6, NULL, NULL, NULL, NULL, NULL, NULL, '2017-09-13 19:34:57', '2017-09-13 19:34:57', NULL, NULL),
-(23, NULL, NULL, NULL, NULL, NULL, 20.6, 15.6, '10.6', NULL, NULL, NULL, '2017-09-13 19:35:15', '2017-09-13 19:35:15', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -397,18 +278,6 @@ CREATE TABLE `indicadores` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `indicadores`
---
-
-INSERT INTO `indicadores` (`id`, `cliente_id`, `fecha_indicador`, `semana`, `mes`, `peso_inicial`, `peso_final`, `diferencia_peso_porcentual`, `hora_entrada`, `hora_salida`, `pse`, `sueno`, `dolor`, `deseo_entrenar`, `desayuno`, `sumatoria`, `pse_global_sesion`, `tiempo_entrenamiento`, `carga_entrenamiento`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 1, '2017-09-09', 36, '2017-09-09', 80.00, 78.00, 2.50, '10:30:00', '12:00:00', 8, 7, 9, 4, 6, 34, 9, 90.00, 810, NULL, '2017-09-09 06:41:33', '2017-09-09 06:41:33'),
-(2, 1, '2017-09-06', 36, '2017-09-06', 85.50, 79.00, 7.60, '11:30:00', '13:30:00', 8, 5, 4, 2, 3, 22, 7, 120.00, 840, NULL, '2017-09-09 06:42:08', '2017-09-09 06:42:08'),
-(3, 1, '2017-10-01', 39, '2017-10-01', 78.00, 75.00, 3.85, '09:00:00', '10:25:00', 8, 9, 7, 5, 6, 35, 2, 85.00, 170, NULL, '2017-09-09 06:42:47', '2017-09-09 06:42:47'),
-(4, 1, '2017-09-10', 36, '2017-09-01', 80.00, 80.00, 0.00, '21:43:00', '22:43:00', 3, 4, 5, 4, 3, 19, 2, 60.00, 120, NULL, '2017-09-11 02:46:15', '2017-09-11 02:46:15'),
-(5, 1, '2017-10-12', 37, '2017-10-01', 81.00, 81.00, 0.00, '21:49:00', '22:49:00', 8, 7, 6, 5, 4, 30, 4, 60.00, 240, NULL, '2017-09-11 03:49:51', '2017-09-11 03:49:51'),
-(6, 2, '2017-09-13', 37, '2017-09-01', 80.00, 78.00, 2.50, '13:39:00', '13:59:00', 8, 7, 9, 4, 5, 33, 6, 20.00, 120, NULL, '2017-09-13 19:39:35', '2017-09-13 19:39:35');
 
 -- --------------------------------------------------------
 
@@ -487,16 +356,6 @@ CREATE TABLE `pagos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Volcado de datos para la tabla `pagos`
---
-
-INSERT INTO `pagos` (`id`, `dias_semana`, `grupo`, `costo_mensual`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 700, NULL, '2017-09-09 07:09:32', '2017-09-09 07:09:32'),
-(2, 3, 1, 800, NULL, '2017-09-09 07:09:40', '2017-09-09 07:09:40'),
-(3, 4, 1, 900, NULL, '2017-09-09 07:09:49', '2017-09-09 07:09:49'),
-(4, 5, 1, 1000, NULL, '2017-09-09 07:09:57', '2017-09-09 07:09:57');
-
 -- --------------------------------------------------------
 
 --
@@ -518,13 +377,13 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `series` (
   `id` int(10) UNSIGNED NOT NULL,
   `cantidad_series` int(11) NOT NULL,
-  `peso_corporal` float NOT NULL,
-  `peso_externo` float NOT NULL,
-  `masa` float NOT NULL,
-  `potencia_impulsiva` float NOT NULL,
+  `peso_corporal` double(8,2) NOT NULL,
+  `peso_externo` double(8,2) NOT NULL,
+  `masa` double(8,2) NOT NULL,
+  `potencia_impulsiva` double(8,2) NOT NULL,
   `potencia_relativa` double(8,2) NOT NULL,
-  `velocidad_impulsiva` float NOT NULL,
-  `fuerza_impulsiva` float NOT NULL,
+  `velocidad_impulsiva` double(8,2) NOT NULL,
+  `fuerza_impulsiva` double(8,2) NOT NULL,
   `cantidad_repeticiones` int(11) NOT NULL,
   `mejor_serie` int(11) NOT NULL,
   `rm` double(8,2) NOT NULL,
@@ -537,29 +396,6 @@ CREATE TABLE `series` (
   `rm_porcentual` double NOT NULL,
   `mejor_serie_boolean` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `series`
---
-
-INSERT INTO `series` (`id`, `cantidad_series`, `peso_corporal`, `peso_externo`, `masa`, `potencia_impulsiva`, `potencia_relativa`, `velocidad_impulsiva`, `fuerza_impulsiva`, `cantidad_repeticiones`, `mejor_serie`, `rm`, `deleted_at`, `created_at`, `updated_at`, `ultima_serie`, `pse`, `rm_pse_porcentual`, `rm_porcentual`, `mejor_serie_boolean`) VALUES
-(1, 3, 81, 100, 181, 100, 1.24, 100, 100, 3, 0, 10.90, NULL, '2017-09-09 07:12:40', '2017-09-09 07:12:40', 0, 10, 92.993, 917.43119266055, 1),
-(2, 3, 81, 60, 141, 60, 0.75, 60, 60, 1, 0, 2.98, NULL, '2017-09-09 07:12:40', '2017-09-09 07:12:40', 1, 6, 73.033, 3355.7046979866, NULL),
-(3, 3, 80, 100, 180, 100, 1.25, 100, 100, 3, 1, 10.90, NULL, '2017-09-09 07:24:08', '2017-09-09 07:24:08', 0, 10, 92.993, 917.43119266055, 1),
-(4, 3, 80, 80, 160, 80, 1.00, 80, 80, 2, 1, 6.28, NULL, '2017-09-09 07:24:08', '2017-09-09 07:24:08', 1, 9, 88.003, 1592.3566878981, NULL),
-(5, 2, 82.5, 92.5, 175, 2, 0.02, 2, 2, 3, 1, 10.11, NULL, '2017-09-11 04:47:04', '2017-09-11 04:47:04', 0, 2, 53.073, 915.11673921646, 1),
-(6, 2, 82.5, 92.5, 175, 2, 0.02, 2, 2, 3, 1, 10.11, NULL, '2017-09-11 04:47:04', '2017-09-11 04:47:04', 1, 2, 53.073, 915.11673921646, NULL),
-(7, 1, 80, 80, 160, 105.3, 1.32, 106.3, 100, 3, 1, 105.30, NULL, '2017-09-11 04:51:35', '2017-09-11 04:51:35', 0, 3, 58.063, 75.973409306743, 1),
-(8, 3, 80, 200, 280, 2, 0.02, 2, 2, 2, 1, 14.20, NULL, '2017-09-11 05:11:38', '2017-09-11 05:11:38', 0, 2, 53.073, 1408.4507042254, 1),
-(9, 3, 80, 100, 180, 100, 1.25, 100, 100, 3, 0, 12.09, NULL, '2017-09-11 05:47:03', '2017-09-11 05:47:03', 0, 5, 68.043, 827.26671078756, 1),
-(10, 3, 80, 112, 192, 105, 1.31, 100, 100, 3, 0, 12.09, NULL, '2017-09-11 05:47:04', '2017-09-11 05:47:04', 1, 5, 68.043, 827.26671078756, NULL),
-(11, 3, 80, 100, 180, 100, 1.25, 100, 100, 2, 0, 10.90, NULL, '2017-09-11 05:56:19', '2017-09-11 05:56:19', 0, 3, 58.063, 917.43119266055, 1),
-(12, 3, 80, 100, 180, 100, 1.25, 100, 100, 3, 0, 10.90, NULL, '2017-09-11 05:56:19', '2017-09-11 05:56:19', 1, 3, 58.063, 917.43119266055, NULL),
-(13, 2, 80, 110, 190, 110, 1.38, 100, 100, 3, 1, 11.89, NULL, '2017-09-11 06:15:45', '2017-09-11 06:15:45', 0, 4, 63.053, 925.14718250631, 1),
-(14, 2, 80, 110, 190, 110, 1.38, 100, 100, 3, 1, 11.89, NULL, '2017-09-11 06:15:45', '2017-09-11 06:15:45', 1, 4, 63.053, 925.14718250631, NULL),
-(15, 4, 80, 100, 180, 10, 0.12, 10, 10.5, 3, 0, 10.90, NULL, '2017-09-12 05:23:51', '2017-09-12 05:23:51', 0, 1, 48.083, 917.43119266055, 1),
-(16, 4, 80, 100, 180, 8, 0.10, 8, 8.3, 3, 0, 10.90, NULL, '2017-09-12 05:23:51', '2017-09-12 05:23:51', 1, 8, 83.013, 917.43119266055, NULL),
-(17, 1, 80, 100, 180, 10, 0.12, 10, 10, 3, 1, 10.00, NULL, '2017-09-12 06:02:04', '2017-09-12 06:02:04', 0, 1, 48.083, 1000, 1);
 
 -- --------------------------------------------------------
 
@@ -583,7 +419,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Matias', 'matix_tkd@hotmail.com', '$2y$10$Q.TLMQ4YKjbGqeTkKL606e4hRUSPBfPreckRqlq7VvlJeS.CFTSn2', NULL, '2017-09-09 06:18:51', '2017-09-09 06:18:51', NULL);
+(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$HkOtx/MKUmz5ebIrjKtHUesP7geSDAP/ASW6TF3lbSQ3VR35WDMgm', NULL, '2017-12-07 22:41:12', '2017-12-07 22:41:12', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -718,12 +554,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `antropometrias`
 --
 ALTER TABLE `antropometrias`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `categoria_ejercicios`
 --
@@ -733,7 +569,7 @@ ALTER TABLE `categoria_ejercicios`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `clientes_ejercicios`
 --
@@ -743,37 +579,37 @@ ALTER TABLE `clientes_ejercicios`
 -- AUTO_INCREMENT de la tabla `clientes_evaluaciones`
 --
 ALTER TABLE `clientes_evaluaciones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `clientes_pagos`
 --
 ALTER TABLE `clientes_pagos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `clientes_series`
 --
 ALTER TABLE `clientes_series`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `deportes`
 --
 ALTER TABLE `deportes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `ejercicios`
 --
 ALTER TABLE `ejercicios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `evaluaciones`
 --
 ALTER TABLE `evaluaciones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `indicadores`
 --
 ALTER TABLE `indicadores`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `indicadores_semanales`
 --
@@ -783,12 +619,12 @@ ALTER TABLE `indicadores_semanales`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `series`
 --
 ALTER TABLE `series`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --

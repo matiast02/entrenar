@@ -197,9 +197,9 @@ class IndicadorController extends Controller
                 })
 
                 ->editColumn('sueno',function($indicador){
-                    if($indicador->sueno >= 1 and $indicador->sueno <= 4) {$color= "green";}
-                    elseif($indicador->sueno >= 5 and $indicador->sueno <= 6) {$color = "#E1DE01";}
-                    else{$color = "red";}
+                    if($indicador->sueno >= 1 and $indicador->sueno <= 5) {$color= "red";}
+                    elseif($indicador->sueno >= 6 and $indicador->sueno <= 7) {$color = "#E1DE01";}
+                    else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->sueno.'</span>';
                 })
@@ -213,9 +213,9 @@ class IndicadorController extends Controller
                 })
 
                 ->editColumn('deseo_entrenar',function($indicador){
-                    if($indicador->deseo_entrenar >= 1 and $indicador->deseo_entrenar <= 4) {$color= "green";}
-                    elseif($indicador->deseo_entrenar >= 5 and $indicador->deseo_entrenar <= 6) {$color = "#E1DE01";}
-                    else{$color = "red";}
+                    if($indicador->deseo_entrenar >= 1 and $indicador->deseo_entrenar <= 5) {$color= "red";}
+                    elseif($indicador->deseo_entrenar >= 6 and $indicador->deseo_entrenar <= 8) {$color = "#E1DE01";}
+                    else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->deseo_entrenar.'</span>';
                 })
@@ -409,9 +409,9 @@ class IndicadorController extends Controller
             })
 
             ->editColumn('sueno',function($indicador){
-                if($indicador->sueno >= 1 and $indicador->sueno <= 4) {$color= "green";}
-                elseif($indicador->sueno >= 5 and $indicador->sueno <= 6) {$color = "#E1DE01";}
-                else{$color = "red";}
+                if($indicador->sueno >= 1 and $indicador->sueno <= 5) {$color= "red";}
+                elseif($indicador->sueno >= 6 and $indicador->sueno <= 7) {$color = "#E1DE01";}
+                else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->sueno.'</span>';
             })
@@ -425,9 +425,9 @@ class IndicadorController extends Controller
             })
 
             ->editColumn('deseo_entrenar',function($indicador){
-                if($indicador->deseo_entrenar >= 1 and $indicador->deseo_entrenar <= 4) {$color= "green";}
-                elseif($indicador->deseo_entrenar >= 5 and $indicador->deseo_entrenar <= 6) {$color = "#E1DE01";}
-                else{$color = "red";}
+                if($indicador->deseo_entrenar >= 1 and $indicador->deseo_entrenar <= 5) {$color= "red";}
+                elseif($indicador->deseo_entrenar >= 6 and $indicador->deseo_entrenar <= 8) {$color = "#E1DE01";}
+                else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->deseo_entrenar.'</span>';
             })
