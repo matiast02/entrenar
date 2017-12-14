@@ -146,7 +146,7 @@
         </form>
     </div>
 
-    <div class="panel panel-white col-lg-4" id="panel-series-nf" style="display: none;">
+    <div class="panel panel-white col-lg-6" id="panel-series-nf" style="display: none;">
 
     </div>
 
