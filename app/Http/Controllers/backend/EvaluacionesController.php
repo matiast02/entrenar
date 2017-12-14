@@ -208,33 +208,6 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
-                //velocidad 10 mts
-                $formulario = '<div id="velocidad_segundos-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Segundos:</label>
-                                    <div class="col-lg-5">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
-                                        <div class="form-control-feedback"></div>
-                                        <span class="help-block"></span>
-                                    </div>
-                               </div>'.
-                    '<div id="velocidad_decimas-field" class="form-group">
-                        <label class="col-lg-3 control-label">Decimas:</label>
-                        <div class="col-lg-5">
-                          <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
-                            <div class="form-control-feedback"></div>
-                            <span class="help-block"></span>
-                        </div>
-                    </div>'.
-                    '<div id="velocidad_centesimas-field" class="form-group">
-                        <label class="col-lg-3 control-label">Centesimas:</label>
-                        <div class="col-lg-5">
-                          <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
-                            <div class="form-control-feedback"></div>
-                            <span class="help-block"></span>
-                        </div>
-                     </div>';
-                break;
-
             case 11:
                 //velocidad 5 - 10 - 5
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
