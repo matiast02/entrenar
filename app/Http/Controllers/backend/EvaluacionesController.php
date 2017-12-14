@@ -206,6 +206,7 @@ class EvaluacionesController extends Controller
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
+<<<<<<< HEAD
                                </div>
                              <div id="velocidad_decimas-field" class="form-group">
                                 <label class="col-md-6 control-label">Decimas:</label>
@@ -276,6 +277,9 @@ class EvaluacionesController extends Controller
                                 </div>
                              </div>
                              </div>';
+=======
+                                </div>';
+>>>>>>> cb3f564f3e0b3cfab36c258ba0a118ab7760ca09
                 break;
 
             case 11:
