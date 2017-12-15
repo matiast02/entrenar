@@ -198,20 +198,19 @@ class EvaluacionesController extends Controller
 
             case 10:
 
-                //velocidad 10 mts
-                $formulario = '<div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
-                                    <label class="col-md-6 control-label">Segundos:</label>
-                                    <div class="col-md-6">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
+                //Peso Muerto 1 pierna
+                $formulario = '<div id="maximo_peso-field" class="form-group">
+                                    <label class="col-md-3 control-label">Máximo Peso:</label>
+                                    <div class="col-md-5">
+                                       <input type="numeric" class="form-control" name="maximo_peso" id="peso_muerto">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-
                                 </div>';
                 break;
 
             case 11:
-                //velocidad 5 - 10 - 5
+                //Agilidad (velocidad) 5 - 10 - 5
                 $formulario = '<div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
                                     <div class="col-lg-5">
@@ -235,7 +234,9 @@ class EvaluacionesController extends Controller
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                                 </div></div>
+                                 </div>
+                                 
+                                 </div>
                                  <div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
                                     <div class="col-lg-5">
@@ -244,7 +245,7 @@ class EvaluacionesController extends Controller
                                         <span class="help-block"></span>
                                     </div>
                                </div>'.
-                    '<div id="velocidad_decimas-field" class="form-group">
+                                '<div id="velocidad_decimas-field" class="form-group">
                                     <label class="col-lg-3 control-label">Decimas:</label>
                                     <div class="col-lg-5">
                                       <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
@@ -252,14 +253,15 @@ class EvaluacionesController extends Controller
                                         <span class="help-block"></span>
                                     </div>
                                 </div>'.
-                    '<div id="velocidad_centesimas-field" class="form-group">
+                                '<div id="velocidad_centesimas-field" class="form-group">
                                     <label class="col-lg-3 control-label">Centesimas:</label>
                                     <div class="col-lg-5">
                                       <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                                 </div></div>
+                                 </div>
+                                 </div>
                                  <div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
                                     <div class="col-lg-5">
@@ -268,7 +270,7 @@ class EvaluacionesController extends Controller
                                         <span class="help-block"></span>
                                     </div>
                                </div>'.
-                    '<div id="velocidad_decimas-field" class="form-group">
+                                '<div id="velocidad_decimas-field" class="form-group">
                                     <label class="col-lg-3 control-label">Decimas:</label>
                                     <div class="col-lg-5">
                                       <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
@@ -276,7 +278,7 @@ class EvaluacionesController extends Controller
                                         <span class="help-block"></span>
                                     </div>
                                 </div>'.
-                    '<div id="velocidad_centesimas-field" class="form-group">
+                                '<div id="velocidad_centesimas-field" class="form-group">
                                     <label class="col-lg-3 control-label">Centesimas:</label>
                                     <div class="col-lg-5">
                                       <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
@@ -621,6 +623,40 @@ class EvaluacionesController extends Controller
                     ], 200);
                 }
                 break;
+
+            case 11:
+                //Agilidad (velocidad) 5 - 10 - 5
+                $validator =  Validator::make($request->all(), [
+                    'velocidad_segundos' => 'required|numeric',
+                    'velocidad_decimas' => 'required|numeric',
+                    'velocidad_centesimas' => 'required|numeric',
+                    'cliente' => 'required|numeric',
+                    'ejercicio' => 'required|numeric'
+                ]);
+                if ($validator->fails())
+                {
+                    //Crea un array con los errores
+                    $errors = $validator->errors();
+                    $errors =  json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                }else{
+                    $evaluacion->velocidad_segundos = $request->input('velocidad_segundos');
+                    $evaluacion->velocidad_decimas = $request->input('velocidad_decimas');
+                    $evaluacion->velocidad_centesimas = $request->input('velocidad_centesimas');
+                    $evaluacion->save();
+                    //se inserta en la tabla pivot
+                    $evaluacion->clientes()->attach([$evaluacion->id => ['cliente_id'=>$request->input('cliente'),'ejercicio_id'=>$request->input('ejercicio')]]);
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Resultados cargados'
+                    ], 200);
+                }
+                break;
         }
     }
 
@@ -649,7 +685,6 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
-
             case 2:
                 //salto cmj
                 $formulario = '<div id="salto_cmj-field" class="form-group">
@@ -662,7 +697,6 @@ class EvaluacionesController extends Controller
                                  </div>';
                 break;
 
-
             case 3:
                 //salto sj
                 $formulario = '<div id="salto_sj-field" class="form-group">
@@ -674,7 +708,6 @@ class EvaluacionesController extends Controller
                 </div>
              </div>';
                 break;
-
 
             case 4:
                 //salto continuo
@@ -704,7 +737,6 @@ class EvaluacionesController extends Controller
                     </div>';
                 break;
 
-
             case 5:
                 //peso muerto
                 $formulario = '<div id="maximo_peso-field" class="form-group">
@@ -716,7 +748,6 @@ class EvaluacionesController extends Controller
                                     </div>
                                 </div>';
                 break;
-
 
             case 6:
                 //velocidad 10 mts
@@ -746,7 +777,6 @@ class EvaluacionesController extends Controller
                      </div>';
                 break;
 
-
             case 7:
                 //remo
                 $formulario = '<div id="maximo_peso-field" class="form-group">
@@ -759,7 +789,6 @@ class EvaluacionesController extends Controller
                                 </div>';
                 break;
 
-
             case 8:
                 //yoyo test
                 $formulario = '<div id="resistencia_numero_fase-field" class="form-group">
@@ -771,7 +800,6 @@ class EvaluacionesController extends Controller
                                     </div>
                                </div>';
                 break;
-
 
             case 9:
                 //sentadilla bulgara
@@ -792,7 +820,6 @@ class EvaluacionesController extends Controller
                                     </div>
                                  </div>';
                 break;
-
 
             case 10:
                 //peso muerto 1 Pierna
@@ -877,7 +904,6 @@ class EvaluacionesController extends Controller
 
                 break;
 
-
             case 2:
                 //salto cmj
                 $salto_cmj = $request->input('salto_cmj');
@@ -913,7 +939,6 @@ class EvaluacionesController extends Controller
 
                 break;
 
-
             case 3:
                 //salto sj
                 $salto_sj = $request->input('salto_sj');
@@ -948,7 +973,6 @@ class EvaluacionesController extends Controller
                 }
 
                 break;
-
 
             case 4:
                 //salto continuo
@@ -991,7 +1015,6 @@ class EvaluacionesController extends Controller
 
                 break;
 
-
             case 5:
                 //peso muerto
                 $maximo_peso = $request->input('maximo_peso');
@@ -1026,7 +1049,6 @@ class EvaluacionesController extends Controller
                 }
 
                 break;
-
 
             case 6:
                 //velocidad 10 mts
@@ -1069,7 +1091,6 @@ class EvaluacionesController extends Controller
 
                 break;
 
-
             case 7:
                 //remo
                 $maximo_peso = $request->input('maximo_peso');
@@ -1105,7 +1126,6 @@ class EvaluacionesController extends Controller
 
                 break;
 
-
             case 8:
                 //yoyo test
                 $resistencia_numero_fase = $request->input('resistencia_numero_fase');
@@ -1140,7 +1160,6 @@ class EvaluacionesController extends Controller
                 }
 
                 break;
-
 
             case 9:
                 //sentadilla bulgara
@@ -1179,7 +1198,6 @@ class EvaluacionesController extends Controller
                 }
 
                 break;
-
 
             case 10:
                 //peso muerto 1 Pierna
@@ -1661,6 +1679,25 @@ class EvaluacionesController extends Controller
                             $filas .= '<tr>
                                           <td>'.$evaluacion->maximo_peso.'</td>
                                           <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td>
+                                       </tr>';
+
+                            break;
+
+                        case 11:
+                            //Agilidad (velocidad) 5 - 10 - 5
+                            $titulos_tabla = '<tr>
+                                                  <th>Segundos</th>
+                                                  <th>Decimas</th>
+                                                  <th>Centesimas</th>
+                                                  <th>Fecha</th>
+                                              </tr>
+                                              </thead>
+                                              <tbody>';
+                            $filas .= '<tr>
+                                          <td>'.$evaluacion->velocidad_segundos.'</td>
+                                          <td>'.$evaluacion->velocidad_decimas.'</td>
+                                          <td>'.$evaluacion->velocidad_centesimas.'</td>
+                                          <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
                                        </tr>';
 
                             break;
