@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-12-2017 a las 21:15:38
+-- Tiempo de generación: 16-12-2017 a las 07:00:54
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -79,11 +79,11 @@ CREATE TABLE `categoria_ejercicios` (
 --
 
 INSERT INTO `categoria_ejercicios` (`id`, `nombre`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Fuerza Tren Superior', NULL, '2017-12-07 22:41:43', '2017-12-07 22:41:43'),
-(2, 'Fuerza Tren Inferior', NULL, '2017-12-07 22:41:49', '2017-12-07 22:41:49'),
-(3, 'Resistencia', NULL, '2017-12-07 22:41:55', '2017-12-07 22:41:55'),
-(4, 'Velocidad', NULL, '2017-12-07 22:42:00', '2017-12-07 22:42:00'),
-(5, 'Salto', NULL, '2017-12-08 00:29:13', '2017-12-08 00:29:13');
+(1, 'Fuerza Tren Superior', NULL, '2017-12-16 05:51:41', '2017-12-16 05:51:41'),
+(2, 'Fuerza Tren Inferior', NULL, '2017-12-16 05:51:45', '2017-12-16 05:51:45'),
+(3, 'Velocidad', NULL, '2017-12-16 05:51:50', '2017-12-16 05:51:50'),
+(4, 'Resistencia', NULL, '2017-12-16 05:51:55', '2017-12-16 05:51:55'),
+(5, 'Saltos', NULL, '2017-12-16 05:52:02', '2017-12-16 05:52:02');
 
 -- --------------------------------------------------------
 
@@ -212,16 +212,17 @@ CREATE TABLE `ejercicios` (
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Salto Abalakov', 5, 0, NULL, '2017-12-08 00:32:08', '2017-12-08 00:32:08'),
-(2, 'Salto Cmj', 5, 0, NULL, '2017-12-08 00:33:11', '2017-12-08 00:33:11'),
-(3, 'Salto Sj', 5, 0, NULL, '2017-12-08 00:33:32', '2017-12-08 00:33:32'),
-(4, 'Salto Continuo', 5, 0, NULL, '2017-12-08 00:33:54', '2017-12-08 00:33:54'),
-(5, 'Peso Muerto', 2, 0, NULL, '2017-12-08 00:34:14', '2017-12-08 00:34:14'),
-(6, 'Velocidad 10 mts', 4, 0, NULL, '2017-12-08 00:34:38', '2017-12-08 00:34:38'),
-(7, 'Remo', 1, 0, NULL, '2017-12-08 00:37:25', '2017-12-08 00:37:25'),
-(8, 'Yoyo Test', 3, 0, NULL, '2017-12-08 00:37:46', '2017-12-08 00:37:46'),
-(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2017-12-08 00:38:14', '2017-12-08 00:38:14'),
-(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2017-12-08 00:38:45', '2017-12-08 00:38:45');
+(1, 'Salto Abalakov', 5, 0, NULL, '2017-12-16 05:52:35', '2017-12-16 05:52:35'),
+(2, 'Salto Cmj', 5, 0, NULL, '2017-12-16 05:53:30', '2017-12-16 05:53:30'),
+(3, 'Salto Sj', 5, 0, NULL, '2017-12-16 05:53:41', '2017-12-16 05:53:41'),
+(4, 'Salto Continuo', 5, 0, NULL, '2017-12-16 05:53:53', '2017-12-16 05:53:53'),
+(5, 'Peso Muerto', 2, 0, NULL, '2017-12-16 05:56:41', '2017-12-16 05:56:41'),
+(6, 'Velocidad 10 mts', 3, 0, NULL, '2017-12-16 05:56:56', '2017-12-16 05:56:56'),
+(7, 'Remo', 1, 0, NULL, '2017-12-16 05:57:21', '2017-12-16 05:57:21'),
+(8, 'Yoyo Test', 4, 0, NULL, '2017-12-16 05:57:35', '2017-12-16 05:57:35'),
+(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2017-12-16 05:58:02', '2017-12-16 05:58:02'),
+(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2017-12-16 05:58:57', '2017-12-16 05:58:57'),
+(11, 'Agilidad 5-10-5', 3, 0, NULL, '2017-12-16 05:59:22', '2017-12-16 05:59:22');
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,7 @@ INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `
 CREATE TABLE `evaluaciones` (
   `id` int(10) UNSIGNED NOT NULL,
   `maximo_peso` double DEFAULT NULL,
-  `velocidad_segundos` double DEFAULT NULL,
+  `velocidad_segundos_10` double NOT NULL,
   `salto_abalakov` double DEFAULT NULL,
   `salto_cmj` double DEFAULT NULL,
   `salto_sj` double DEFAULT NULL,
@@ -244,8 +245,12 @@ CREATE TABLE `evaluaciones` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `velocidad_decimas` double(8,2) DEFAULT NULL,
-  `velocidad_centesimas` double(8,2) DEFAULT NULL
+  `velocidad_decimas_10` double(8,2) DEFAULT NULL,
+  `velocidad_centesimas_10` double(8,2) DEFAULT NULL,
+  `velocidad_segundos_5` double(8,2) DEFAULT NULL,
+  `velocidad_decimas_5` double(8,2) DEFAULT NULL,
+  `velocidad_centesimas_5` double(8,2) DEFAULT NULL,
+  `velocidad_sumatoria` double(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -419,7 +424,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$HkOtx/MKUmz5ebIrjKtHUesP7geSDAP/ASW6TF3lbSQ3VR35WDMgm', NULL, '2017-12-07 22:41:12', '2017-12-07 22:41:12', NULL);
+(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$zR.qSwQxH.ezoE7C.Nwgh.pT.bZcCUwOvz1Q1S2yPo73J3c3A/SWK', NULL, '2017-12-16 05:51:26', '2017-12-16 05:51:26', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -599,7 +604,7 @@ ALTER TABLE `deportes`
 -- AUTO_INCREMENT de la tabla `ejercicios`
 --
 ALTER TABLE `ejercicios`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `evaluaciones`
 --

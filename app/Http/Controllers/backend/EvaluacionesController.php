@@ -129,7 +129,7 @@ class EvaluacionesController extends Controller
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
                                     <div class="col-lg-5">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
+                                       <input type="numeric" class="form-control" name="velocidad_segundos_10" id="velocidad_s">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
@@ -137,7 +137,7 @@ class EvaluacionesController extends Controller
                     '<div id="velocidad_decimas-field" class="form-group">
                         <label class="col-lg-3 control-label">Decimas:</label>
                         <div class="col-lg-5">
-                          <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
+                          <input type="numeric" class="form-control" name="velocidad_decimas_10" id="velocidad_d">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
                         </div>
@@ -145,7 +145,7 @@ class EvaluacionesController extends Controller
                     '<div id="velocidad_centesimas-field" class="form-group">
                         <label class="col-lg-3 control-label">Centesimas:</label>
                         <div class="col-lg-5">
-                          <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
+                          <input type="numeric" class="form-control" name="velocidad_centesimas_10" id="velocidad_c">
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
                         </div>
@@ -211,81 +211,70 @@ class EvaluacionesController extends Controller
 
             case 11:
                 //Agilidad (velocidad) 5 - 10 - 5
-                $formulario = '<div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Segundos:</label>
-                                    <div class="col-lg-5">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
+                $formulario =   '<div class="col-md-3"><div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Segundos:</label>
+                                    <div class="col-lg-6">
+                                       <input type="numeric" class="form-control" name="velocidad_segundos_5" id="velocidad_s">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                               </div>'.
-                                '<div id="velocidad_decimas-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Decimas:</label>
-                                    <div class="col-lg-5">
-                                      <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
+                                 </div>
+                                 <div id="velocidad_decimas-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Decimas:</label>
+                                    <div class="col-lg-6">
+                                      <input type="numeric" class="form-control" name="velocidad_decimas_5" id="velocidad_d">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                                </div>'.
-                                '<div id="velocidad_centesimas-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Centesimas:</label>
-                                    <div class="col-lg-5">
-                                      <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
+                                </div>
+                                 <div id="velocidad_centesimas-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Centesimas:</label>
+                                    <div class="col-lg-6">
+                                      <input type="numeric" class="form-control" name="velocidad_centesimas_5" id="velocidad_c">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
                                  </div>
                                  
                                  </div>
-                                 <div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Segundos:</label>
-                                    <div class="col-lg-5">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
+                                 
+                                 <div class="col-md-3"><div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Segundos:</label>
+                                    <div class="col-lg-6">
+                                       <input type="numeric" class="form-control" name="velocidad_segundos_10" id="velocidad_s">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                               </div>'.
-                                '<div id="velocidad_decimas-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Decimas:</label>
-                                    <div class="col-lg-5">
-                                      <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
+                               </div>
+                                 <div id="velocidad_decimas-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Decimas:</label>
+                                    <div class="col-lg-6">
+                                      <input type="numeric" class="form-control" name="velocidad_decimas_10" id="velocidad_d">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                                </div>'.
-                                '<div id="velocidad_centesimas-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Centesimas:</label>
-                                    <div class="col-lg-5">
-                                      <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
+                                </div>
+                                 <div id="velocidad_centesimas-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Centesimas:</label>
+                                    <div class="col-lg-6">
+                                      <input type="numeric" class="form-control" name="velocidad_centesimas_10" id="velocidad_c">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
                                  </div>
+                                 
                                  </div>
-                                 <div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Segundos:</label>
-                                    <div class="col-lg-5">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s">
+                                 
+                                 <div class="col-md-6"><div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-6 control-label">Sumatoria:</label>
+                                    <div class="col-lg-6">
+                                       <input type="numeric" class="form-control" name="velocidad_sumatoria" id="velocidad_s">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
-                               </div>'.
-                                '<div id="velocidad_decimas-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Decimas:</label>
-                                    <div class="col-lg-5">
-                                      <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d">
-                                        <div class="form-control-feedback"></div>
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>'.
-                                '<div id="velocidad_centesimas-field" class="form-group">
-                                    <label class="col-lg-3 control-label">Centesimas:</label>
-                                    <div class="col-lg-5">
-                                      <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c">
-                                        <div class="form-control-feedback"></div>
-                                        <span class="help-block"></span>
-                                    </div>
-                                 </div></div>';
+                               </div>                                                     
+                                 
+                                 </div>';
                 break;
         }
 
@@ -471,9 +460,9 @@ class EvaluacionesController extends Controller
             case 6:
                 //velocidad 10 mts
                 $validator =  Validator::make($request->all(), [
-                    'velocidad_segundos' => 'required|numeric',
-                    'velocidad_decimas' => 'required|numeric',
-                    'velocidad_centesimas' => 'required|numeric',
+                    'velocidad_segundos_10' => 'required|numeric',
+                    'velocidad_decimas_10' => 'required|numeric',
+                    'velocidad_centesimas_10' => 'required|numeric',
                     'cliente' => 'required|numeric',
                     'ejercicio' => 'required|numeric'
                 ]);
@@ -489,9 +478,9 @@ class EvaluacionesController extends Controller
                     ], 422);
 
                 }else{
-                    $evaluacion->velocidad_segundos = $request->input('velocidad_segundos');
-                    $evaluacion->velocidad_decimas = $request->input('velocidad_decimas');
-                    $evaluacion->velocidad_centesimas = $request->input('velocidad_centesimas');
+                    $evaluacion->velocidad_segundos = $request->input('velocidad_segundos_10');
+                    $evaluacion->velocidad_decimas = $request->input('velocidad_decimas_10');
+                    $evaluacion->velocidad_centesimas = $request->input('velocidad_centesimas_10');
                     $evaluacion->save();
                     //se inserta en la tabla pivot
                     $evaluacion->clientes()->attach([$evaluacion->id => ['cliente_id'=>$request->input('cliente'),'ejercicio_id'=>$request->input('ejercicio')]]);
@@ -627,9 +616,13 @@ class EvaluacionesController extends Controller
             case 11:
                 //Agilidad (velocidad) 5 - 10 - 5
                 $validator =  Validator::make($request->all(), [
-                    'velocidad_segundos' => 'required|numeric',
-                    'velocidad_decimas' => 'required|numeric',
-                    'velocidad_centesimas' => 'required|numeric',
+                    'velocidad_segundos_5' => 'required|numeric',
+                    'velocidad_decimas_5' => 'required|numeric',
+                    'velocidad_centesimas_5' => 'required|numeric',
+                    'velocidad_segundos_10' => 'required|numeric',
+                    'velocidad_decimas_10' => 'required|numeric',
+                    'velocidad_centesimas_10' => 'required|numeric',
+                    'velocidad_sumatoria' => 'required|numeric',
                     'cliente' => 'required|numeric',
                     'ejercicio' => 'required|numeric'
                 ]);
@@ -645,9 +638,13 @@ class EvaluacionesController extends Controller
                     ], 422);
 
                 }else{
-                    $evaluacion->velocidad_segundos = $request->input('velocidad_segundos');
-                    $evaluacion->velocidad_decimas = $request->input('velocidad_decimas');
-                    $evaluacion->velocidad_centesimas = $request->input('velocidad_centesimas');
+                    $evaluacion->velocidad_segundos_5 = $request->input('velocidad_segundos_5');
+                    $evaluacion->velocidad_decimas_5 = $request->input('velocidad_decimas_5');
+                    $evaluacion->velocidad_centesimas_5 = $request->input('velocidad_centesimas_5');
+                    $evaluacion->velocidad_segundos_10 = $request->input('velocidad_segundos_10');
+                    $evaluacion->velocidad_decimas_10 = $request->input('velocidad_decimas_10');
+                    $evaluacion->velocidad_centesimas_10 = $request->input('velocidad_centesimas_10');
+                    $evaluacion->velocidad_sumatoria = $request->input('velocidad_sumatoria');
                     $evaluacion->save();
                     //se inserta en la tabla pivot
                     $evaluacion->clientes()->attach([$evaluacion->id => ['cliente_id'=>$request->input('cliente'),'ejercicio_id'=>$request->input('ejercicio')]]);
@@ -754,7 +751,7 @@ class EvaluacionesController extends Controller
                 $formulario = '<div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-3 control-label">Segundos:</label>
                                     <div class="col-lg-5">
-                                       <input type="numeric" class="form-control" name="velocidad_segundos" id="velocidad_s" value='.$evaluacion->velocidad_segundos.'>
+                                       <input type="numeric" class="form-control" name="velocidad_segundos_10" id="velocidad_s" value='.$evaluacion->velocidad_segundos_10.'>
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
                                     </div>
@@ -762,7 +759,7 @@ class EvaluacionesController extends Controller
                     '<div id="velocidad_decimas-field" class="form-group">
                         <label class="col-lg-3 control-label">Decimas:</label>
                         <div class="col-lg-5">
-                          <input type="numeric" class="form-control" name="velocidad_decimas" id="velocidad_d" value='.$evaluacion->velocidad_decimas.'>
+                          <input type="numeric" class="form-control" name="velocidad_decimas_10" id="velocidad_d" value='.$evaluacion->velocidad_decimas_10.'>
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
                         </div>
@@ -770,7 +767,7 @@ class EvaluacionesController extends Controller
                     '<div id="velocidad_centesimas-field" class="form-group">
                         <label class="col-lg-3 control-label">Centesimas:</label>
                         <div class="col-lg-5">
-                          <input type="numeric" class="form-control" name="velocidad_centesimas" id="velocidad_c" value='.$evaluacion->velocidad_centesimas.'>
+                          <input type="numeric" class="form-control" name="velocidad_centesimas_10" id="velocidad_c" value='.$evaluacion->velocidad_centesimas_10.'>
                             <div class="form-control-feedback"></div>
                             <span class="help-block"></span>
                         </div>
@@ -831,6 +828,74 @@ class EvaluacionesController extends Controller
                                         <span class="help-block"></span>
                                     </div>
                                 </div>';
+                break;
+
+            case 11:
+                //Agilidad (velocidad) 5 - 10 - 5
+                $formulario =   '<div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Segundos:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="velocidad_segundos_5" id="velocidad_s" value='.$evaluacion->velocidad_segundos_5.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                               </div>
+                                 <div id="velocidad_decimas-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Decimas:</label>
+                                    <div class="col-lg-5">
+                                      <input type="numeric" class="form-control" name="velocidad_decimas_5" id="velocidad_d" value='.$evaluacion->velocidad_decimas_5.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                 <div id="velocidad_centesimas-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Centesimas:</label>
+                                    <div class="col-lg-5">
+                                      <input type="numeric" class="form-control" name="velocidad_centesimas_5" id="velocidad_c" value='.$evaluacion->velocidad_centesimas_5.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                 </div>
+                                 
+                                 </div>
+                                 
+                                 <div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Segundos:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="velocidad_segundos_10" id="velocidad_s" value='.$evaluacion->velocidad_segundos_10.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                               </div>
+                                 <div id="velocidad_decimas-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Decimas:</label>
+                                    <div class="col-lg-5">
+                                      <input type="numeric" class="form-control" name="velocidad_decimas_10" id="velocidad_d" value='.$evaluacion->velocidad_decimas_10.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                 <div id="velocidad_centesimas-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Centesimas:</label>
+                                    <div class="col-lg-5">
+                                      <input type="numeric" class="form-control" name="velocidad_centesimas_10" id="velocidad_c" value='.$evaluacion->velocidad_centesimas_10.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                 </div>
+                                 
+                                 </div>
+                                 
+                                 <div class="col-md-4"><div id="velocidad_segundos-field" class="form-group">
+                                    <label class="col-lg-3 control-label">Segundos:</label>
+                                    <div class="col-lg-5">
+                                       <input type="numeric" class="form-control" name="velocidad_sumatoria" id="velocidad_s" value='.$evaluacion->velocidad_sumatoria.'>
+                                        <div class="form-control-feedback"></div>
+                                        <span class="help-block"></span>
+                                    </div>
+                               </div>                                                     
+                                 
+                                 </div>';
                 break;
 
         }
@@ -1052,16 +1117,16 @@ class EvaluacionesController extends Controller
 
             case 6:
                 //velocidad 10 mts
-                $velocidad_segundos = $request->input('velocidad_segundos');
-                $velocidad_decimas = $request->input('velocidad_decimas');
-                $velocidad_centesimas = $request->input('velocidad_centesimas');
+                $velocidad_segundos = $request->input('velocidad_segundos_10');
+                $velocidad_decimas = $request->input('velocidad_decimas_10');
+                $velocidad_centesimas = $request->input('velocidad_centesimas_10');
 
 
                 //validamos los campos enviados
                 $validator = Validator::make($request->all(), [
-                    'velocidad_segundos' => 'required|numeric',
-                    'velocidad_decimas' => 'required|numeric',
-                    'velocidad_centesimas' => 'required|numeric',
+                    'velocidad_segundos_10' => 'required|numeric',
+                    'velocidad_decimas_10' => 'required|numeric',
+                    'velocidad_centesimas_10' => 'required|numeric',
                 ]);
 
 
@@ -1077,9 +1142,9 @@ class EvaluacionesController extends Controller
 
                 } else {
 
-                    $evaluacion->velocidad_segundos = $velocidad_segundos;
-                    $evaluacion->velocidad_decimas = $velocidad_decimas;
-                    $evaluacion->velocidad_centesimas = $velocidad_centesimas;
+                    $evaluacion->velocidad_segundos_10 = $velocidad_segundos;
+                    $evaluacion->velocidad_decimas_10 = $velocidad_decimas;
+                    $evaluacion->velocidad_centesimas_10 = $velocidad_centesimas;
                     $evaluacion->update();
 
 
@@ -1234,6 +1299,65 @@ class EvaluacionesController extends Controller
 
                 break;
 
+            case 11:
+                //Agilidad (velocidad) 5 - 10 - 5
+                $velocidad_segundos_5 = $request->input('velocidad_segundos_5');
+                $velocidad_decimas_5 = $request->input('velocidad_decimas_5');
+                $velocidad_centesimas_5 = $request->input('velocidad_centesimas_5');
+
+                $velocidad_segundos_10 = $request->input('velocidad_segundos_10');
+                $velocidad_decimas_10 = $request->input('velocidad_decimas_10');
+                $velocidad_centesimas_10 = $request->input('velocidad_centesimas_10');
+
+                $velocidad_sumatoria = $request->input('velocidad_sumatoria');
+
+
+                //validamos los campos enviados
+                $validator = Validator::make($request->all(), [
+                    'velocidad_segundos_5' => 'required|numeric',
+                    'velocidad_decimas_5' => 'required|numeric',
+                    'velocidad_centesimas_5' => 'required|numeric',
+
+                    'velocidad_segundos_10' => 'required|numeric',
+                    'velocidad_decimas_10' => 'required|numeric',
+                    'velocidad_centesimas_10' => 'required|numeric',
+
+                    'velocidad_sumatoria' => 'required|numeric',
+                ]);
+
+
+                //si falla la validacion, redireccionamos con los errores
+                if ($validator->fails()) {
+                    $errors = $validator->errors();
+                    $errors = json_decode($errors);
+
+                    return response()->json([
+                        'success' => false,
+                        'message' => $errors
+                    ], 422);
+
+                } else {
+
+                    $evaluacion->velocidad_segundos_5 = $velocidad_segundos_5;
+                    $evaluacion->velocidad_decimas_5 = $velocidad_decimas_5;
+                    $evaluacion->velocidad_centesimas_5 = $velocidad_centesimas_5;
+
+                    $evaluacion->velocidad_segundos_10 = $velocidad_segundos_10;
+                    $evaluacion->velocidad_decimas_10 = $velocidad_decimas_10;
+                    $evaluacion->velocidad_centesimas_10 = $velocidad_centesimas_10;
+
+                    $evaluacion->velocidad_sumatoria = $velocidad_sumatoria;
+
+                    $evaluacion->update();
+
+
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'record updated'
+                    ], 200);
+                }
+
+                break;
 
         }
     }
@@ -1613,9 +1737,9 @@ class EvaluacionesController extends Controller
                                               </thead>
                                               <tbody>';
                             $filas .= '<tr>
-                                          <td>'.$evaluacion->velocidad_segundos.'</td>
-                                          <td>'.$evaluacion->velocidad_decimas.'</td>
-                                          <td>'.$evaluacion->velocidad_centesimas.'</td>
+                                          <td>'.$evaluacion->velocidad_segundos_10.'</td>
+                                          <td>'.$evaluacion->velocidad_decimas_10.'</td>
+                                          <td>'.$evaluacion->velocidad_centesimas_10.'</td>
                                           <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
                                        </tr>';
 
@@ -1686,17 +1810,25 @@ class EvaluacionesController extends Controller
                         case 11:
                             //Agilidad (velocidad) 5 - 10 - 5
                             $titulos_tabla = '<tr>
-                                                  <th>Segundos</th>
-                                                  <th>Decimas</th>
-                                                  <th>Centesimas</th>
+                                                  <th>Segundos 5</th>
+                                                  <th>Decimas 5</th>
+                                                  <th>Centesimas 5</th>
+                                                  <th>Segundos 10</th>
+                                                  <th>Decimas 10</th>
+                                                  <th>Centesimas 10</th>
+                                                  <th>Sumatoria</th>
                                                   <th>Fecha</th>
                                               </tr>
                                               </thead>
                                               <tbody>';
                             $filas .= '<tr>
-                                          <td>'.$evaluacion->velocidad_segundos.'</td>
-                                          <td>'.$evaluacion->velocidad_decimas.'</td>
-                                          <td>'.$evaluacion->velocidad_centesimas.'</td>
+                                          <td>'.$evaluacion->velocidad_segundos_5.'</td>
+                                          <td>'.$evaluacion->velocidad_decimas_5.'</td>
+                                          <td>'.$evaluacion->velocidad_centesimas_5.'</td>
+                                          <td>'.$evaluacion->velocidad_segundos_10.'</td>
+                                          <td>'.$evaluacion->velocidad_decimas_10.'</td>
+                                          <td>'.$evaluacion->velocidad_centesimas_10.'</td>
+                                          <td>'.$evaluacion->velocidad_sumatoria.'</td>
                                           <td>'.date('d-m-Y H:m:s',strtotime($evaluacion->updated_at)).'</td> 
                                        </tr>';
 
