@@ -316,6 +316,11 @@ class ReporteController extends Controller
                                     array_push($campo,'Maximo peso');
                                     break;
 
+                                case 11:
+                                    //velocidad 5-10-5
+                                    array_push($valores,$evaluacion->velocidad_sumatoria);
+                                    array_push($campo,'Velocidad 10');
+
                             }
                             //datos de lsa fechas de cada registro, para evitar que esten repetidos
                             if (!in_array($evaluacion->created_at->format('d-m-Y'),$fecha)){
