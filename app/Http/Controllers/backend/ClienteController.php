@@ -233,6 +233,7 @@ class ClienteController extends Controller
         $clientes =  \DB::table('clientes')
             ->select(['nombre AS text','id AS id','apellido AS apellido'])
             ->where("apellido", "LIKE", "%{$keyword->input('term.term')}%")
+            ->whereNull('deleted_at')
             ->get();
         $searchClientes = Cliente::where("nombre", "LIKE", "%{$keyword->input('term.term')}%")->get();
         return response()->json(
