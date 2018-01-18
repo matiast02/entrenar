@@ -138,7 +138,7 @@ class AntropometriaController extends Controller
             'indice_meso' => 'required|numeric',
             'indice_hecto' => 'required|numeric',
             'clasificacion' => 'required',
-            'ideal' => 'required|string',
+            'ideal' => 'required',
         ]);
 
         //si falla la validacion, redireccionamos con los errores

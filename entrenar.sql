@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-01-2018 a las 15:42:31
+-- Tiempo de generación: 18-01-2018 a las 13:11:39
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -79,11 +79,11 @@ CREATE TABLE `categoria_ejercicios` (
 --
 
 INSERT INTO `categoria_ejercicios` (`id`, `nombre`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Fuerza Tren Superior', NULL, '2018-01-17 14:23:53', '2018-01-17 14:23:53'),
-(2, 'Fuerza Tren Inferior', NULL, '2018-01-17 14:23:58', '2018-01-17 14:23:58'),
-(3, 'Velocidad', NULL, '2018-01-17 14:24:06', '2018-01-17 14:24:06'),
-(4, 'Resistencia', NULL, '2018-01-17 14:24:11', '2018-01-17 14:24:11'),
-(5, 'Saltos', NULL, '2018-01-17 14:24:39', '2018-01-17 14:24:39');
+(1, 'Fuerza Tren Superior', NULL, '2018-01-18 12:05:50', '2018-01-18 12:05:50'),
+(2, 'Fuerza Tren Inferior', NULL, '2018-01-18 12:06:00', '2018-01-18 12:06:00'),
+(3, 'Resistencia', NULL, '2018-01-18 12:06:05', '2018-01-18 12:06:05'),
+(4, 'Velocidad', NULL, '2018-01-18 12:06:12', '2018-01-18 12:06:12'),
+(5, 'Saltos', NULL, '2018-01-18 12:06:19', '2018-01-18 12:06:19');
 
 -- --------------------------------------------------------
 
@@ -212,17 +212,17 @@ CREATE TABLE `ejercicios` (
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Agilidad 5-10-5', 3, 0, NULL, '2018-01-17 14:38:16', '2018-01-17 14:38:16'),
-(2, 'Peso Muerto', 2, 0, NULL, '2018-01-17 14:38:28', '2018-01-17 14:38:28'),
-(3, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2018-01-17 14:38:44', '2018-01-17 14:38:44'),
-(4, 'Remo', 1, 0, NULL, '2018-01-17 14:38:54', '2018-01-17 14:38:54'),
-(5, 'Salto Abalakov', 5, 0, NULL, '2018-01-17 14:39:09', '2018-01-17 14:39:09'),
-(6, 'Salto Cmj', 5, 0, NULL, '2018-01-17 14:39:24', '2018-01-17 14:39:24'),
-(7, 'Salto Continuo', 5, 0, NULL, '2018-01-17 14:39:39', '2018-01-17 14:39:39'),
-(8, 'Salto Sj', 5, 0, NULL, '2018-01-17 14:40:40', '2018-01-17 14:40:40'),
-(9, 'Sentadilla Bulgara', 2, 0, NULL, '2018-01-17 14:40:59', '2018-01-17 14:40:59'),
-(10, 'Velocidad 10 mts', 3, 0, NULL, '2018-01-17 14:41:12', '2018-01-17 14:41:12'),
-(11, 'Yoyo Test', 4, 0, NULL, '2018-01-17 14:41:23', '2018-01-17 14:41:23');
+(1, 'Salto Abalakov', 5, 0, NULL, '2018-01-18 12:06:54', '2018-01-18 12:06:54'),
+(2, 'Salto Cmj', 5, 0, NULL, '2018-01-18 12:07:10', '2018-01-18 12:07:10'),
+(3, 'Salto Sj', 5, 0, NULL, '2018-01-18 12:08:14', '2018-01-18 12:08:14'),
+(4, 'Salto Continuo', 5, 0, NULL, '2018-01-18 12:08:31', '2018-01-18 12:08:31'),
+(5, 'Peso Muerto', 2, 0, NULL, '2018-01-18 12:08:48', '2018-01-18 12:08:48'),
+(6, 'Velocidad 10 mts', 4, 0, NULL, '2018-01-18 12:09:05', '2018-01-18 12:09:05'),
+(7, 'Remo', 1, 0, NULL, '2018-01-18 12:09:18', '2018-01-18 12:09:18'),
+(8, 'Yoyo Test', 3, 0, NULL, '2018-01-18 12:09:30', '2018-01-18 12:09:30'),
+(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2018-01-18 12:09:50', '2018-01-18 12:09:50'),
+(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2018-01-18 12:10:07', '2018-01-18 12:10:07'),
+(11, 'Agilidad 5-10-5', 4, 0, NULL, '2018-01-18 12:10:26', '2018-01-18 12:10:26');
 
 -- --------------------------------------------------------
 
@@ -425,7 +425,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$UyQGhZYxKDZgP09Pm9y07Oaw9GC.DxV3RgRPRUanzw1pnb1Yp6L4K', NULL, '2018-01-17 14:23:30', '2018-01-17 14:23:30', NULL);
+(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$uVfs8oN8epoTzAPSeJ4xzOmXQ9UVfzyxJcPx1O9cJ37tAQeflNENO', NULL, '2018-01-18 12:05:39', '2018-01-18 12:05:39', NULL);
 
 --
 -- Índices para tablas volcadas
