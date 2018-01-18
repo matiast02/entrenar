@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2018 a las 13:11:39
+-- Tiempo de generación: 18-01-2018 a las 15:45:35
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -40,7 +40,7 @@ CREATE TABLE `antropometrias` (
   `indice_meso` double(8,2) NOT NULL,
   `indice_hecto` double(8,2) NOT NULL,
   `clasificacion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `ideal` double(8,2) NOT NULL,
+  `ideal` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -79,11 +79,11 @@ CREATE TABLE `categoria_ejercicios` (
 --
 
 INSERT INTO `categoria_ejercicios` (`id`, `nombre`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Fuerza Tren Superior', NULL, '2018-01-18 12:05:50', '2018-01-18 12:05:50'),
-(2, 'Fuerza Tren Inferior', NULL, '2018-01-18 12:06:00', '2018-01-18 12:06:00'),
-(3, 'Resistencia', NULL, '2018-01-18 12:06:05', '2018-01-18 12:06:05'),
-(4, 'Velocidad', NULL, '2018-01-18 12:06:12', '2018-01-18 12:06:12'),
-(5, 'Saltos', NULL, '2018-01-18 12:06:19', '2018-01-18 12:06:19');
+(1, 'Fuerza Tren Superior', NULL, '2018-01-18 14:41:27', '2018-01-18 14:41:27'),
+(2, 'Fuerza Tren Inferior', NULL, '2018-01-18 14:41:32', '2018-01-18 14:41:32'),
+(3, 'Velocidad', NULL, '2018-01-18 14:41:35', '2018-01-18 14:41:35'),
+(4, 'Resistencia', NULL, '2018-01-18 14:41:39', '2018-01-18 14:41:39'),
+(5, 'Saltos', NULL, '2018-01-18 14:41:44', '2018-01-18 14:41:44');
 
 -- --------------------------------------------------------
 
@@ -212,17 +212,17 @@ CREATE TABLE `ejercicios` (
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Salto Abalakov', 5, 0, NULL, '2018-01-18 12:06:54', '2018-01-18 12:06:54'),
-(2, 'Salto Cmj', 5, 0, NULL, '2018-01-18 12:07:10', '2018-01-18 12:07:10'),
-(3, 'Salto Sj', 5, 0, NULL, '2018-01-18 12:08:14', '2018-01-18 12:08:14'),
-(4, 'Salto Continuo', 5, 0, NULL, '2018-01-18 12:08:31', '2018-01-18 12:08:31'),
-(5, 'Peso Muerto', 2, 0, NULL, '2018-01-18 12:08:48', '2018-01-18 12:08:48'),
-(6, 'Velocidad 10 mts', 4, 0, NULL, '2018-01-18 12:09:05', '2018-01-18 12:09:05'),
-(7, 'Remo', 1, 0, NULL, '2018-01-18 12:09:18', '2018-01-18 12:09:18'),
-(8, 'Yoyo Test', 3, 0, NULL, '2018-01-18 12:09:30', '2018-01-18 12:09:30'),
-(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2018-01-18 12:09:50', '2018-01-18 12:09:50'),
-(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2018-01-18 12:10:07', '2018-01-18 12:10:07'),
-(11, 'Agilidad 5-10-5', 4, 0, NULL, '2018-01-18 12:10:26', '2018-01-18 12:10:26');
+(1, 'Salto Abalakov', 5, 0, NULL, '2018-01-18 14:42:09', '2018-01-18 14:42:09'),
+(2, 'Salto Cmj', 5, 0, NULL, '2018-01-18 14:42:22', '2018-01-18 14:42:22'),
+(3, 'Salto Sj', 5, 0, NULL, '2018-01-18 14:42:43', '2018-01-18 14:42:43'),
+(4, 'Salto Continuo', 5, 0, NULL, '2018-01-18 14:42:56', '2018-01-18 14:42:56'),
+(5, 'Peso Muerto', 2, 0, NULL, '2018-01-18 14:43:09', '2018-01-18 14:43:09'),
+(6, 'Velocidad 10 mts', 3, 0, NULL, '2018-01-18 14:43:21', '2018-01-18 14:43:21'),
+(7, 'Remo', 1, 0, NULL, '2018-01-18 14:43:34', '2018-01-18 14:43:34'),
+(8, 'Yoyo Test', 4, 0, NULL, '2018-01-18 14:43:48', '2018-01-18 14:43:48'),
+(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2018-01-18 14:44:00', '2018-01-18 14:44:00'),
+(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2018-01-18 14:44:14', '2018-01-18 14:44:14'),
+(11, 'Agilidad 5-10-5', 3, 0, NULL, '2018-01-18 14:44:28', '2018-01-18 14:44:28');
 
 -- --------------------------------------------------------
 
@@ -425,7 +425,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$uVfs8oN8epoTzAPSeJ4xzOmXQ9UVfzyxJcPx1O9cJ37tAQeflNENO', NULL, '2018-01-18 12:05:39', '2018-01-18 12:05:39', NULL);
+(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$S8U6a6WTTPLDBuN1yl.jxOd4jiwPiZfjInd47jcx2/adB16VytHii', NULL, '2018-01-18 14:41:17', '2018-01-18 14:41:17', NULL);
 
 --
 -- Índices para tablas volcadas
