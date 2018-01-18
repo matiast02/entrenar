@@ -25,7 +25,7 @@ class CreateAntropometriasTable extends Migration
             $table->float('indice_meso');
             $table->float('indice_hecto');
             $table->string('clasificacion');
-            $table->float('ideal');
+            $table->string('ideal');
 
             $table->softDeletes();
             $table->timestamps();
