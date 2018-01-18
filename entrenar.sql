@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2017 a las 07:00:54
+-- Tiempo de generación: 17-01-2018 a las 15:42:31
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -79,11 +79,11 @@ CREATE TABLE `categoria_ejercicios` (
 --
 
 INSERT INTO `categoria_ejercicios` (`id`, `nombre`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Fuerza Tren Superior', NULL, '2017-12-16 05:51:41', '2017-12-16 05:51:41'),
-(2, 'Fuerza Tren Inferior', NULL, '2017-12-16 05:51:45', '2017-12-16 05:51:45'),
-(3, 'Velocidad', NULL, '2017-12-16 05:51:50', '2017-12-16 05:51:50'),
-(4, 'Resistencia', NULL, '2017-12-16 05:51:55', '2017-12-16 05:51:55'),
-(5, 'Saltos', NULL, '2017-12-16 05:52:02', '2017-12-16 05:52:02');
+(1, 'Fuerza Tren Superior', NULL, '2018-01-17 14:23:53', '2018-01-17 14:23:53'),
+(2, 'Fuerza Tren Inferior', NULL, '2018-01-17 14:23:58', '2018-01-17 14:23:58'),
+(3, 'Velocidad', NULL, '2018-01-17 14:24:06', '2018-01-17 14:24:06'),
+(4, 'Resistencia', NULL, '2018-01-17 14:24:11', '2018-01-17 14:24:11'),
+(5, 'Saltos', NULL, '2018-01-17 14:24:39', '2018-01-17 14:24:39');
 
 -- --------------------------------------------------------
 
@@ -212,17 +212,17 @@ CREATE TABLE `ejercicios` (
 --
 
 INSERT INTO `ejercicios` (`id`, `nombre`, `categoria_ejercicios_id`, `fuerza`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Salto Abalakov', 5, 0, NULL, '2017-12-16 05:52:35', '2017-12-16 05:52:35'),
-(2, 'Salto Cmj', 5, 0, NULL, '2017-12-16 05:53:30', '2017-12-16 05:53:30'),
-(3, 'Salto Sj', 5, 0, NULL, '2017-12-16 05:53:41', '2017-12-16 05:53:41'),
-(4, 'Salto Continuo', 5, 0, NULL, '2017-12-16 05:53:53', '2017-12-16 05:53:53'),
-(5, 'Peso Muerto', 2, 0, NULL, '2017-12-16 05:56:41', '2017-12-16 05:56:41'),
-(6, 'Velocidad 10 mts', 3, 0, NULL, '2017-12-16 05:56:56', '2017-12-16 05:56:56'),
-(7, 'Remo', 1, 0, NULL, '2017-12-16 05:57:21', '2017-12-16 05:57:21'),
-(8, 'Yoyo Test', 4, 0, NULL, '2017-12-16 05:57:35', '2017-12-16 05:57:35'),
-(9, 'Sentadilla Bulgara ', 2, 0, NULL, '2017-12-16 05:58:02', '2017-12-16 05:58:02'),
-(10, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2017-12-16 05:58:57', '2017-12-16 05:58:57'),
-(11, 'Agilidad 5-10-5', 3, 0, NULL, '2017-12-16 05:59:22', '2017-12-16 05:59:22');
+(1, 'Agilidad 5-10-5', 3, 0, NULL, '2018-01-17 14:38:16', '2018-01-17 14:38:16'),
+(2, 'Peso Muerto', 2, 0, NULL, '2018-01-17 14:38:28', '2018-01-17 14:38:28'),
+(3, 'Peso Muerto 1 Pierna', 2, 0, NULL, '2018-01-17 14:38:44', '2018-01-17 14:38:44'),
+(4, 'Remo', 1, 0, NULL, '2018-01-17 14:38:54', '2018-01-17 14:38:54'),
+(5, 'Salto Abalakov', 5, 0, NULL, '2018-01-17 14:39:09', '2018-01-17 14:39:09'),
+(6, 'Salto Cmj', 5, 0, NULL, '2018-01-17 14:39:24', '2018-01-17 14:39:24'),
+(7, 'Salto Continuo', 5, 0, NULL, '2018-01-17 14:39:39', '2018-01-17 14:39:39'),
+(8, 'Salto Sj', 5, 0, NULL, '2018-01-17 14:40:40', '2018-01-17 14:40:40'),
+(9, 'Sentadilla Bulgara', 2, 0, NULL, '2018-01-17 14:40:59', '2018-01-17 14:40:59'),
+(10, 'Velocidad 10 mts', 3, 0, NULL, '2018-01-17 14:41:12', '2018-01-17 14:41:12'),
+(11, 'Yoyo Test', 4, 0, NULL, '2018-01-17 14:41:23', '2018-01-17 14:41:23');
 
 -- --------------------------------------------------------
 
@@ -250,7 +250,7 @@ CREATE TABLE `evaluaciones` (
   `velocidad_segundos_5` double(8,2) DEFAULT NULL,
   `velocidad_decimas_5` double(8,2) DEFAULT NULL,
   `velocidad_centesimas_5` double(8,2) DEFAULT NULL,
-  `velocidad_sumatoria` double(8,2) DEFAULT NULL
+  `velocidad_sumatoria` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -343,7 +343,8 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2017_07_31_153658_create_antropometrias_table', 1),
 ('2017_08_24_210125_update_evaluaciones_table_add_nullable_All_col', 1),
 ('2017_08_26_205619_update_table_series_add_col_mejor_serie_bool', 1),
-('2017_08_28_021947_update_table_clientes_col_dni_unique', 1);
+('2017_08_28_021947_update_table_clientes_col_dni_unique', 1),
+('2018_01_17_003816_update_table_evaluaciones_col_sumatoria', 1);
 
 -- --------------------------------------------------------
 
@@ -424,7 +425,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$zR.qSwQxH.ezoE7C.Nwgh.pT.bZcCUwOvz1Q1S2yPo73J3c3A/SWK', NULL, '2017-12-16 05:51:26', '2017-12-16 05:51:26', NULL);
+(1, 'Victor Cuellar', 'profesorvictorcuellar@hotmail.com', '$2y$10$UyQGhZYxKDZgP09Pm9y07Oaw9GC.DxV3RgRPRUanzw1pnb1Yp6L4K', NULL, '2018-01-17 14:23:30', '2018-01-17 14:23:30', NULL);
 
 --
 -- Índices para tablas volcadas
