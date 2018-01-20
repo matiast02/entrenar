@@ -71,7 +71,26 @@
         });
 
 
+        //calcular sumatoria de agilidad 5 - 10 - 5
+        $('body').on('change', 'input[id="velocidad_agilidad"]', function() {
+            $('input[name="velocidad_sumatoria"]').val(
+                    //suma de segundos
+                    Number($('input[name="velocidad_segundos_10"]').val()) +
+                    Number($('input[name="velocidad_segundos_5"]').val()) + "."+
+                    //suma de decimas
+                    (Number($('input[name="velocidad_decimas_10"]').val()) +
+                    Number($('input[name="velocidad_decimas_5"]').val()) ));
+            //sumas de centesimas
+            //(Number($('input[name="velocidad_centesimas_10"]').val()) +
+            //Number($('input[name="velocidad_centesimas_5"]').val()) ));
+        });
+
+
+
         $('select').select2({});
+
+
+
 
     </script>
 
