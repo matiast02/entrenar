@@ -398,7 +398,6 @@
         }
 
         //calcular sumatoria de agilidad 5 - 10 - 5
-        //calcular la masa en base al peso externo y corporal
         $('body').on('change', 'input[id="velocidad_agilidad"]', function() {
             $('input[name="velocidad_sumatoria"]').val(
                 //suma de segundos

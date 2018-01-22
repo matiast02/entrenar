@@ -194,11 +194,12 @@
             var logo = document.getElementById('logo').innerHTML;
             var mywindow = window.open('', 'Print', 'height=1400,width=1600');
 
-            mywindow.document.write('<html><head><title>Reporte de {{$cliente->apellido.', '.$cliente->nombre}}</title></head>');
+            mywindow.document.write('<html><head><title></title></head>');
             mywindow.document.write('<body>');
             mywindow.document.write('<div id="cabcera" style="display:inline-block;">');
             mywindow.document.write('<div id="logo" style="float:left;"><img src="{{asset('images/logo.jpeg')}}" style="width: 120px; height: 120px;"></div>');
                 mywindow.document.write('<div id="perfil-cliente" style="float:left;margin-left:200px;">');
+                    mywindow.document.write('<h3> Reporte de {{$cliente->apellido.', '.$cliente->nombre}} </h3>');
                     mywindow.document.write('<div id="foto-perfil" style="float:left"><img src="{{asset($cliente->foto)}}" style="width: 70px; height: 70px;"></div>');
                     mywindow.document.write('<div id="datos-cliente" style="display:inline-block;margin-left:5px;margin-top:-10px;font-size: 0.7em;"><ul style="padding-left:0px;list-style:none;">');
                     mywindow.document.write('<li><a style="text-decoration:none"><b>Edad:</b> {{$edad}}</a></li>');
