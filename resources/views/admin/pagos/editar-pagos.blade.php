@@ -65,11 +65,12 @@
                                     {{--<input type="text" class="form-control" name ="grupo" >--}}
                                     <select class="select" name="grupo">
                                         <option value="{{$pago->grupo}}" selected>{{ucfirst($pago->grupo)}}</option>
-                                        <option value="0" disabled>Seleccionar Grupo de Trabajo.</option>
-                                        <option value="1">1</option>
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
+                                        <option value="0" disabled>Seleccionar Descuento.</option>
+                                        <option value="1">Sin Decuentos</option>
+                                        <option value="10">10%</option>
+                                        <option value="20">20%</option>
+                                        <option value="30">30%</option>
+                                        <option value="50">50%</option>
                                     </select>
                                     <div class="form-control-feedback"></div>
                                     <span class="help-block"></span>

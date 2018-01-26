@@ -75,7 +75,7 @@
                                 <div class="col-lg-6">
                                     <select class="form-control" id="pago" name="pago">
                                         @foreach($pagos as $pago)
-                                            <option value="{{$pago->id}}">{{ucfirst('Dias: '.$pago->dias_semana. '  -  ' . ' Grupo: ' .$pago->grupo. '  -  ' . ' Monto: $' .$pago->costo_mensual)}}</option>
+                                            <option value="{{$pago->id}}">{{ucfirst('Dias: '.$pago->dias_semana. '  -  ' . ' Descuento: ' .$pago->grupo. '  -  ' . ' Monto: $' .$pago->costo_mensual)}}</option>
                                         @endforeach
                                     </select>
                                 </div>

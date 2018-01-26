@@ -69,7 +69,7 @@
                                             <?php
                                             $mes=date("n");
                                             $rango=11;
-                                            for ($i=$mes-2;$i<=$mes+$rango;$i++){
+                                            for ($i=$mes-1;$i<=$mes+$rango;$i++){
                                                 $mesano=date('Y-n', mktime(0, 0, 0, $i, 1, date("Y") ) );
                                                 $meses=date('F', mktime(0, 0, 0, $i, 1, date("Y") ) );
                                                 if ($meses=="January") $meses="Enero";

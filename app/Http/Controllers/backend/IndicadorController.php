@@ -24,6 +24,7 @@ class IndicadorController extends Controller
     }
 
 
+
     public function create()
     {
         return view('admin.indicadores.crear-indicadores',['titulo'=>'Crear Indicador']);
@@ -69,15 +70,15 @@ class IndicadorController extends Controller
             'hora_salida' => 'required',
             $tiempo_entrenamiento = 'tiempo_entrenamiento',
 
-            'pse' => 'required|numeric|max:10|min:1',
-            'sueno' => 'required|numeric|max:10|min:1',
-            'dolor' => 'required|numeric|max:10|min:1',
-            'deseo_entrenar' => 'required|numeric|max:10|min:1',
-            'desayuno' => 'required|numeric|max:10|min:1',
+            'pse' => 'required|numeric|max:2|min:0',
+            'sueno' => 'required|numeric|max:2|min:0',
+            'dolor' => 'required|numeric|max:2|min:0',
+            'deseo_entrenar' => 'required|numeric|max:2|min:0',
+            'desayuno' => 'required|numeric|max:2|min:0',
 
             $sumatoria = 'sumatoria' => 'numeric',
 
-            'pse_global_sesion' => 'required|numeric',
+            'pse_global_sesion' => 'required|numeric|max:10|min:1',
             $carga_entrenamiento = 'carga_entrenamiento' => 'numeric'
         ]);
 
@@ -144,6 +145,7 @@ class IndicadorController extends Controller
     }
 
 
+
     public function listarIndicadores()
     {
         $clientes = Cliente::all();
@@ -189,47 +191,56 @@ class IndicadorController extends Controller
                 })
 
                 ->editColumn('pse',function($indicador){
-                    if($indicador->pse >= 1 and $indicador->pse <= 4) {$color= "green";}
-                    elseif($indicador->pse >= 5 and $indicador->pse <= 6) {$color = "#E1DE01";}
-                    else{$color = "red";}
+                    if($indicador->pse == 0) {$color= "red";}
+                    elseif($indicador->pse == 1) {$color = "#E1DE01";}
+                    else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->pse.'</span>';
                 })
 
                 ->editColumn('sueno',function($indicador){
-                    if($indicador->sueno >= 1 and $indicador->sueno <= 5) {$color= "red";}
-                    elseif($indicador->sueno >= 6 and $indicador->sueno <= 7) {$color = "#E1DE01";}
+                    if($indicador->sueno == 0) {$color= "red";}
+                    elseif($indicador->sueno == 1) {$color = "#E1DE01";}
                     else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->sueno.'</span>';
                 })
 
                 ->editColumn('dolor',function($indicador){
-                    if($indicador->dolor >= 1 and $indicador->dolor <= 4) {$color= "green";}
-                    elseif($indicador->dolor >= 5 and $indicador->dolor <= 6) {$color = "#E1DE01";}
-                    else{$color = "red";}
+                    if($indicador->dolor == 0) {$color= "red";}
+                    elseif($indicador->dolor == 1) {$color = "#E1DE01";}
+                    else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->dolor.'</span>';
                 })
 
                 ->editColumn('deseo_entrenar',function($indicador){
-                    if($indicador->deseo_entrenar >= 1 and $indicador->deseo_entrenar <= 5) {$color= "red";}
-                    elseif($indicador->deseo_entrenar >= 6 and $indicador->deseo_entrenar <= 8) {$color = "#E1DE01";}
+                    if($indicador->deseo_entrenar == 0) {$color= "red";}
+                    elseif($indicador->deseo_entrenar == 1) {$color = "#E1DE01";}
                     else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->deseo_entrenar.'</span>';
                 })
 
                 ->editColumn('desayuno',function($indicador){
-                    if($indicador->desayuno >= 1 and $indicador->desayuno <= 4) {$color= "green";}
-                    elseif($indicador->desayuno >= 5 and $indicador->desayuno <= 6) {$color = "#E1DE01";}
-                    else{$color = "red";}
+                    if($indicador->desayuno == 0) {$color= "red";}
+                    elseif($indicador->desayuno == 1) {$color = "#E1DE01";}
+                    else{$color = "green";}
 
                     return '<span class="label" style="background-color:'.$color.';">'.$indicador->desayuno.'</span>';
                 })
 
                 ->editColumn('diferencia_peso_porcentual',function($indicador){
                     return round($indicador->diferencia_peso_porcentual,1);
+                })
+
+
+                ->editColumn('pse_global_sesion',function($indicador){
+                    if($indicador->pse_global_sesion >= 1 and $indicador->pse_global_sesion <= 4) {$color= "green";}
+                    elseif($indicador->pse_global_sesion >= 5 and $indicador->pse_global_sesion <= 6) {$color = "#E1DE01";}
+                    else{$color = "red";}
+
+                    return '<span class="label" style="background-color:'.$color.';">'.$indicador->pse_global_sesion.'</span>';
                 })
 
                 ->addColumn('operaciones', '
@@ -248,7 +259,6 @@ class IndicadorController extends Controller
                 ->make(true);
         }
     }
-
 
 
 
@@ -344,6 +354,7 @@ class IndicadorController extends Controller
     }
 
 
+
     public function semanasDelMes($fecha){
         $mes = date('m',strtotime($fecha));
         $anio = date('Y',strtotime($fecha));
@@ -356,6 +367,7 @@ class IndicadorController extends Controller
         }
         return $semana;
     }
+
 
 
     //devuelve los datos al datatable que les solicito
@@ -401,46 +413,57 @@ class IndicadorController extends Controller
             })
 
             ->editColumn('pse',function($indicador){
-                if($indicador->pse >= 1 and $indicador->pse <= 4) {$color= "green";}
-                elseif($indicador->pse >= 5 and $indicador->pse <= 6) {$color = "#E1DE01";}
-                else{$color = "red";}
+                if($indicador->pse == 0) {$color= "red";}
+                elseif($indicador->pse == 1) {$color = "#E1DE01";}
+                else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->pse.'</span>';
             })
 
             ->editColumn('sueno',function($indicador){
-                if($indicador->sueno >= 1 and $indicador->sueno <= 5) {$color= "red";}
-                elseif($indicador->sueno >= 6 and $indicador->sueno <= 7) {$color = "#E1DE01";}
+                if($indicador->sueno == 0) {$color= "red";}
+                elseif($indicador->sueno == 1) {$color = "#E1DE01";}
                 else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->sueno.'</span>';
             })
 
             ->editColumn('dolor',function($indicador){
-                if($indicador->dolor >= 1 and $indicador->dolor <= 4) {$color= "green";}
-                elseif($indicador->dolor >= 5 and $indicador->dolor <= 6) {$color = "#E1DE01";}
-                else{$color = "red";}
+                if($indicador->dolor == 0) {$color= "red";}
+                elseif($indicador->dolor == 1) {$color = "#E1DE01";}
+                else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->dolor.'</span>';
             })
 
             ->editColumn('deseo_entrenar',function($indicador){
-                if($indicador->deseo_entrenar >= 1 and $indicador->deseo_entrenar <= 5) {$color= "red";}
-                elseif($indicador->deseo_entrenar >= 6 and $indicador->deseo_entrenar <= 8) {$color = "#E1DE01";}
+                if($indicador->deseo_entrenar == 0) {$color= "red";}
+                elseif($indicador->deseo_entrenar == 1) {$color = "#E1DE01";}
                 else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->deseo_entrenar.'</span>';
             })
 
             ->editColumn('desayuno',function($indicador){
-                if($indicador->desayuno >= 1 and $indicador->desayuno <= 4) {$color= "green";}
-                elseif($indicador->desayuno >= 5 and $indicador->desayuno <= 6) {$color = "#E1DE01";}
-                else{$color = "red";}
+                if($indicador->desayuno == 0) {$color= "red";}
+                elseif($indicador->desayuno == 1) {$color = "#E1DE01";}
+                else{$color = "green";}
 
                 return '<span class="label" style="background-color:'.$color.';">'.$indicador->desayuno.'</span>';
             })
+
+
             ->editColumn('diferencia_peso_porcentual',function($indicador){
                 return round($indicador->diferencia_peso_porcentual,1);
+            })
+
+
+            ->editColumn('pse_global_sesion',function($indicador){
+                if($indicador->pse_global_sesion >= 1 and $indicador->pse_global_sesion <= 4) {$color= "green";}
+                elseif($indicador->pse_global_sesion >= 5 and $indicador->pse_global_sesion <= 6) {$color = "#E1DE01";}
+                else{$color = "red";}
+
+                return '<span class="label" style="background-color:'.$color.';">'.$indicador->pse_global_sesion.'</span>';
             })
 
             ->addColumn('operaciones', '
@@ -593,13 +616,13 @@ class IndicadorController extends Controller
             'hora_entrada' => 'required',
             'hora_salida' => 'required',
             $tiempo_entrenamiento = 'tiempo_entrenamiento',
-            'pse' => 'required|numeric|max:10|min:1',
-            'sueno' => 'required|numeric|max:10|min:1',
-            'dolor' => 'required|numeric|max:10|min:1',
-            'deseo_entrenar' => 'required|numeric|max:10|min:1',
-            'desayuno' => 'required|numeric|max:10|min:1',
+            'pse' => 'required|numeric|max:2|min:0',
+            'sueno' => 'required|numeric|max:2|min:0',
+            'dolor' => 'required|numeric|max:2|min:0',
+            'deseo_entrenar' => 'required|numeric|max:2|min:0',
+            'desayuno' => 'required|numeric|max:2|min:0',
             $sumatoria = 'sumatoria' => 'numeric',
-            'pse_global_sesion' => 'required|numeric',
+            'pse_global_sesion' => 'required|numeric|max:10|min:1',
             $carga_entrenamiento = 'carga_entrenamiento' => 'numeric'
         ]);
 

@@ -28,7 +28,7 @@
 @section('contenido')
     <div class="panel panel-flat col-lg-10">
         <div class="panel-heading">
-            <h5 class="panel-title">Lista de Grupos y Pagos<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
+            <h5 class="panel-title">Lista de Dias Semanales, Pagos y Descuentos<a class="heading-elements-toggle"><i class="icon-more"></i></a></h5>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li><a data-action="collapse"></a></li>
@@ -42,7 +42,7 @@
                 <thead>
                 <tr>
                     <th>Días Semanales</th>
-                    <th>Grupos</th>
+                    <th>Descuentos</th>
                     <th>Costo Mensual</th>
                     <th>Operaciones</th>
                 </tr>
