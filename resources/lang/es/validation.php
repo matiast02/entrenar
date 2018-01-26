@@ -50,7 +50,7 @@ return [
     'ip'                   => 'El campo :attribute debe ser una dirección IP válida.',
     'json'                 => 'El campo :attribute debe ser una cadena de texto JSON válida.',
     'max'                  => [
-        'numeric' => 'El campo :attribute debe ser un número entre 1 y :max.',
+        'numeric' => 'El campo :attribute no puede superar el número :max.',
         'file'    => 'El archivo :attribute debe pesar :max kilobytes como máximo.',
         'string'  => 'El campo :attribute debe contener :max caracteres como máximo.',
         'array'   => 'El campo :attribute debe contener :max elementos como máximo.',
@@ -58,7 +58,7 @@ return [
     'mimes'                => 'El campo :attribute debe ser un archivo de tipo :values.',
     'mimetypes'            => 'El campo :attribute debe ser un archivo de tipo :values.',
     'min'                  => [
-        'numeric' => 'El campo :attribute debe ser un número entre :min y 10.',
+        'numeric' => 'El campo :attribute no puede ser menor al número :min.',
         'file'    => 'El archivo :attribute debe pesar al menos :min kilobytes.',
         'string'  => 'El campo :attribute debe contener al menos :min caracteres.',
         'array'   => 'El campo :attribute no debe contener más de :min elementos.',

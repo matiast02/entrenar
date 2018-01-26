@@ -60,15 +60,16 @@
 
 
                             <div id="grupo-field" class="form-group">
-                                <label class="col-lg-3 control-label">Grupo:</label>
+                                <label class="col-lg-3 control-label">Descuentos:</label>
                                 <div class="col-lg-9">
                                     {{--<input type="text" class="form-control" name ="grupo" >--}}
                                     <select class="select" name="grupo" >
-                                        <option value="0" selected disabled>Seleccionar Grupo de Trabajo.</option>
-                                        <option value="1">1</option>
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
+                                        <option value="0" selected disabled>Seleccionar Descuento.</option>
+                                        <option value="1">Sin Decuentos</option>
+                                        <option value="10">10%</option>
+                                        <option value="20">20%</option>
+                                        <option value="30">30%</option>
+                                        <option value="50">50%</option>
                                     </select>
                                     <div class="form-control-feedback"></div>
                                     <span class="help-block"></span>
