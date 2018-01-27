@@ -165,7 +165,7 @@
                 var image{{$i}} = new Image();
                 image{{$i}}.id = "pic{{$i}}";
                 image{{$i}}.src = canvas{{$i}}.toDataURL('image/png');
-                $('#imprimir').append('<img src="'+image{{$i}}.src+'" width="500" height="200" style="margin-left:20%;margin-top:5%;"/>');
+                $('#imprimir').append('<img src="'+image{{$i}}.src+'" width="410" height="250" style="margin-left:1mm; margin-right:-8mm; margin-top:5%; padding-left:0%; padding-right:-10mm; float:left: "/>');
                 @endfor
                 //una vez que se crean todas las imagenes
                 $('#btn-imprimir').show();
