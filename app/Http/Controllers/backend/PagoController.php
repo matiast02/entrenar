@@ -157,6 +157,16 @@ class PagoController extends Controller
     public function anyData()
     {
         return Datatables::of(Pago::query())
+
+            ->editColumn('grupo', function($pagos){
+                if($pagos->grupo == 1) {return "Sin descuentos";}
+                elseif($pagos->grupo == 10) {return "10 %";}
+                elseif($pagos->grupo == 20) {return "20 %";}
+                elseif($pagos->grupo == 30) {return "30 %";}
+                else {return "50 %";}
+            })
+
+
             ->addColumn('operaciones', '
                     <ul class="icons-list">
 						<li class="dropdown">
