@@ -399,16 +399,34 @@
 
         //calcular sumatoria de agilidad 5 - 10 - 5
         $('body').on('change', 'input[id="velocidad_agilidad"]', function() {
+            var s10 = Number($('input[name="velocidad_segundos_10"]').val());
+            var s5 = Number($('input[name="velocidad_segundos_5"]').val());
+            var d10 = Number($('input[name="velocidad_decimas_10"]').val());
+            var d5 = Number($('input[name="velocidad_decimas_5"]').val());
+            var c10 = Number($('input[name="velocidad_centesimas_10"]').val());
+            var c5 = Number($('input[name="velocidad_centesimas_5"]').val());
+            var total,segundos, decimas, centesimas = 0;
+
+            //sumo las decimas y segundos indicados en cada campo
+            decimas = d10 + d5;
+            segundos = s10 + s5;
+            centesimas = c10 + c5;
+
+            if (decimas == 100){
+                segundos = segundos++; //aumento 1 segundo
+                decimas = 0; //al ser 100 decimas las coloco en 0 e incremetno 1 segundo
+                console.log("segundos:" +segundos+" decimas: "+decimas);
+            }else if(decimas >= 100){
+                segundos = segundos + ((decimas-(decimas%100))/100);//aumento x cantidad de segundos (100 decimas incrementa 1 segundo)
+                decimas = (decimas%100);//me quedo con el resto de las decimas
+                console.log("segundos:" +segundos+" decimas: "+decimas);
+            }
+
+
             $('input[name="velocidad_sumatoria"]').val(
-                //suma de segundos
-                Number($('input[name="velocidad_segundos_10"]').val()) +
-                Number($('input[name="velocidad_segundos_5"]').val()) + "."+
-                //suma de decimas
-                (Number($('input[name="velocidad_decimas_10"]').val()) +
-                Number($('input[name="velocidad_decimas_5"]').val()) ));
-                //sumas de centesimas
-                //(Number($('input[name="velocidad_centesimas_10"]').val()) +
-                 //Number($('input[name="velocidad_centesimas_5"]').val()) ));
+                segundos+"."+decimas
+            );
+
         });
 
         $('select').select2({});
