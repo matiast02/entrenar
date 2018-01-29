@@ -123,7 +123,9 @@ class ClientePagoController extends Controller
                 $meses_pagados = DB::table('clientes_pagos')
                     ->select('mes_pago')
                     ->where('cliente_id',$cliente->id)
+                    ->orderBy('mes_pago','desc')
                     ->get();
+
                 $lista_meses_pagados = array();
                 foreach ($meses_pagados as $mes){
                     //guardar en una coleccion las fechas (solo mes y año) de los meses pagados
@@ -140,7 +142,6 @@ class ClientePagoController extends Controller
                     ->whereNotIn(DB::raw('DATE_FORMAT(indicadores.mes,"%m-%Y")'),collect($lista_meses_pagados))
                     ->groupBy(DB::raw('YEAR(indicadores.fecha_indicador), MONTH(indicadores.fecha_indicador)'))
                     ->get();
-
 
             //si el cliente tiene deudas se lo coloca en la lista de deudores
             if (count($deudas_por_cliente)>0){
@@ -163,13 +164,18 @@ class ClientePagoController extends Controller
             ->orderBy('clientes_pagos.mes_pago', 'desc');
 
 
-
         return Datatables::of($pagos)
 
 
             ->editColumn('mes_pago',function($pago){
+                //consulta el ultimo mes pagado por el cliente
+                $meses_pagados = DB::table('clientes_pagos')
+                    ->select('mes_pago')
+                    ->where('cliente_id',$pago->cliente_id)
+                    ->orderBy('mes_pago','desc')
+                    ->first();
                 //para mostrar formato nombre_mes /año
-                $mes = date('F',strtotime($pago->fecha_pago));
+                $mes = date('F',strtotime($meses_pagados->mes_pago));
                 if ($mes=="January") $mes="Enero";
                 if ($mes=="February") $mes="Febrero";
                 if ($mes=="March") $mes="Marzo";
@@ -182,7 +188,7 @@ class ClientePagoController extends Controller
                 if ($mes=="October") $mes="Octubre";
                 if ($mes=="November") $mes="Noviembre";
                 if ($mes=="December") $mes="Diciembre";
-                $anio = date('Y',strtotime($pago->fecha_pago));
+                $anio = date('Y',strtotime($meses_pagados->mes_pago));
                 return '<span class="label label-primary">'.$mes.' / '.$anio.'</span>'; })
 
             ->addColumn('deuda',function($pago){

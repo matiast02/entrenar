@@ -310,6 +310,9 @@
                     $('#crear-cliente').find('.form-control-feedback').html('');
                     $('#crear-cliente').find('.help-block').html('');
                     $('#crear-cliente')[0].reset();
+                    $('#foto').val('');
+                    $('.filename').remove();
+                    $('#foto').after('<span class="filename" style="user-select: none;">Ninguna imagen seleccionada</span>');
                 },
                 error: function(data){
                     //resetear estilos
