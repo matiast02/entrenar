@@ -1612,7 +1612,7 @@ class EvaluacionesController extends Controller
                             </thead>
                             <tbody>';
 
-                //se argma la tabla
+                //se arma la tabla
                 foreach ($series as $serie){
                     $tabla .= '<tr>
                                  <td>'.$serie->cantidad_series.'</td>
