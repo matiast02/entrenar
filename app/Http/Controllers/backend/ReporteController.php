@@ -320,8 +320,10 @@ class ReporteController extends Controller
 
                                 case 11:
                                     //velocidad 5-10-5
-                                    array_push($valores,$evaluacion->velocidad_sumatoria);
-                                    array_push($campo,'Velocidad 10');
+                                    $tiempo = explode(":",$evaluacion->velocidad_sumatoria);
+                                    array_push($valores,$tiempo[0].".".$tiempo[1]);
+                                    //array_push($valores,$evaluacion->velocidad_sumatoria);
+                                    array_push($campo,'Agilidad segundos.decimas');
 
                             }
                             //datos de lsa fechas de cada registro, para evitar que esten repetidos
@@ -342,6 +344,7 @@ class ReporteController extends Controller
 
                 }
 //                return var_dump($graficos);
+
             }
 
 

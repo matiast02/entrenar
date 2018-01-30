@@ -412,19 +412,30 @@
             segundos = s10 + s5;
             centesimas = c10 + c5;
 
-            if (decimas == 100){
-                segundos = segundos++; //aumento 1 segundo
+            //calculo de centecimas
+            if (centesimas == 100){
+                decimas++;
+                centesimas=0;
+                console.log("centecimas: "+centesimas);
+            }else if(centesimas >100){
+                decimas = decimas + ((centesimas-(centesimas%100))/100);
+                centesimas = (centesimas%100);//me quedo con el resto de las centecimas ej: 124 obtengo 24
+                console.log("decimas: "+decimas+" centesimas: "+centesimas);
+            }
+
+            //calculo de decimas
+            if (decimas == 10){
+                segundos++; //aumento 1 segundo
                 decimas = 0; //al ser 100 decimas las coloco en 0 e incremetno 1 segundo
                 console.log("segundos:" +segundos+" decimas: "+decimas);
-            }else if(decimas >= 100){
-                segundos = segundos + ((decimas-(decimas%100))/100);//aumento x cantidad de segundos (100 decimas incrementa 1 segundo)
-                decimas = (decimas%100);//me quedo con el resto de las decimas
+            }else if(decimas > 10){
+                segundos++;//aumento 1 segundo
+                decimas = (decimas%10);//obtengo el ultimo digito ej: si es 12 obtengo 2
                 console.log("segundos:" +segundos+" decimas: "+decimas);
             }
 
-
             $('input[name="velocidad_sumatoria"]').val(
-                segundos+"."+decimas
+                segundos+":"+decimas+":"+centesimas
             );
 
         });
