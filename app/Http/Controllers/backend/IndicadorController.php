@@ -57,7 +57,7 @@ class IndicadorController extends Controller
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
             'fecha_indicador' => 'required|date_format:d/m/Y',
-            'mes' => 'required|date_format:Y-m-d',
+          //  'mes' => 'required|date_format:Y-m-d',
 
             $semana = 'semana' => 'numeric',
 
@@ -98,8 +98,8 @@ class IndicadorController extends Controller
             $fecha_indicador = $date = str_replace('/', '-', $request->input('fecha_indicador'));
             $fecha_indicador =date("Y-m-d", strtotime($fecha_indicador));
 
-                $mes = $date = str_replace('/', '-', $request->input('mes'));
-                $mes =date("Y-m-d", strtotime($mes));
+             //   $mes = $date = str_replace('/', '-', $request->input('mes'));
+                $mes =date("Y-m-d", strtotime($fecha_indicador));
 
             //date("W",strtotime($fecha)), es una funcion que me guarda en la vble semana, la correspondiente semana de la fecha agregada, EN CASO QUE LA FECHA NO SE ENCUENTRE YA REGISTRADA.
             $semana =date("W",strtotime($fecha_indicador));
@@ -608,7 +608,7 @@ class IndicadorController extends Controller
         $validator =  Validator::make($request->all(), [
             'cliente' => 'required|numeric',
             'fecha_indicador' => 'required|date_format:d/m/Y',
-            'mes' => 'required|date_format:Y-m-d',
+          //  'mes' => 'required|date_format:Y-m-d',
             $semana = 'semana' => 'numeric',
             'peso_inicial' => 'required|numeric',
             'peso_final' => 'required|numeric',
@@ -643,8 +643,8 @@ class IndicadorController extends Controller
             $fecha_indicador = $date = str_replace('/', '-', $request->input('fecha_indicador'));
             $request->merge(array('fecha_indicador' => date("Y-m-d", strtotime($fecha_indicador))));
 
-        $mes = $date = str_replace('/', '-', $request->input('mes'));
-        $mes =date("Y-m-d", strtotime($mes));
+       // $mes = $date = str_replace('/', '-', $request->input('mes'));
+        $mes =date("Y-m-d", strtotime($fecha_indicador));
 
         //date("W",strtotime($fecha)), es una funcion que me guarda en la vble semana, la correspondiente semana de la fecha agregada, EN CASO QUE LA FECHA NO SE ENCUENTRE YA REGISTRADA.
         $semana =date("W",strtotime($fecha_indicador));

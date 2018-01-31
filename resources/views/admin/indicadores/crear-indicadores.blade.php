@@ -68,39 +68,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Mes Indicador: </label>
-                                <div class="col-lg-9">
-                                    <div id="mes-field" class="input-group">
-                                        <select id="mes" name="mes" class="form-control">
-                                            <?php
-                                            $mes=date("n");
-                                            $rango=11;
-                                            for ($i=$mes;$i<=$mes+$rango;$i++){
-                                                $mesano=date('Y-n', mktime(0, 0, 0, $i, 1, date("Y") ) );
-                                                $meses=date('F', mktime(0, 0, 0, $i, 1, date("Y") ) );
-                                                if ($meses=="January") $meses="Enero";
-                                                if ($meses=="February") $meses="Febrero";
-                                                if ($meses=="March") $meses="Marzo";
-                                                if ($meses=="April") $meses="Abril";
-                                                if ($meses=="May") $meses="Mayo";
-                                                if ($meses=="June") $meses="Junio";
-                                                if ($meses=="July") $meses="Julio";
-                                                if ($meses=="August") $meses="Agosto";
-                                                if ($meses=="September") $meses="Septiembre";
-                                                if ($meses=="October") $meses="Octubre";
-                                                if ($meses=="November") $meses="Noviembre";
-                                                if ($meses=="December") $meses="Diciembre";
-                                                $ano=date('Y', mktime(0, 0, 0, $i, 1, date("Y") ) );
-                                                echo "<option value='$mesano-01'>$meses / $ano</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                        <div class="form-control-feedback"></div>
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <div id="peso_inicial-field" class="form-group">
                                 <label class="col-lg-3 control-label">Peso Inicial:</label>
