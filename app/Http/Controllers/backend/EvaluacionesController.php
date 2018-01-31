@@ -224,7 +224,7 @@ class EvaluacionesController extends Controller
                 //Agilidad (velocidad) 5 - 10 - 5
                 $formulario =   '<div class="col-md-3"><div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-4 control-label">Seg:</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-8">
                                        <input type="numeric" class="form-control" name="velocidad_segundos_5" id="velocidad_agilidad">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -232,7 +232,7 @@ class EvaluacionesController extends Controller
                                  </div>
                                  <div id="velocidad_decimas-field" class="form-group">
                                     <label class="col-lg-4 control-label">Dec:</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-8">
                                       <input type="numeric" class="form-control" name="velocidad_decimas_5" id="velocidad_agilidad">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -240,7 +240,7 @@ class EvaluacionesController extends Controller
                                 </div>
                                  <div id="velocidad_centesimas-field" class="form-group">
                                     <label class="col-lg-4 control-label">Cen:</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-8">
                                       <input type="numeric" class="form-control" name="velocidad_centesimas_5" id="velocidad_agilidad">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -251,7 +251,7 @@ class EvaluacionesController extends Controller
                                  
                                  <div class="col-md-3"><div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-4 control-label">Seg:</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-8">
                                        <input type="numeric" class="form-control" name="velocidad_segundos_10" id="velocidad_aguilidad">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -259,7 +259,7 @@ class EvaluacionesController extends Controller
                                </div>
                                  <div id="velocidad_decimas-field" class="form-group">
                                     <label class="col-lg-4 control-label">Dec:</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-8">
                                       <input type="numeric" class="form-control" name="velocidad_decimas_10" id="velocidad_agilidad">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -267,7 +267,7 @@ class EvaluacionesController extends Controller
                                 </div>
                                  <div id="velocidad_centesimas-field" class="form-group">
                                     <label class="col-lg-4 control-label">Cen:</label>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-8">
                                       <input type="numeric" class="form-control" name="velocidad_centesimas_10" id="velocidad_agilidad">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>
@@ -278,7 +278,7 @@ class EvaluacionesController extends Controller
                                  
                                  <div class="col-md-6"><div id="velocidad_segundos-field" class="form-group">
                                     <label class="col-lg-4 control-label">Sumatoria:</label>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-7">
                                        <input type="numeric" class="form-control" name="velocidad_sumatoria" id="velocidad_sumatoria">
                                         <div class="form-control-feedback"></div>
                                         <span class="help-block"></span>

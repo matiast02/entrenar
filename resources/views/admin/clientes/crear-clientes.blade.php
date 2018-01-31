@@ -182,7 +182,7 @@
                                 <div class="col-lg-9">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="icon-calendar22"></i></span>
-                                        <input type="text" id="fecha_inicio_entrenamiento"  name="fecha_inicio_entrenamiento" class="form-control daterange-single" value="01/01/2017">
+                                        <input type="text" id="fecha_inicio_entrenamiento"  name="fecha_inicio_entrenamiento" class="form-control daterange-single" value="01/01/2018">
                                     </div>
                                 </div>
                             </div>
