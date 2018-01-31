@@ -413,13 +413,15 @@
             centesimas = c10 + c5;
 
             //calculo de centecimas
-            if (centesimas == 100){
+            if (centesimas == 10){
                 decimas++;
                 centesimas=0;
                 console.log("centecimas: "+centesimas);
-            }else if(centesimas >100){
-                decimas = decimas + ((centesimas-(centesimas%100))/100);
-                centesimas = (centesimas%100);//me quedo con el resto de las centecimas ej: 124 obtengo 24
+            }else if(centesimas >10){
+//                decimas = decimas + ((centesimas-(centesimas%100))/100);
+//                centesimas = (centesimas%100);//me quedo con el resto de las centecimas ej: 124 obtengo 24
+                decimas++;
+                centesimas = (centesimas%10);
                 console.log("decimas: "+decimas+" centesimas: "+centesimas);
             }
 
